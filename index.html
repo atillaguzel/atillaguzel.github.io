@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 
-<<<<<<< HEAD
-=======
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122031932-1"></script>
   <script>
@@ -14,10 +13,6 @@
   gtag('config', 'UA-122031932-1');
   </script>
 
-
-  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
-
->>>>>>> e840523fa1ac4e7873202a0089b1a38413b02e6e
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
@@ -29,11 +24,6 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<<<<<<< HEAD
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-=======
->>>>>>> e840523fa1ac4e7873202a0089b1a38413b02e6e
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
@@ -42,19 +32,7 @@
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
-<<<<<<< HEAD
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-89354427-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-=======
->>>>>>> e840523fa1ac4e7873202a0089b1a38413b02e6e
 
 </head>
 <body>
@@ -122,15 +100,6 @@
         <a href="https://www.englishpen.org/campaigns/the-tyranny-of-space-interviews/">The tyranny of space and time</a>
         <p>Time can erase the writer, <br> but it cannot erase the written word.<br><cite>&mdash; Ahmet Altan</cite></p>
       </div>
-<<<<<<< HEAD
-      <div class="intro">
-        <h5>Welcome &mdash; <br> I'm Atilla Guzel, <br>data scientist and traveler.</h5>
-      </div>
-  </div>
-  <div class="grid2">
-      <p class="copy">I'm currently studying for a Master's degree at <a href="https://bolognabusinessschool.com/hp/">BBS</a>. I'm also one of the cofounders of <a href="https://www.lifeium.app">Lifeium</a>, and contributing the marketing and development team there. I have a strong interest in machine learning.</p>
-      <p class="copy-b">Life is too short and time is so precious. We are nomad travelers sailing this giant ship and the children of our own choices about life and time. So let's live wisely, be responsible and be grateful...</p>
-=======
       <div class="intro" style="padding-top: 40px">
         <h1>Hello &mdash; <br> I'm Atilla Guzel, <br>data scientist and traveler...</h1>
       </div>
@@ -138,7 +107,7 @@
   <div class="grid2">
       <p class="copy" style="letter-spacing:0.1rem; ">I'm currently studying for a Master's degree at <a href="https://bolognabusinessschool.com/hp/">BBS</a>. I'm also one of the cofounders of <a href="https://www.lifeium.app/">Lifeium</a>, and contributing the marketing and development team there. I have a strong interest in machine learning.</p>
       <p class="copy-b" style="letter-spacing:0.1rem; ">Life is too short and time is so precious. We are nomad travelers sailing this giant ship and the children of our own choices about life and time. So let's live wisely, be responsible and be grateful...</p>
->>>>>>> e840523fa1ac4e7873202a0089b1a38413b02e6e
+
   </div>
 
   <div class="grid2">
@@ -161,89 +130,5 @@
       </p>
   </div>
 
-
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
-<script src="js/anime.min.js.html"></script>
-<script type="text/javascript">
-$( document ).ready(function() {
-    console.log( "ready!" );
-
-    // from http://www.quirksmode.org/js/events_properties.html#position
-    function getMousePos(e) {
-      var posx = 0, posy = 0;
-      if (!e) var e = window.event;
-      if (e.pageX || e.pageY) 	{
-        posx = e.pageX;
-        posy = e.pageY;
-      }
-      else if (e.clientX || e.clientY) 	{
-        posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-        posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-      }
-      return { x : posx, y : posy }
-    }
-
-    var els = document.querySelectorAll('.fragments .fragment');
-
-    var nodeList = anime({
-      targets: els,
-      translateX: 250
-    });
-
-    els.addEventListener('mousemove', mousemoveFn);
-    els.addEventListener('mouseleave', mouseleaveFn);
-    els.addEventListener('mouseenter', mouseenterFn);
-
-    var mouseenterFn = function() {
-			for(var key in self.DOM.animatable) {
-				anime.remove(self.DOM.animatable[key]);
-			}
-		};
-
-		var mousemoveFn = function(ev) {
-			console.console.log('over');
-			requestAnimationFrame(function() { self._layout(ev); });
-		};
-
-		var mouseleaveFn = function(ev) {
-			console.console.log('leave');
-			requestAnimationFrame(function() {
-				for(var key in self.DOM.animatable) {
-					if( self.options.movement[key] == undefined ) {continue;}
-					anime({
-						targets: self.DOM.animatable[key],
-						duration: self.options.movement[key].reverseAnimation != undefined ? self.options.movement[key].reverseAnimation.duration || 0 : 1,
-						easing: self.options.movement[key].reverseAnimation != undefined ? self.options.movement[key].reverseAnimation.easing || 'linear' : 'linear',
-						elasticity: self.options.movement[key].reverseAnimation != undefined ? self.options.movement[key].reverseAnimation.elasticity || null : null,
-						scaleX: 1,
-						scaleY: 1,
-						scaleZ: 1,
-						translateX: 0,
-						translateY: 0,
-						translateZ: 0,
-						rotateX: 0,
-						rotateY: 0,
-						rotateZ: 0
-					});
-				}
-			});
-		};
-});
-</script>
-=======
-</body>
->>>>>>> e840523fa1ac4e7873202a0089b1a38413b02e6e
 </html>
