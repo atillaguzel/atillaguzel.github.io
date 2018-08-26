@@ -22,9 +22,6 @@
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -34,10 +31,6 @@
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
-	
-  <!-- jQuery
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
 </head>
 <body>
@@ -135,84 +128,5 @@
   </div>
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
-<script src="js/anime.min.js.html"></script>
-<script type="text/javascript">
-$( document ).ready(function() {
-    console.log( "ready!" );
-
-    // from http://www.quirksmode.org/js/events_properties.html#position
-    function getMousePos(e) {
-      var posx = 0, posy = 0;
-      if (!e) var e = window.event;
-      if (e.pageX || e.pageY) 	{
-        posx = e.pageX;
-        posy = e.pageY;
-      }
-      else if (e.clientX || e.clientY) 	{
-        posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-        posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-      }
-      return { x : posx, y : posy }
-    }
-
-    var els = document.querySelectorAll('.fragments .fragment');
-
-    var nodeList = anime({
-      targets: els,
-      translateX: 250
-    });
-
-    els.addEventListener('mousemove', mousemoveFn);
-    els.addEventListener('mouseleave', mouseleaveFn);
-    els.addEventListener('mouseenter', mouseenterFn);
-
-    var mouseenterFn = function() {
-			for(var key in self.DOM.animatable) {
-				anime.remove(self.DOM.animatable[key]);
-			}
-		};
-
-		var mousemoveFn = function(ev) {
-			console.console.log('over');
-			requestAnimationFrame(function() { self._layout(ev); });
-		};
-
-		var mouseleaveFn = function(ev) {
-			console.console.log('leave');
-			requestAnimationFrame(function() {
-				for(var key in self.DOM.animatable) {
-					if( self.options.movement[key] == undefined ) {continue;}
-					anime({
-						targets: self.DOM.animatable[key],
-						duration: self.options.movement[key].reverseAnimation != undefined ? self.options.movement[key].reverseAnimation.duration || 0 : 1,
-						easing: self.options.movement[key].reverseAnimation != undefined ? self.options.movement[key].reverseAnimation.easing || 'linear' : 'linear',
-						elasticity: self.options.movement[key].reverseAnimation != undefined ? self.options.movement[key].reverseAnimation.elasticity || null : null,
-						scaleX: 1,
-						scaleY: 1,
-						scaleZ: 1,
-						translateX: 0,
-						translateY: 0,
-						translateZ: 0,
-						rotateX: 0,
-						rotateY: 0,
-						rotateZ: 0
-					});
-				}
-			});
-		};
-});
-</script>
 </html>
