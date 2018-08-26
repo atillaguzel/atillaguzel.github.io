@@ -212,7 +212,11 @@ body h4 {
   grid-row-end: 4;
   transform: rotate(90deg);
   transform-origin: 0% 0%;
+<<<<<<< HEAD
   font-size: 0.8rem;
+=======
+  font-size: 0.9rem;
+>>>>>>> e840523fa1ac4e7873202a0089b1a38413b02e6e
   align-self: center;
   width: 400px;
 }

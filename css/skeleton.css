@@ -206,8 +206,13 @@ html {
 body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
+<<<<<<< HEAD
   font-family: "Replica Mono", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
+=======
+  font-family: "iA Writer Duospace", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 900;
+>>>>>>> e840523fa1ac4e7873202a0089b1a38413b02e6e
   font-style: normal;
   color: #3f3f3f; }
 
@@ -217,6 +222,7 @@ body {
 /*
  * Legal Disclaimer
  *
+<<<<<<< HEAD
  * These Fonts are licensed only for use on these domains and their subdomains:
  * adam.bio
  *
@@ -257,6 +263,47 @@ h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
   h5 { font-size: 2.4rem; }
   h6 { font-size: 1.5rem; }
 }
+=======
+ IBM Plex Typeface
+ Copyright © 2017 IBM Corp. with Reserved Font Name "Plex"
+
+ This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is copied below, and is also available with a FAQ at: http://scripts.sil.org/OFL
+
+ iA Writer Duospace is a modification of IBM's Plex font.
+
+ https://github.com/iaolo/iA-Fonts/tree/master/iA%20Writer%20Duospace
+ */
+ @font-face {
+       font-family: 'iA Writer Duospace';
+       src: url('../fonts/iAWriterDuospace-Regular.eot');
+       src: url('../fonts/iAWriterDuospace-Regular.eot?#iefix') format('embedded-opentype'),
+           url('../fonts/iAWriterDuospace-Regular.woff2') format('woff2'),
+           url('../fonts/iAWriterDuospace-Regular.woff') format('woff');
+       font-weight: normal;
+       font-style: normal;
+ }
+
+ h1, h2, h3, h4, h5, h6 {
+   margin-top: 0;
+   margin-bottom: 2rem;
+   font-weight: 900; }
+ h1 { font-size: 1.8rem; line-height: 1.5;  letter-spacing: 0.1rem;}
+ h2 { font-size: 1.7rem; line-height: 1.25; letter-spacing: -.1rem; }
+ h3 { font-size: 1.6rem; line-height: 1.3;  letter-spacing: -.1rem; }
+ h4 { font-size: 1.5rem; line-height: 1.35; letter-spacing: -.08rem; }
+ h5 { font-size: 1.4rem; line-height: 1.5;  letter-spacing: -.05rem; }
+ h6 { font-size: 1.3rem; line-height: 1.6;  letter-spacing: 0; }
+
+ /* Larger than phablet */
+ @media (min-width: 550px) {
+   h1 { font-size: 2.4rem; }
+   h2 { font-size: 2.3rem; }
+   h3 { font-size: 2.2rem; }
+   h4 { font-size: 2.1rem; }
+   h5 { font-size: 2.0rem; }
+   h6 { font-size: 1.8rem; }
+ }
+>>>>>>> e840523fa1ac4e7873202a0089b1a38413b02e6e
 
 p {
   margin-top: 0; }
