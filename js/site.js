@@ -108,6 +108,55 @@
     track(field.dataset.trackInput, paramsFor(field, 'type'));
   });
 
+  // The theme switch. The site follows the device's setting until the visitor presses the
+  // switch. Their choice is kept in this browser, and a small script in each page's <head>
+  // applies it before anything is painted. Choosing the theme the device already asks for
+  // forgets the choice, so the site goes back to following the device.
+  var prefersDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  var switches = [].slice.call(document.querySelectorAll('.theme'));
+
+  function deviceTheme() {
+    return prefersDark && prefersDark.matches ? 'dark' : 'light';
+  }
+
+  function currentTheme() {
+    return document.documentElement.dataset.theme || deviceTheme();
+  }
+
+  function showTheme() {
+    var dark = currentTheme() === 'dark';
+    switches.forEach(function (button) {
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', 'Switch to the ' + (dark ? 'light' : 'dark') + ' theme');
+    });
+  }
+
+  switches.forEach(function (button) {
+    button.hidden = false;
+    button.addEventListener('click', function () {
+      var next = currentTheme() === 'dark' ? 'light' : 'dark';
+      var root = document.documentElement;
+      root.classList.add('theme-fading');
+      setTimeout(function () { root.classList.remove('theme-fading'); }, 360);
+      try {
+        if (next === deviceTheme()) {
+          delete root.dataset.theme;
+          localStorage.removeItem('theme');
+        } else {
+          root.dataset.theme = next;
+          localStorage.setItem('theme', next);
+        }
+      } catch (e) {
+        root.dataset.theme = next;
+      }
+      showTheme();
+      track('theme_change', { theme: next });
+    });
+  });
+
+  if (prefersDark && prefersDark.addEventListener) prefersDark.addEventListener('change', showTheme);
+  showTheme();
+
   var box = null;
 
   function closeBox() {

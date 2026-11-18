@@ -34,16 +34,20 @@ Measuring visits matters less than leaving the reader alone, so the default is n
 - **Local previews never send visits**, whatever the stored choice. On a local address the events are collected in `window.__tracked` so they can be checked in the console.
 - **Only measurement is agreed to.** When Google's script loads it is told that analytics storage is granted and that every advertising signal is denied.
 
-**Events.** Page views, outbound link clicks and scroll depth come from GA4's own enhanced measurement, so the site adds only what that cannot see. There are two events, and markup declares them; pages do not call Google directly.
+**Events.** Page views, outbound link clicks and scroll depth come from GA4's own enhanced measurement, so the site adds only what that cannot see. There are three events. Markup declares the first two; pages do not call Google directly.
 
 | Event | When | Parameters | Markup |
 |---|---|---|---|
 | `share` (a GA4 recommended event) | A button in the pass-it-on panel is pressed | `method`: `copy_link`, `native`, `x` or `bluesky`; `content_type`: `article`; `item_id`: the post's slug | `data-track="share" data-track-method="x"` |
 | `demo_interaction` | A reading device or demo is used | `demo_name`: which one; `demo_action`: `type`, `example`, `copy`, `toggle` or `replay` | `data-track="demo_interaction" data-track-demo="pipeline" data-track-action="example"` on a button, or on the box that holds several |
+| `theme_change` | The theme switch is pressed | `theme`: `light` or `dark`, the theme switched to | None; `js/site.js` sends it |
 
 - A text field takes `data-track-input="demo_interaction" data-track-demo="…"`. It reports once per page view that the field was used. **What a visitor types is never sent.**
 - Every new button, example chip and text field in a device gets these attributes. A new `demo_name` is lower case with underscores and names the device, not the post.
 - Add `?ga_debug` to an address to see events arrive in GA4's DebugView.
+- In GA4, `demo_name`, `demo_action` and `theme` are registered as event-scoped custom dimensions, each with the event parameter of the same name. A new parameter needs the same.
+
+`demo_name` values in use: `sluggi_demo` (homepage); `signup_scene`, `stranger_reveal`, `name_checker`, `skeleton_compare` (look-alike names post); `hidden_issue`, `issue_steps`, `intake` (guild post); `address_scene`, `pipeline` (slug post); `fetched_files` (hand-written site post).
 - The box is the one place the yellow and pale button pair appears together: yellow for yes, pale for no, the same size side by side.
 
 ## Search engines and agents
@@ -98,6 +102,14 @@ Pages that should stay out of search (`404.html`, the `/resume/` redirect) carry
 | `--mist`, `--line`, `--muted` | Quiet fills, hairlines, secondary text |
 
 **Dark is its own palette, not the light one inverted.** On white, the yellow and the pale buttons sit close to the page and are quiet. Carried over unchanged they would be the brightest things on a dark page. So in dark the yellow deepens to amber, the pale button becomes a dark surface with light text, lines soften from `--ink` to a mid teal-grey so that borders read as ink and not as glowing wire, and panels sit one step lighter than the page. A new component draws its lines with `--edge` and its panel faces with `--panel`, never `--ink` or `--paper`, and then needs no dark rules of its own.
+
+**The theme switch.** The site follows the visitor's device until they press the sun-and-moon switch at the end of the header nav.
+
+- The dark palette is written twice in `css/site.css`: once for a device that asks for dark, once for `data-theme="dark"` on the root. Change a dark token in both places.
+- A choice is kept in the browser's `localStorage` as `theme`. Choosing the theme the device already asks for clears it, so the site goes back to following the device.
+- Every page has a three-line script in its `<head>`, straight after the `color-scheme` meta tag, that applies a stored choice before anything is painted. It is the one script that must run early; copy it with the rest of the head.
+- The switch itself is the last `<li>` in the nav, a `<button class="theme">` that starts `hidden`. Copy it from `index.html`.
+- While the palette changes, the root carries `theme-fading` for a third of a second so every colour fades together.
 
 **Type.** Two faces, both monospace. iA Writer Duospace sets running text; only its regular weight is in the repo. IBM Plex Mono, the face Duospace is drawn from, sets everything bold: headings, labels, buttons, code. Anything heavier than 400 uses `--font-display`.
 

@@ -31,11 +31,16 @@
   --font-display: "IBM Plex Mono", "iA Writer Duospace", ui-monospace, Menlo, Consolas, monospace;
 }
 
+/* Dark is not the light theme inverted. The fills that are quiet on white would glare on
+   black, so they are deepened; lines are softened so they read as ink, not wire; and panels
+   are raised a step above the page.
+
+   The dark palette is written twice and the two lists must stay identical: once for a
+   visitor whose device asks for dark and who has not chosen light, and once for a visitor
+   who has chosen dark with the switch in the header. */
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark is not the light theme inverted. The fills that are quiet on white would glare
-       on black, so they are deepened; lines are softened so they read as ink, not wire;
-       and panels are raised a step above the page. */
+  :root:not([data-theme="light"]) {
     --paper: #0f1b20;
     --band: #215f63;
     --ink: #e6f0f0;
@@ -55,6 +60,32 @@
     --mist: #1d3239;
     --muted: #9db1b5;
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0f1b20;
+  --band: #215f63;
+  --ink: #e6f0f0;
+  --text: #cfdcdd;
+  --pen: #9fd3d8;
+  --mark: #6f5d25;
+  --btn: #c9a851;
+  --btn-alt: #1f3a42;
+  --on-btn-alt: #e6f0f0;
+  --edge: #5d7f86;
+  --panel: #152429;
+  --shade: #4a6a70;
+  --shade-o: 0.5;
+  --bevel-hi: rgba(255, 255, 255, 0.14);
+  --bevel-lo: rgba(0, 0, 0, 0.35);
+  --line: #29424a;
+  --mist: #1d3239;
+  --muted: #9db1b5;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
 }
 
 *,
@@ -257,6 +288,78 @@ a.mk:hover {
 
 .top ul a:hover {
   border-bottom-color: var(--ink);
+}
+
+/* The theme switch: a sun whose rays draw in while a shadow crosses it to leave a moon.
+   js/site.js sets aria-pressed to true when the dark palette is showing. */
+
+.top li {
+  display: flex;
+  align-items: center;
+}
+
+.theme {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin: -0.25rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.theme svg {
+  width: 1.375rem;
+  height: 1.375rem;
+  overflow: visible;
+}
+
+.theme .sun,
+.theme .bite,
+.theme .rays {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 480ms cubic-bezier(0.5, 0, 0.2, 1.2), opacity 300ms ease-out;
+}
+
+.theme .sun {
+  fill: currentColor;
+}
+
+.theme .bite {
+  transform: translate(8px, -8px);
+}
+
+.theme .rays {
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.theme[aria-pressed="true"] .sun {
+  transform: scale(1.5);
+}
+
+.theme[aria-pressed="true"] .bite {
+  transform: none;
+}
+
+.theme[aria-pressed="true"] .rays {
+  transform: scale(0.2) rotate(60deg);
+  opacity: 0;
+}
+
+/* While the palette changes, every colour on the page fades. The class is on the root for
+   a third of a second and then removed, so nothing else is slowed by it. */
+
+.theme-fading,
+.theme-fading *,
+.theme-fading *::before,
+.theme-fading *::after {
+  transition: background-color 320ms ease-out, color 320ms ease-out, border-color 320ms ease-out,
+    fill 320ms ease-out, stroke 320ms ease-out, opacity 320ms ease-out !important;
 }
 
 h1 {
