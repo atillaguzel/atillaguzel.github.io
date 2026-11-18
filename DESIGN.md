@@ -31,7 +31,19 @@ Measuring visits matters less than leaving the reader alone, so the default is n
 - **The question arrives late and slowly.** Ten seconds after load a small box drifts into the bottom-right corner. It takes no focus, covers no controls and blocks nothing.
 - **One answer is remembered** in the browser's `localStorage`, so the box appears once. A browser sending the Global Privacy Control signal has answered no and is never asked.
 - **Every page footer carries** `<button type="button" class="textbtn" data-consent-open hidden>analytics settings</button>`, which reopens the box so a visitor can change their answer.
-- **Local previews never send visits**, whatever the stored choice.
+- **Local previews never send visits**, whatever the stored choice. On a local address the events are collected in `window.__tracked` so they can be checked in the console.
+- **Only measurement is agreed to.** When Google's script loads it is told that analytics storage is granted and that every advertising signal is denied.
+
+**Events.** Page views, outbound link clicks and scroll depth come from GA4's own enhanced measurement, so the site adds only what that cannot see. There are two events, and markup declares them; pages do not call Google directly.
+
+| Event | When | Parameters | Markup |
+|---|---|---|---|
+| `share` (a GA4 recommended event) | A button in the pass-it-on panel is pressed | `method`: `copy_link`, `native`, `x` or `bluesky`; `content_type`: `article`; `item_id`: the post's slug | `data-track="share" data-track-method="x"` |
+| `demo_interaction` | A reading device or demo is used | `demo_name`: which one; `demo_action`: `type`, `example`, `copy`, `toggle` or `replay` | `data-track="demo_interaction" data-track-demo="pipeline" data-track-action="example"` on a button, or on the box that holds several |
+
+- A text field takes `data-track-input="demo_interaction" data-track-demo="…"`. It reports once per page view that the field was used. **What a visitor types is never sent.**
+- Every new button, example chip and text field in a device gets these attributes. A new `demo_name` is lower case with underscores and names the device, not the post.
+- Add `?ga_debug` to an address to see events arrive in GA4's DebugView.
 - The box is the one place the yellow and pale button pair appears together: yellow for yes, pale for no, the same size side by side.
 
 ## Search engines and agents
@@ -74,12 +86,18 @@ Pages that should stay out of search (`404.html`, the `/resume/` redirect) carry
 |---|---|
 | `--paper` | The page ground and the inside of panels |
 | `--band` | The teal block that opens every page |
-| `--ink` | Borders, headings, labels |
+| `--ink` | Headings, labels and focus rings |
+| `--edge` | Every drawn line: borders, rules, rings |
+| `--panel` | The face of a panel |
 | `--text` | Running text |
 | `--pen` | Graphics only: the logo, list markers, the prompt glyph. Too light for small text |
 | `--mark` | The marker: the highlighter stroke under text links |
-| `--btn`, `--on-btn` | The yellow button and its text. Yellow in both schemes |
+| `--btn`, `--on-btn` | The yellow fill and the text on it |
+| `--btn-alt`, `--on-btn-alt` | The pale button and its text |
+| `--shade`, `--shade-o` | The stipple's colour and strength |
 | `--mist`, `--line`, `--muted` | Quiet fills, hairlines, secondary text |
+
+**Dark is its own palette, not the light one inverted.** On white, the yellow and the pale buttons sit close to the page and are quiet. Carried over unchanged they would be the brightest things on a dark page. So in dark the yellow deepens to amber, the pale button becomes a dark surface with light text, lines soften from `--ink` to a mid teal-grey so that borders read as ink and not as glowing wire, and panels sit one step lighter than the page. A new component draws its lines with `--edge` and its panel faces with `--panel`, never `--ink` or `--paper`, and then needs no dark rules of its own.
 
 **Type.** Two faces, both monospace. iA Writer Duospace sets running text; only its regular weight is in the repo. IBM Plex Mono, the face Duospace is drawn from, sets everything bold: headings, labels, buttons, code. Anything heavier than 400 uses `--font-display`.
 
@@ -151,7 +169,6 @@ Posts follow the look above. Each one is built as its own HTML page and may carr
       <ul>
         <li><a href="/#work">work</a></li>
         <li><a href="/blog/">blog</a></li>
-        <li><a href="https://www.linkedin.com/in/atilla-guzel/" rel="me">linkedin</a></li>
       </ul>
     </nav>
     <h1>Post title in sentence case</h1>
@@ -180,12 +197,22 @@ The `<head>` follows "Search engines and agents" above, with the title as `Post 
 | Element | Markup | Use it for |
 |---|---|---|
 | Headings | `h2`, `h3` | Sections and sub-sections |
-| Code | `<code>`, `<pre><code>` | Inline names; blocks scroll sideways on their own |
+| Code | `<code>`, `<pre><code>` | Inline names, and blocks of code as plain text |
 | List | `ul`, `ol` | Items that are each a full thought |
 | Quotation | `blockquote` with `p` and `cite` | Someone else's words |
 | Note | `<aside class="note">` with `<h3 class="label">` | A caveat or definition the reader may skip |
 | Figure | `figure` with `img`, `svg` or `canvas`, and `figcaption` | Diagrams and images. Draw SVG with the tokens |
 | Table | `<div class="scroll"><table>` | Facts compared across rows |
+
+**Code blocks never scroll sideways.** Three things make that so, in this order:
+
+1. Write code to fit. Keep every line in a block to about 66 characters, breaking a long call across lines the way a formatter would.
+2. On a wide screen a block grows past the reading column into the page's spare width.
+3. Where a line still does not fit, as on a phone, `js/site.js` wraps it under itself, indented past its own indent and marked with a small arrow. Copying gives the code exactly as written.
+
+Author a block as plain `<pre><code>` text. The script adds the per-line markup. A trailing comment stays with its `#`, so a wrapped row breaks before the comment and never inside its opening.
+
+**Tables do not scroll sideways on a phone either.** Below 36rem each row stacks into a small block: the first cell becomes the row's title, and every other cell shows its column name above its value. Author a table as `<div class="scroll"><table>` with a `<thead>`, and put the thing each row is about in the first column. `js/site.js` copies the column names onto the cells.
 
 **Every post closes with the pass-it-on panel**, after the last paragraph and before the link back to the list. Copy it from an existing post and change three things: the address in `.addr`, and the title and address inside the two share links, percent-encoded.
 

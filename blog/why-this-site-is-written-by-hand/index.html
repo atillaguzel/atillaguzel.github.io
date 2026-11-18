@@ -82,7 +82,6 @@
         <ul>
           <li><a href="/#work">work</a></li>
           <li><a href="/blog/">blog</a></li>
-          <li><a href="https://www.linkedin.com/in/atilla-guzel/" rel="me">linkedin</a></li>
         </ul>
       </nav>
       <h1>Why this site is written by hand</h1>
@@ -107,7 +106,7 @@
               <tfoot hidden><tr><td>Total</td><td id="fetched-total"></td></tr></tfoot>
             </table>
           </div>
-          <div class="aid"><button class="btn btn--alt btn--sm" type="button" id="fetched-replay" hidden>Replay</button></div>
+          <div class="aid"><button class="btn btn--alt btn--sm" type="button" id="fetched-replay" data-track="demo_interaction" data-track-demo="fetched_files" data-track-action="replay" hidden>Replay</button></div>
           <p class="fine">Sizes are as stored on the server, before compression. A dash means the size was not reported, usually because your browser already had the file. Google Analytics appears only if you accepted it.</p>
         </div>
       </div>
@@ -141,10 +140,10 @@
           <h2 class="label" id="share-h">pass it on</h2>
           <p>If this was worth your time, it may be worth someone else's.</p>
           <p class="actions">
-            <button class="btn btn--sm" type="button" data-copy-link hidden>Copy link</button>
-            <button class="btn btn--alt btn--sm" type="button" data-native-share hidden>Share</button>
-            <a class="btn btn--alt btn--sm" href="https://x.com/intent/post?text=Why%20this%20site%20is%20written%20by%20hand&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhy-this-site-is-written-by-hand%2F" target="_blank" rel="noopener">Share on X</a>
-            <a class="btn btn--alt btn--sm" href="https://bsky.app/intent/compose?text=Why%20this%20site%20is%20written%20by%20hand%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhy-this-site-is-written-by-hand%2F" target="_blank" rel="noopener">Share on Bluesky</a>
+            <button class="btn btn--sm" type="button" data-copy-link data-track="share" data-track-method="copy_link" hidden>Copy link</button>
+            <button class="btn btn--alt btn--sm" type="button" data-native-share data-track="share" data-track-method="native" hidden>Share</button>
+            <a class="btn btn--alt btn--sm" data-track="share" data-track-method="x" href="https://x.com/intent/post?text=Why%20this%20site%20is%20written%20by%20hand&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhy-this-site-is-written-by-hand%2F" target="_blank" rel="noopener">Share on X</a>
+            <a class="btn btn--alt btn--sm" data-track="share" data-track-method="bluesky" href="https://bsky.app/intent/compose?text=Why%20this%20site%20is%20written%20by%20hand%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhy-this-site-is-written-by-hand%2F" target="_blank" rel="noopener">Share on Bluesky</a>
           </p>
           <p class="addr">https://atillaguzel.github.io/blog/why-this-site-is-written-by-hand/</p>
         </div>

@@ -109,7 +109,6 @@
         <ul>
           <li><a href="#work">work</a></li>
           <li><a href="/blog/">blog</a></li>
-          <li><a href="https://www.linkedin.com/in/atilla-guzel/" rel="me">linkedin</a></li>
         </ul>
       </nav>
 
@@ -182,14 +181,14 @@
           <label class="sr" for="slug-in">Text to turn into a slug</label>
           <div class="prompt">
             <span aria-hidden="true">&gt;</span>
-            <input id="slug-in" type="text" value="Привет, мир! Café №1" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <input id="slug-in" data-track-input="demo_interaction" data-track-demo="sluggi_demo" type="text" value="Привет, мир! Café №1" autocomplete="off" autocapitalize="off" spellcheck="false">
           </div>
           <div class="out">
             <span class="out-k">slug</span>
             <output id="slug-out" for="slug-in">privet-mir-cafe-no1</output>
-            <button class="btn btn--alt btn--sm" type="button" id="slug-copy" hidden>Copy</button>
+            <button class="btn btn--alt btn--sm" type="button" id="slug-copy" data-track="demo_interaction" data-track-demo="sluggi_demo" data-track-action="copy" hidden>Copy</button>
           </div>
-          <div class="chips" id="slug-chips" hidden>
+          <div class="chips" id="slug-chips" data-track="demo_interaction" data-track-demo="sluggi_demo" data-track-action="example" hidden>
             <span>or try</span>
             <button class="chip" type="button">Crème brûlée, à la carte</button>
             <button class="chip" type="button">Καλημέρα κόσμε</button>

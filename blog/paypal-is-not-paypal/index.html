@@ -58,7 +58,7 @@
     .g { display: grid; justify-items: center; min-width: 2.25rem; padding: 0.25rem 0.375rem; border: 1px solid var(--line); }
     .g b { color: var(--ink); font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; line-height: 1.4; }
     .g small { color: var(--muted); font-size: 0.625rem; }
-    .g.odd { border-color: var(--ink); background: var(--btn); }
+    .g.odd { border-color: var(--edge); background: var(--btn); }
     .g.odd b, .g.odd small { color: var(--on-btn); }
     .verdicts { display: grid; gap: 0.25rem; padding-left: 1.25rem; list-style: square; color: var(--ink); }
     .title-copy { color: var(--ink); font-size: 1.125rem; font-weight: 700; }
@@ -67,8 +67,8 @@
     .row small { width: 6.5rem; color: var(--muted); font-family: var(--font-text); font-size: 0.75rem; }
     .cells { display: flex; gap: 0.25rem; }
     .cell { display: grid; place-items: center; width: 1.875rem; height: 2rem; border: 1px solid var(--line); font-size: 1.125rem; font-weight: 500; }
-    .cell.hot { border-color: var(--ink); background: var(--btn); color: var(--on-btn); }
-    .cell.plain { border-color: var(--ink); }
+    .cell.hot { border-color: var(--edge); background: var(--btn); color: var(--on-btn); }
+    .cell.plain { border-color: var(--edge); }
     .cell.flip { animation: flip-in 320ms ease-out; }
   </style>
 </head>
@@ -91,7 +91,6 @@
         <ul>
           <li><a href="/#work">work</a></li>
           <li><a href="/blog/">blog</a></li>
-          <li><a href="https://www.linkedin.com/in/atilla-guzel/" rel="me">linkedin</a></li>
         </ul>
       </nav>
       <h1>pаypal is not paypal</h1>
@@ -110,13 +109,13 @@
           <span class="field-box"><span id="scene-typed">p<span class="imp">&#x430;</span>ypal</span><span class="caret"></span></span>
           <span class="verdict" id="scene-ok">available</span>
         </span>
-        <button class="btn btn--alt btn--sm" type="button" id="scene-replay" hidden>Replay</button>
+        <button class="btn btn--alt btn--sm" type="button" id="scene-replay" data-track="demo_interaction" data-track-demo="signup_scene" data-track-action="replay" hidden>Replay</button>
       </div>
 
       <p>Now come back to this page and look at its title, because the same thing has just happened to you. The second letter of the first word is a stranger. I'll show you.</p>
 
       <div class="aid">
-        <button class="btn btn--alt btn--sm" type="button" id="show" aria-pressed="false" hidden>Show me the stranger</button>
+        <button class="btn btn--alt btn--sm" type="button" id="show" data-track="demo_interaction" data-track-demo="stranger_reveal" data-track-action="toggle" aria-pressed="false" hidden>Show me the stranger</button>
         <span class="title-copy" id="show-title" aria-hidden="true" hidden>p<span class="imp">&#x430;</span>ypal is not paypal</span>
         <span class="tag" id="show-tag">The second letter is U+0430, the Cyrillic small letter a.</span>
       </div>
@@ -141,14 +140,14 @@
           <label class="sr" for="name-in">A name to check</label>
           <div class="prompt">
             <span aria-hidden="true">&gt;</span>
-            <input id="name-in" type="text" value="p&#x430;ypal" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <input id="name-in" data-track-input="demo_interaction" data-track-demo="name_checker" type="text" value="p&#x430;ypal" autocomplete="off" autocapitalize="off" spellcheck="false">
           </div>
           <div class="glyphs" id="glyphs" aria-hidden="true"></div>
           <ul class="verdicts" id="verdicts" aria-live="polite">
             <li>Mixes Latin and Cyrillic letters.</li>
             <li>Reads as the reserved name paypal.</li>
           </ul>
-          <div class="chips" id="name-chips" hidden>
+          <div class="chips" id="name-chips" data-track="demo_interaction" data-track-demo="name_checker" data-track-action="example" hidden>
             <span>or try</span>
             <button class="chip" type="button" data-v="PAYPA1">PAYPA1</button>
             <button class="chip" type="button" data-v="pay&#x200B;pal">pay|pal with a hidden space</button>
@@ -169,7 +168,7 @@
           <span class="row"><small>the visitor</small><span class="cells"><span class="cell">p</span><span class="cell hot" id="skel-cell">&#x430;</span><span class="cell">y</span><span class="cell">p</span><span class="cell">a</span><span class="cell">l</span></span></span>
           <span class="row"><small>the real one</small><span class="cells"><span class="cell">p</span><span class="cell">a</span><span class="cell">y</span><span class="cell">p</span><span class="cell">a</span><span class="cell">l</span></span></span>
         </span>
-        <button class="btn btn--alt btn--sm" type="button" id="skel-btn" aria-pressed="false" hidden>Take the skeletons</button>
+        <button class="btn btn--alt btn--sm" type="button" id="skel-btn" data-track="demo_interaction" data-track-demo="skeleton_compare" data-track-action="toggle" aria-pressed="false" hidden>Take the skeletons</button>
         <span class="verdict verdict--no" id="skel-ok" hidden>same skeleton</span>
         <span class="sr" id="skel-live" aria-live="polite"></span>
       </div>
@@ -186,7 +185,10 @@ confusable.skeleton("rnicrosoft")    # 'rnicrosoft'</code></pre>
 
 <pre><code>def username_keys(name: str) -> tuple[str, str]:
     """Return the keys that must each be unique among usernames."""
-    return confusable.skeleton(name), confusable.skeleton(name.casefold())</code></pre>
+    return (
+        confusable.skeleton(name),
+        confusable.skeleton(name.casefold()),
+    )</code></pre>
 
       <p>There are two keys because a skeleton keeps case: you can tell <code>Paypal</code> from <code>paypal</code>, so it does too. Most sites treat usernames as the same whatever their case, and the second key folds case first. That is the one <code>PAYPA1</code> and <code>paypal</code> share.</p>
 
@@ -231,10 +233,10 @@ confusable.skeleton("rnicrosoft")    # 'rnicrosoft'</code></pre>
           <h2 class="label" id="share-h">pass it on</h2>
           <p>If this was worth your time, it may be worth someone else's.</p>
           <p class="actions">
-            <button class="btn btn--sm" type="button" data-copy-link hidden>Copy link</button>
-            <button class="btn btn--alt btn--sm" type="button" data-native-share hidden>Share</button>
-            <a class="btn btn--alt btn--sm" href="https://x.com/intent/post?text=p%D0%B0ypal%20is%20not%20paypal&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fpaypal-is-not-paypal%2F" target="_blank" rel="noopener">Share on X</a>
-            <a class="btn btn--alt btn--sm" href="https://bsky.app/intent/compose?text=p%D0%B0ypal%20is%20not%20paypal%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fpaypal-is-not-paypal%2F" target="_blank" rel="noopener">Share on Bluesky</a>
+            <button class="btn btn--sm" type="button" data-copy-link data-track="share" data-track-method="copy_link" hidden>Copy link</button>
+            <button class="btn btn--alt btn--sm" type="button" data-native-share data-track="share" data-track-method="native" hidden>Share</button>
+            <a class="btn btn--alt btn--sm" data-track="share" data-track-method="x" href="https://x.com/intent/post?text=p%D0%B0ypal%20is%20not%20paypal&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fpaypal-is-not-paypal%2F" target="_blank" rel="noopener">Share on X</a>
+            <a class="btn btn--alt btn--sm" data-track="share" data-track-method="bluesky" href="https://bsky.app/intent/compose?text=p%D0%B0ypal%20is%20not%20paypal%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fpaypal-is-not-paypal%2F" target="_blank" rel="noopener">Share on Bluesky</a>
           </p>
           <p class="addr">https://atillaguzel.github.io/blog/paypal-is-not-paypal/</p>
         </div>

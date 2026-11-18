@@ -54,7 +54,7 @@
   <style>
 
     .demo { margin: 0.75rem 8px 1rem 0; }
-    .address { display: flex; flex-wrap: wrap; align-items: baseline; padding: 0.5rem 0.75rem; border: 2px solid var(--ink); background: var(--paper); color: var(--muted); font-family: var(--font-display); font-size: 0.9375rem; overflow-wrap: anywhere; }
+    .address { display: flex; flex-wrap: wrap; align-items: baseline; padding: 0.5rem 0.75rem; border: 2px solid var(--edge); background: var(--paper); color: var(--muted); font-family: var(--font-display); font-size: 0.9375rem; overflow-wrap: anywhere; }
     .address b { color: var(--ink); font-weight: 500; }
     .address .lost { background: var(--btn); color: var(--on-btn); }
     .stages { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
@@ -88,7 +88,6 @@
         <ul>
           <li><a href="/#work">work</a></li>
           <li><a href="/blog/">blog</a></li>
-          <li><a href="https://www.linkedin.com/in/atilla-guzel/" rel="me">linkedin</a></li>
         </ul>
       </nav>
       <h1>What a slug has to survive</h1>
@@ -103,7 +102,7 @@
 
       <div class="aid" id="scene">
         <span class="address" aria-label="The address ends in cr-me-br-l-e-la-carte">example.com/recipes/<b id="scene-slug">cr<span class="lost">-</span>me-br<span class="lost">-</span>l<span class="lost">-</span>e<span class="lost">-</span>la-carte</b></span>
-        <button class="btn btn--alt btn--sm" type="button" id="scene-replay" hidden>Replay</button>
+        <button class="btn btn--alt btn--sm" type="button" id="scene-replay" data-track="demo_interaction" data-track-demo="address_scene" data-track-action="replay" hidden>Replay</button>
       </div>
 
       <p>You have seen addresses like that one. Four letters went missing, the four with accents, and a hyphen is standing where each of them was. I'll show you the moment they were lost.</p>
@@ -122,7 +121,7 @@
           <label class="sr" for="slug-in">A title to turn into a slug</label>
           <div class="prompt">
             <span aria-hidden="true">&gt;</span>
-            <input id="slug-in" type="text" value="Crème brûlée, à la carte" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <input id="slug-in" data-track-input="demo_interaction" data-track-demo="pipeline" type="text" value="Crème brûlée, à la carte" autocomplete="off" autocapitalize="off" spellcheck="false">
           </div>
           <table class="stages" id="stages">
             <tbody>
@@ -137,7 +136,7 @@
             <span class="out-k">the obvious way would give</span>
             <output id="naive" for="slug-in">cr-me-br-l-e-la-carte</output>
           </div>
-          <div class="chips" id="slug-chips" hidden>
+          <div class="chips" id="slug-chips" data-track="demo_interaction" data-track-demo="pipeline" data-track-action="example" hidden>
             <span>or try</span>
             <button class="chip" type="button">Привет, мир! Café №1</button>
             <button class="chip" type="button">Καλημέρα κόσμε</button>
@@ -204,10 +203,10 @@ slugify("東京 station", custom_map={"東京": "tokyo"})   # 'tokyo-station'</c
           <h2 class="label" id="share-h">pass it on</h2>
           <p>If this was worth your time, it may be worth someone else's.</p>
           <p class="actions">
-            <button class="btn btn--sm" type="button" data-copy-link hidden>Copy link</button>
-            <button class="btn btn--alt btn--sm" type="button" data-native-share hidden>Share</button>
-            <a class="btn btn--alt btn--sm" href="https://x.com/intent/post?text=What%20a%20slug%20has%20to%20survive&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhat-a-slug-has-to-survive%2F" target="_blank" rel="noopener">Share on X</a>
-            <a class="btn btn--alt btn--sm" href="https://bsky.app/intent/compose?text=What%20a%20slug%20has%20to%20survive%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhat-a-slug-has-to-survive%2F" target="_blank" rel="noopener">Share on Bluesky</a>
+            <button class="btn btn--sm" type="button" data-copy-link data-track="share" data-track-method="copy_link" hidden>Copy link</button>
+            <button class="btn btn--alt btn--sm" type="button" data-native-share data-track="share" data-track-method="native" hidden>Share</button>
+            <a class="btn btn--alt btn--sm" data-track="share" data-track-method="x" href="https://x.com/intent/post?text=What%20a%20slug%20has%20to%20survive&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhat-a-slug-has-to-survive%2F" target="_blank" rel="noopener">Share on X</a>
+            <a class="btn btn--alt btn--sm" data-track="share" data-track-method="bluesky" href="https://bsky.app/intent/compose?text=What%20a%20slug%20has%20to%20survive%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhat-a-slug-has-to-survive%2F" target="_blank" rel="noopener">Share on Bluesky</a>
           </p>
           <p class="addr">https://atillaguzel.github.io/blog/what-a-slug-has-to-survive/</p>
         </div>

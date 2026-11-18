@@ -1,5 +1,5 @@
-/* Shared behaviour for every page: analytics that load only after the visitor accepts,
-   and the share panel at the end of a post. See DESIGN.md. */
+/* Shared behaviour for every page: analytics and events that start only after the visitor
+   accepts, and the share panel at the end of a post. See DESIGN.md. */
 
 (function () {
   'use strict';
@@ -24,12 +24,28 @@
   function startAnalytics() {
     document.documentElement.dataset.analytics = 'on';
     window['ga-disable-' + MEASUREMENT_ID] = false;
-    if (loaded || isLocal) return;
+    if (isLocal) return;
+    if (loaded) {
+      window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      return;
+    }
     loaded = true;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
+    // Say exactly what was agreed to: measurement, and nothing to do with advertising.
+    window.gtag('consent', 'default', {
+      analytics_storage: 'granted',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
     window.gtag('js', new Date());
-    window.gtag('config', MEASUREMENT_ID);
+    window.gtag('config', MEASUREMENT_ID, {
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+      // Add ?ga_debug to an address to watch events arrive in GA4's DebugView.
+      debug_mode: /[?&]ga_debug\b/.test(location.search) || undefined
+    });
     var script = document.createElement('script');
     script.async = true;
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
@@ -39,6 +55,7 @@
   function stopAnalytics() {
     document.documentElement.dataset.analytics = 'off';
     window['ga-disable-' + MEASUREMENT_ID] = true;
+    if (loaded) window.gtag('consent', 'update', { analytics_storage: 'denied' });
     document.cookie.split(';').forEach(function (pair) {
       var name = pair.split('=')[0].trim();
       if (name.indexOf('_ga') !== 0) return;
@@ -46,6 +63,50 @@
       document.cookie = name + '=; Max-Age=0; path=/; domain=' + location.hostname;
     });
   }
+
+  // Events. Nothing is sent unless the visitor has accepted. Markup declares what to send:
+  //   data-track="share" data-track-method="x"                     on a button or link
+  //   data-track="demo_interaction" data-track-demo="pipeline"     on a button, or on the
+  //     data-track-action="example"                                box that holds several
+  //   data-track-input="demo_interaction" data-track-demo="..."    on a text field
+  // What a visitor types is never sent, only the fact that they used the field, once.
+  function track(name, params) {
+    if (document.documentElement.dataset.analytics !== 'on') return;
+    if (isLocal) {
+      (window.__tracked = window.__tracked || []).push([name, params]);
+      return;
+    }
+    if (window.gtag) window.gtag('event', name, params);
+  }
+
+  function paramsFor(el, action) {
+    var data = el.dataset;
+    var params = {};
+    if (data.trackMethod) {
+      var post = location.pathname.match(/^\/blog\/([^/]+)\//);
+      params.method = data.trackMethod;
+      params.content_type = 'article';
+      params.item_id = post ? post[1] : location.pathname;
+    }
+    if (data.trackDemo) {
+      params.demo_name = data.trackDemo;
+      params.demo_action = action || data.trackAction || 'use';
+    }
+    return params;
+  }
+
+  document.addEventListener('click', function (event) {
+    var control = event.target.closest('a, button');
+    var marked = control && control.closest('[data-track]');
+    if (marked) track(marked.dataset.track, paramsFor(marked));
+  });
+
+  document.addEventListener('input', function (event) {
+    var field = event.target.closest('[data-track-input]');
+    if (!field || field.dataset.tracked) return;
+    field.dataset.tracked = 'yes';
+    track(field.dataset.trackInput, paramsFor(field, 'type'));
+  });
 
   var box = null;
 
@@ -93,6 +154,76 @@
   [].forEach.call(document.querySelectorAll('[data-consent-open]'), function (button) {
     button.hidden = false;
     button.addEventListener('click', function () { openBox(false); });
+  });
+
+  // Tables in a post. On a phone each row stacks into a small block with its column names
+  // beside the values, so nothing scrolls sideways. The stylesheet does the stacking; this
+  // copies the column names onto the cells and keeps the table's meaning for screen readers,
+  // which is lost when table elements are laid out as blocks.
+  [].forEach.call(document.querySelectorAll('.post .scroll > table'), function (table) {
+    var heads = [].map.call(table.querySelectorAll('thead th'), function (th) { return th.textContent.trim(); });
+    if (!heads.length) return;
+    table.setAttribute('role', 'table');
+    [].forEach.call(table.querySelectorAll('thead, tbody'), function (group) { group.setAttribute('role', 'rowgroup'); });
+    [].forEach.call(table.querySelectorAll('thead th'), function (th) { th.setAttribute('role', 'columnheader'); });
+    [].forEach.call(table.querySelectorAll('tr'), function (row) { row.setAttribute('role', 'row'); });
+    [].forEach.call(table.querySelectorAll('tbody tr'), function (row) {
+      [].forEach.call(row.children, function (cell, i) {
+        cell.setAttribute('role', 'cell');
+        if (heads[i]) cell.dataset.label = heads[i];
+      });
+    });
+    table.classList.add('stacks');
+  });
+
+  // Offer a break after punctuation, so a long name breaks at a dot or a bracket before it
+  // is cut mid-word. A <wbr> is an element, not text, so copying ignores it.
+  function addPieces(parent, text) {
+    (text.match(/[^.,(\[=:\/]*[.,(\[=:\/]?/g) || []).forEach(function (piece, k) {
+      if (!piece) return;
+      if (k) parent.appendChild(document.createElement('wbr'));
+      parent.appendChild(document.createTextNode(piece));
+    });
+  }
+
+  // Code blocks. Each line becomes its own box so the stylesheet can wrap a long line under
+  // itself with a hanging indent. The text is unchanged, so copying a block gives the code
+  // exactly as written. Without script a block scrolls sideways as before.
+  [].forEach.call(document.querySelectorAll('.post pre > code'), function (code) {
+    var lines = code.textContent.replace(/\n$/, '').split('\n');
+    code.textContent = '';
+    lines.forEach(function (text, n) {
+      var line = document.createElement('span');
+      line.className = 'line';
+      var indent = text.match(/^ */)[0].length;
+      var rest = text + (n < lines.length - 1 ? '\n' : '');
+      line.style.setProperty('--i', indent);
+      if (indent && text.length > indent) {
+        // Keep the indentation and the first character together, or a long first word
+        // would drop to the next row and leave the indentation alone on a blank one.
+        var lead = document.createElement('span');
+        lead.className = 'ind';
+        lead.textContent = text.slice(0, indent + 1);
+        line.appendChild(lead);
+        rest = rest.slice(indent + 1);
+      }
+      // A trailing comment stays with its marker: the row breaks before the "#", never
+      // between it and the first word of the comment.
+      var comment = rest.match(/(^|\s)((?:#|\/\/) +\S+)/);
+      if (comment) {
+        var at = comment.index + comment[1].length;
+        addPieces(line, rest.slice(0, at));
+        var kept = document.createElement('span');
+        kept.className = 'nb';
+        kept.textContent = comment[2];
+        line.appendChild(kept);
+        addPieces(line, rest.slice(at + comment[2].length));
+      } else {
+        addPieces(line, rest);
+      }
+      code.appendChild(line);
+    });
+    code.parentNode.classList.add('wraps');
   });
 
   // The share panel at the end of a post. The X and Bluesky buttons are plain links and
