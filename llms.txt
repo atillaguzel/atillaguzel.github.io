@@ -1,0 +1,29 @@
+# Atilla Guzel
+
+> The personal site of Atilla Guzel, a data scientist and engineer based in London who builds small open-source Python libraries.
+
+Every page on this site is hand-written HTML and reads in full without JavaScript.
+
+## Pages
+
+- [Home](https://atillaguzel.github.io/): who Atilla is, the libraries he works on, and where to find him
+- [Blog](https://atillaguzel.github.io/blog/): the list of posts
+
+## Posts
+
+- [An issue is not an instruction](https://atillaguzel.github.io/blog/an-issue-is-not-an-instruction/): How agents can read issues from strangers without taking orders from them.
+- [Why this site is written by hand](https://atillaguzel.github.io/blog/why-this-site-is-written-by-hand/): No generator and no build step: what that replaced, and what it costs.
+- [pаypal is not paypal](https://atillaguzel.github.io/blog/paypal-is-not-paypal/): Why a unique index does not stop look-alike usernames, and how comparing skeletons does.
+- [What a slug has to survive](https://atillaguzel.github.io/blog/what-a-slug-has-to-survive/): Accents, other alphabets and empty results, shown one stage at a time.
+
+## Work
+
+- [sluggi](https://github.com/blip-box/sluggi): a Python library and CLI that turns any text into a clean, URL-safe slug
+- [confusable](https://github.com/blip-box/confusable): Unicode spoofing and look-alike detection for Python, following Unicode Technical Standard #39 (alpha)
+- [guild](https://github.com/blip-box/guild): agent-run maintenance for open-source libraries, under human stewards (in development)
+
+## Elsewhere
+
+- [GitHub](https://github.com/atillaguzel): Atilla's code
+- [LinkedIn](https://www.linkedin.com/in/atilla-guzel/): the best way to reach him
+- [blipbox](https://blipbox.io): where the libraries are presented in full

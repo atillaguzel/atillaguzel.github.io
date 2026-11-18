@@ -1,0 +1,988 @@
+@font-face {
+  font-family: "iA Writer Duospace";
+  src: url("../fonts/iAWriterDuospace-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+  --paper: #fbfcfc;
+  --band: #b1d6d8;
+  --ink: #16253d;      /* borders, headlines */
+  --text: #3f3f3f;     /* running text */
+  --pen: #477b85;      /* the mark */
+  --mark: #f8e19f;     /* highlighter under links */
+  --btn: #f8e19f;
+  --on-btn: #16253d;
+  --line: #c9dcdd;
+  --mist: #e6f1f1;
+  --muted: #55676f;
+  --font-text: "iA Writer Duospace", "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-display: "IBM Plex Mono", "iA Writer Duospace", ui-monospace, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0f1b20;
+    --band: #1f4650;
+    --ink: #e6f0f0;
+    --text: #cfdcdd;
+    --pen: #9fd3d8;
+    --mark: #5c5324;
+    --line: #29424a;
+    --mist: #18282e;
+    --muted: #9db1b5;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--font-text);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote {
+  margin: 0;
+}
+
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
+.wrap {
+  max-width: 58rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Links and buttons */
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a.mk {
+  background: linear-gradient(var(--mark), var(--mark)) no-repeat 0 100% / 100% 0.55em;
+  transition: background-size 120ms ease-out;
+}
+
+a.mk:hover {
+  background-size: 100% 100%;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--on-btn);
+  border-radius: 3px;
+  background: var(--btn);
+  color: var(--on-btn);
+  font-family: var(--font-display);
+  font-weight: 500;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.6), inset -1px -1px 0 rgba(22, 37, 61, 0.28);
+  transition: filter 120ms ease-out;
+}
+
+.btn:hover {
+  filter: brightness(0.95);
+}
+
+.btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: inset 1px 1px 0 rgba(22, 37, 61, 0.3), inset -1px -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.btn--alt {
+  background: #e6f1f1;
+}
+
+/* Band */
+
+.band {
+  background: var(--band);
+  color: var(--ink);
+  padding-block: 1.25rem clamp(2rem, 5vw, 3rem);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* The mark: a nib that writes its line once when the page loads, and again when the
+   brand is pointed at. The second pair of keyframes exists only so hover can restart it. */
+
+.logo {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+}
+
+.nib-body {
+  fill: var(--paper);
+}
+
+.nib-hole {
+  fill: var(--btn);
+  stroke-width: 2;
+}
+
+.nib-line {
+  stroke-dasharray: 1;
+  animation: nib-draw 520ms 300ms ease-out both;
+}
+
+.nib-pen {
+  animation: nib-write 520ms 300ms ease-out both;
+}
+
+.brand:hover .nib-line,
+.brand:focus-visible .nib-line {
+  animation-name: nib-draw-again;
+  animation-delay: 0s;
+}
+
+.brand:hover .nib-pen,
+.brand:focus-visible .nib-pen {
+  animation-name: nib-write-again;
+  animation-delay: 0s;
+}
+
+@keyframes nib-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes nib-draw-again {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes nib-write {
+  from { transform: translateX(-12px); }
+  to { transform: none; }
+}
+
+@keyframes nib-write-again {
+  from { transform: translateX(-12px); }
+  to { transform: none; }
+}
+
+.top ul {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+
+.top ul a {
+  border-bottom: 2px solid transparent;
+  transition: border-color 120ms ease-out;
+}
+
+.top ul a:hover {
+  border-bottom-color: var(--ink);
+}
+
+h1 {
+  margin-top: clamp(2.5rem, 8vw, 4.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 6.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+/* The homepage headline is one word. The sentence that names Atilla is part of the same
+   h1, so the heading reads in full to search engines and screen readers. */
+
+.hello {
+  display: block;
+  font-size: clamp(2.5rem, 10vw, 4.5rem);
+  line-height: 1;
+}
+
+h1 .intro {
+  display: block;
+  max-width: 46ch;
+  margin-top: 1.25rem;
+  font-family: var(--font-text);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0;
+  text-wrap: pretty;
+}
+
+.lede {
+  max-width: 46ch;
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Stippled shadow: the wrapper draws the pattern, the face sits on top and can move. */
+
+.stip {
+  position: relative;
+  display: block;
+}
+
+.stip::before {
+  content: "";
+  position: absolute;
+  inset: 8px -8px -8px 8px;
+  background-image:
+    linear-gradient(45deg, var(--ink) 25%, transparent 25%, transparent 75%, var(--ink) 75%),
+    linear-gradient(45deg, var(--ink) 25%, transparent 25%, transparent 75%, var(--ink) 75%);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+  opacity: 0.45;
+  transition: inset 120ms ease-out;
+}
+
+.face {
+  position: relative;
+  transition: transform 120ms ease-out;
+}
+
+/* The sluggi demo */
+
+.try {
+  max-width: 44rem;
+  margin-top: 2.75rem;
+  padding-right: 8px;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0.75rem;
+  margin: 0;
+  transform: translateY(-58%);
+  padding: 0 0.5rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.prompt {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+.prompt span {
+  color: var(--pen);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.prompt input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+}
+
+.prompt input:focus {
+  outline: none;
+}
+
+.prompt:focus-within {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.out {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.out-k {
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.out output {
+  flex: 1;
+  min-width: 0;
+  padding: 0.25rem 0.5rem;
+  background: var(--btn);
+  color: var(--on-btn);
+  font-family: var(--font-display);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.btn--sm {
+  padding: 0.25rem 0.625rem;
+  font: inherit;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.chip {
+  padding: 0.125rem 0.5rem;
+  border: 1px dashed var(--ink);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: var(--mist);
+}
+
+.fine {
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+/* Page */
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 8vw, 4.5rem);
+  padding-block: clamp(2.5rem, 6vw, 3.5rem) 4rem;
+}
+
+section {
+  scroll-margin-top: 1.5rem;
+}
+
+h2 {
+  margin-bottom: 1.75rem;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.prose {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 65ch;
+}
+
+/* Work: labelled panels */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  gap: 2.5rem 2rem;
+  padding-right: 8px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  padding: 1.625rem 1.25rem 1.25rem;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+.card:hover::before,
+.card:focus-within::before {
+  inset: 10px -10px -10px 10px;
+}
+
+.card:hover .face,
+.card:focus-within .face {
+  transform: translate(-2px, -2px);
+}
+
+.card:active .face {
+  transform: translate(3px, 3px);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.125rem 0.875rem;
+  font-size: 0.8125rem;
+}
+
+.facts dt {
+  color: var(--muted);
+}
+
+.facts dd {
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.panel .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin-top: auto;
+  font-size: 0.9375rem;
+}
+
+/* The first link covers the whole panel; the others sit above it. */
+
+.panel .links a:first-child::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.panel .links a + a {
+  position: relative;
+  z-index: 1;
+}
+
+.panel:has(.links a:first-child:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.panel .links a:first-child:focus-visible {
+  outline: none;
+}
+
+/* Inner pages: a slim band that carries the nav and the page title */
+
+.band--page h1 {
+  margin-top: clamp(2rem, 6vw, 3rem);
+  font-size: clamp(1.75rem, 5.5vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.meta {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* Posts: one reading column. Links inside a post get the marker without a class. */
+
+.post {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 65ch;
+}
+
+.post > * {
+  min-width: 0;
+}
+
+.post a {
+  background: linear-gradient(var(--mark), var(--mark)) no-repeat 0 100% / 100% 0.55em;
+  transition: background-size 120ms ease-out;
+}
+
+.post a:hover {
+  background-size: 100% 100%;
+}
+
+.post h2 {
+  margin: 1.5rem 0 0;
+}
+
+.post h3 {
+  margin-top: 0.75rem;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.post ul,
+.post ol {
+  display: grid;
+  gap: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.post ul {
+  list-style: square;
+}
+
+.post ol {
+  list-style: decimal;
+}
+
+.post li::marker {
+  color: var(--pen);
+}
+
+.post code {
+  padding: 0.0625rem 0.3125rem;
+  background: var(--mist);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 0.9375em;
+}
+
+.post pre {
+  margin: 0;
+  padding: 1rem 1.125rem;
+  border: 2px solid var(--ink);
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  tab-size: 4;
+}
+
+.post pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+
+.post blockquote {
+  color: var(--ink);
+}
+
+.post figure {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.post figure > img,
+.post figure > svg,
+.post figure > canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 2px solid var(--ink);
+}
+
+.post figcaption {
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.post hr {
+  width: 100%;
+  margin: 1rem 0;
+  border: 0;
+  border-top: 1px dashed var(--line);
+}
+
+.post .scroll {
+  overflow-x: auto;
+}
+
+.post table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.post th,
+.post td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.post thead th {
+  border-bottom: 2px solid var(--ink);
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* A note is a labelled panel with no shadow: the stipple is kept for things you can act on. */
+
+.note {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 1.375rem 1.125rem 1rem;
+  border: 2px solid var(--ink);
+}
+
+.post .label {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Reading devices shared by posts. See "Reading devices" in DESIGN.md. */
+
+.aid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+}
+
+.tag {
+  padding: 0.125rem 0.5rem;
+  background: var(--btn);
+  color: var(--on-btn);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+}
+
+.imp {
+  transition: background-color 250ms ease-out, box-shadow 250ms ease-out;
+}
+
+.is-shown .imp {
+  background: var(--btn);
+  color: var(--on-btn);
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.field {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.field-box {
+  display: inline-flex;
+  align-items: center;
+  min-width: 10rem;
+  padding: 0.375rem 0.625rem;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1.0625rem;
+}
+
+.caret {
+  width: 2px;
+  height: 1.2em;
+  margin-left: 1px;
+  background: var(--ink);
+  opacity: 0;
+}
+
+.is-typing .caret {
+  opacity: 1;
+  animation: caret-blink 700ms steps(1) infinite;
+}
+
+.verdict {
+  padding: 0.125rem 0.5rem;
+  border: 2px solid var(--pen);
+  color: var(--pen);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.verdict--no {
+  border-color: var(--ink);
+  background: var(--btn);
+  color: var(--on-btn);
+}
+
+.stamp-in {
+  animation: stamp-in 320ms ease-out both;
+}
+
+.fade-in {
+  animation: fade-in 400ms ease-out both;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+@keyframes stamp-in {
+  from { opacity: 0; transform: scale(1.4) rotate(-6deg); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes flip-in {
+  from { transform: rotateX(90deg); }
+  to { transform: none; }
+}
+
+/* The share panel that closes a post */
+
+.share {
+  margin: 1rem 8px 0.5rem 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.addr {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+/* A button inside a post keeps its own fill; other links in a post get the marker. */
+
+.post a.btn {
+  background: var(--btn);
+}
+
+.post a.btn--alt {
+  background: #e6f1f1;
+}
+
+.btn.is-done {
+  animation: stamp-in 320ms ease-out;
+}
+
+/* The list of posts on the blog index */
+
+.posts {
+  display: grid;
+  max-width: 65ch;
+  border-top: 1px solid var(--line);
+}
+
+.posts li {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 0.25rem 1.5rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.posts time {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.posts a {
+  justify-self: start;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.posts p {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 30rem) {
+  .posts li {
+    grid-template-columns: 1fr;
+  }
+
+  .posts p {
+    grid-column: 1;
+  }
+}
+
+/* Analytics consent: a small box that arrives late and slowly, and takes no focus. */
+
+.consent {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 10;
+  width: min(20rem, calc(100vw - 2.5rem));
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition: opacity 250ms ease-out, transform 250ms ease-out;
+}
+
+.consent.is-slow {
+  transition-duration: 1800ms;
+}
+
+.consent.is-leaving {
+  transition-duration: 400ms;
+}
+
+.consent.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.consent .panel {
+  gap: 0.75rem;
+  padding: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.consent-h {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.consent .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.textbtn {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px dotted currentColor;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.textbtn:hover {
+  color: var(--ink);
+}
+
+/* Footer */
+
+footer {
+  display: grid;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+blockquote {
+  display: grid;
+  gap: 0.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--band);
+}
+
+cite {
+  font-style: normal;
+}
+
+@media (max-width: 30rem) {
+  .top {
+    gap: 0.75rem;
+  }
+
+  .top ul {
+    gap: 0.75rem;
+  }
+
+  .brand {
+    gap: 0.5rem;
+  }
+
+  .logo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

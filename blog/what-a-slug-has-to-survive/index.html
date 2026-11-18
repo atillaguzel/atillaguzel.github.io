@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What a slug has to survive · Atilla Guzel</title>
+  <meta name="description" content="An editor publishes Crème brûlée and the address comes out as cr-me-br-l-e. What a title goes through to become a URL slug, shown one stage at a time.">
+  <meta name="author" content="Atilla Guzel">
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://atillaguzel.github.io/blog/what-a-slug-has-to-survive/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Atilla Guzel">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="What a slug has to survive">
+  <meta property="og:description" content="An editor publishes Crème brûlée and the address comes out as cr-me-br-l-e. What a title goes through to become a URL slug, shown one stage at a time.">
+  <meta property="og:url" content="https://atillaguzel.github.io/blog/what-a-slug-has-to-survive/">
+  <meta property="og:image" content="https://atillaguzel.github.io/images/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Atilla Guzel, data scientist and engineer in London">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "What a slug has to survive",
+    "description": "An editor publishes Crème brûlée and the address comes out as cr-me-br-l-e. What a title goes through to become a URL slug, shown one stage at a time.",
+    "datePublished": "2026-11-17",
+    "dateModified": "2026-11-18",
+    "inLanguage": "en-GB",
+    "url": "https://atillaguzel.github.io/blog/what-a-slug-has-to-survive/",
+    "mainEntityOfPage": "https://atillaguzel.github.io/blog/what-a-slug-has-to-survive/",
+    "image": "https://atillaguzel.github.io/images/og.png",
+    "author": {
+      "@type": "Person",
+      "@id": "https://atillaguzel.github.io/#person",
+      "name": "Atilla Guzel",
+      "url": "https://atillaguzel.github.io/"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&display=swap">
+  <link rel="preload" href="/fonts/iAWriterDuospace-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <style>
+
+    .demo { margin: 0.75rem 8px 1rem 0; }
+    .address { display: flex; flex-wrap: wrap; align-items: baseline; padding: 0.5rem 0.75rem; border: 2px solid var(--ink); background: var(--paper); color: var(--muted); font-family: var(--font-display); font-size: 0.9375rem; overflow-wrap: anywhere; }
+    .address b { color: var(--ink); font-weight: 500; }
+    .address .lost { background: var(--btn); color: var(--on-btn); }
+    .stages { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    .stages th, .stages td { padding: 0.375rem 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .stages th { width: 11rem; padding-right: 1rem; color: var(--muted); font-weight: 400; }
+    .stages td { color: var(--ink); font-family: var(--font-display); overflow-wrap: anywhere; }
+    .stages tr:last-child th, .stages tr:last-child td { border-bottom: 0; }
+    .stages tr.changed td { background: var(--mist); }
+    .stages tr.final td { background: var(--btn); color: var(--on-btn); font-weight: 500; }
+    .stages td span { padding: 0 0.25rem; }
+    .stages.is-running tr { animation: fade-in 260ms ease-out both; }
+    @media (max-width: 30rem) { .stages th { width: 6.5rem; } }
+  </style>
+</head>
+<body>
+
+  <header class="band band--page">
+    <div class="wrap">
+      <nav class="top" aria-label="Main">
+        <a class="brand" href="/">
+          <svg class="logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="nib-line" pathLength="1" d="M3 40H17"/>
+            <g class="nib-pen"><g transform="translate(6 6) rotate(45 24 20)">
+              <path class="nib-body" d="M19 4H29V11L33.5 20 24 36 14.5 20 19 11Z"/>
+              <path d="M24 35V25"/>
+              <circle class="nib-hole" cx="24" cy="20.5" r="2.25"/>
+            </g></g>
+          </svg>
+          atilla guzel
+        </a>
+        <ul>
+          <li><a href="/#work">work</a></li>
+          <li><a href="/blog/">blog</a></li>
+          <li><a href="https://www.linkedin.com/in/atilla-guzel/" rel="me">linkedin</a></li>
+        </ul>
+      </nav>
+      <h1>What a slug has to survive</h1>
+      <p class="meta"><time datetime="2026-11-17">17 November 2026</time></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="post">
+
+      <p>An editor finishes an article and gives it a title: Crème brûlée, à la carte. They press publish. The site turns the title into a web address, and the address comes out like this.</p>
+
+      <div class="aid" id="scene">
+        <span class="address" aria-label="The address ends in cr-me-br-l-e-la-carte">example.com/recipes/<b id="scene-slug">cr<span class="lost">-</span>me-br<span class="lost">-</span>l<span class="lost">-</span>e<span class="lost">-</span>la-carte</b></span>
+        <button class="btn btn--alt btn--sm" type="button" id="scene-replay" hidden>Replay</button>
+      </div>
+
+      <p>You have seen addresses like that one. Four letters went missing, the four with accents, and a hyphen is standing where each of them was. I'll show you the moment they were lost.</p>
+
+      <p>That readable tail of an address is called a slug. <a href="https://github.com/blip-box/sluggi">sluggi</a> is the library I maintain for making them, and the rest of this page is what a title has to survive on the way.</p>
+
+      <h2>Where the letters went</h2>
+
+      <p>The editor's site did the obvious thing. It made the title lowercase and swapped everything that was not a to z for a hyphen. To that rule, <code>è</code> is simply something that is not a to z.</p>
+
+      <p>Here is the same title going through sluggi, one stage at a time. A shaded row is a stage that changed something. Put your own title in and watch.</p>
+
+      <div class="stip demo">
+        <div class="face panel">
+          <h3 class="label">the pipeline</h3>
+          <label class="sr" for="slug-in">A title to turn into a slug</label>
+          <div class="prompt">
+            <span aria-hidden="true">&gt;</span>
+            <input id="slug-in" type="text" value="Crème brûlée, à la carte" autocomplete="off" autocapitalize="off" spellcheck="false">
+          </div>
+          <table class="stages" id="stages">
+            <tbody>
+              <tr><th scope="row">decode HTML entities</th><td><span>Crème brûlée, à la carte</span></td></tr>
+              <tr class="changed"><th scope="row">normalise, drop accents</th><td><span>Creme brulee, a la carte</span></td></tr>
+              <tr><th scope="row">transliterate</th><td><span>Creme brulee, a la carte</span></td></tr>
+              <tr class="changed"><th scope="row">lowercase</th><td><span>creme brulee, a la carte</span></td></tr>
+              <tr class="final"><th scope="row">extract words, join</th><td><span>creme-brulee-a-la-carte</span></td></tr>
+            </tbody>
+          </table>
+          <div class="out">
+            <span class="out-k">the obvious way would give</span>
+            <output id="naive" for="slug-in">cr-me-br-l-e-la-carte</output>
+          </div>
+          <div class="chips" id="slug-chips" hidden>
+            <span>or try</span>
+            <button class="chip" type="button">Привет, мир! Café №1</button>
+            <button class="chip" type="button">Καλημέρα κόσμε</button>
+            <button class="chip" type="button">Caf&amp;eacute; &amp;amp; Bar</button>
+            <button class="chip" type="button">  --Hello,   World!!--  </button>
+            <button class="chip" type="button">🎉 Party time</button>
+            <button class="chip" type="button">Straße nach 東京</button>
+            <button class="chip" type="button">!!!</button>
+          </div>
+          <p class="fine">An in-browser approximation of sluggi's default pipeline. The library has more stages: stopwords, truncation and your own replacement rules.</p>
+        </div>
+      </div>
+
+      <h2>What else a title runs into</h2>
+
+      <p>Back to our editor, who has a busy week ahead. Each of these arrives on their desk sooner or later.</p>
+
+      <h3>Accents</h3>
+      <p>This is the one that caught them on Monday. The fix is Unicode normalisation. In the form called NFKD, <code>è</code> becomes a plain <code>e</code> followed by a separate accent mark, and the mark can then be dropped. That gives <code>creme-brulee</code>.</p>
+
+      <h3>Other alphabets</h3>
+      <p>On Tuesday the title is in Russian. Normalisation does nothing for <code>Привет</code>, because a Cyrillic letter is not a Latin letter with something added. It needs a table that says <code>П</code> is <code>P</code>. sluggi has those tables for Cyrillic and Greek, so <code>Привет, мир</code> becomes <code>privet-mir</code>.</p>
+
+      <h3>Text that arrives encoded</h3>
+      <p>On Wednesday the title comes out of an older system with HTML entities still in it. Without a decoding step, <code>Caf&amp;eacute;</code> becomes <code>caf-eacute</code>. With one it becomes <code>cafe</code>.</p>
+
+      <h3>Punctuation at the edges</h3>
+      <p>Swapping each unwanted character for a hyphen leaves doubled hyphens and stray ones at each end. Pulling the words out and joining them avoids both: <code>--Hello,   World!!--</code> becomes <code>hello-world</code>.</p>
+
+      <h3>Length</h3>
+      <p>Cutting a slug at a fixed number of characters can stop in the middle of a word. sluggi cuts at a word boundary by default, so <code>The quick brown fox jumps over the lazy dog</code> with a limit of 20 gives <code>the-quick-brown-fox</code>.</p>
+
+      <h2>What sluggi leaves alone</h2>
+
+      <p>I would rather you heard this from me than found it on a Friday. These are the default results from sluggi 0.1.2.</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th scope="col">Input</th><th scope="col">Slug</th><th scope="col">Why</th></tr></thead>
+          <tbody>
+            <tr><td><code>Straße</code></td><td><code>straße</code></td><td><code>ß</code> has no accent to drop and no built-in mapping</td></tr>
+            <tr><td><code>Ærøskøbing</code></td><td><code>ærøskøbing</code></td><td>The same is true of <code>æ</code> and <code>ø</code></td></tr>
+            <tr><td><code>東京</code></td><td><code>東京</code></td><td>Only Greek and Cyrillic are transliterated</td></tr>
+            <tr><td><code>🎉 Party time</code></td><td><code>party-time</code></td><td>Emoji are dropped by default. Turning them into their names needs the optional extra and a setting switched on</td></tr>
+            <tr><td><code>!!!</code></td><td>an empty string</td><td>There were no words</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The first three still work in a web address, since browsers encode them, but they are not ASCII. If you need ASCII, pass your own mapping:</p>
+
+<pre><code>from sluggi import slugify
+
+slugify("東京 station", custom_map={"東京": "tokyo"})   # 'tokyo-station'</code></pre>
+
+      <p>The last row is the one to plan for. A title made only of punctuation or emoji gives an empty slug, and an empty slug is not an address. Check for it, and fall back to something that is always there, such as the record's id.</p>
+
+      <h2>Monday, again</h2>
+
+      <p>The editor gives an article a title: Crème brûlée, à la carte. They press publish. The address ends in <code>creme-brulee-a-la-carte</code>, and nobody notices anything, which is what a slug is for.</p>
+
+      <aside class="stip share" aria-labelledby="share-h">
+        <div class="face panel">
+          <h2 class="label" id="share-h">pass it on</h2>
+          <p>If this was worth your time, it may be worth someone else's.</p>
+          <p class="actions">
+            <button class="btn btn--sm" type="button" data-copy-link hidden>Copy link</button>
+            <button class="btn btn--alt btn--sm" type="button" data-native-share hidden>Share</button>
+            <a class="btn btn--alt btn--sm" href="https://x.com/intent/post?text=What%20a%20slug%20has%20to%20survive&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhat-a-slug-has-to-survive%2F" target="_blank" rel="noopener">Share on X</a>
+            <a class="btn btn--alt btn--sm" href="https://bsky.app/intent/compose?text=What%20a%20slug%20has%20to%20survive%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhat-a-slug-has-to-survive%2F" target="_blank" rel="noopener">Share on Bluesky</a>
+          </p>
+          <p class="addr">https://atillaguzel.github.io/blog/what-a-slug-has-to-survive/</p>
+        </div>
+      </aside>
+
+      <hr>
+      <p><a href="/blog/">&larr; all posts</a></p>
+
+    </article>
+
+    <footer>
+      <p>Written by <a class="mk" href="/">Atilla Guzel</a>.</p>
+      <p><button type="button" class="textbtn" data-consent-open hidden>analytics settings</button></p>
+    </footer>
+  </main>
+
+  <script>
+
+    (function () {
+      var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* The opening: the address is typed out, and each lost letter lands as a hyphen. */
+      var scene = document.getElementById('scene');
+      var sceneSlug = document.getElementById('scene-slug');
+      var replay = document.getElementById('scene-replay');
+      var PARTS = ['cr', '-', 'me-br', '-', 'l', '-', 'e', '-', 'la-carte'];
+      var timer = null;
+      function playScene() {
+        var flat = [];
+        PARTS.forEach(function (part, p) {
+          part.split('').forEach(function (ch) { flat.push([ch, p % 2 === 1]); });
+        });
+        var i = 0;
+        clearInterval(timer);
+        sceneSlug.textContent = '';
+        timer = setInterval(function () {
+          var pair = flat[i++];
+          var node = document.createElement('span');
+          node.textContent = pair[0];
+          if (pair[1]) node.className = 'lost fade-in';
+          sceneSlug.appendChild(node);
+          if (i >= flat.length) clearInterval(timer);
+        }, 70);
+      }
+      if (!calm) {
+        replay.hidden = false;
+        replay.addEventListener('click', playScene);
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            if (!entries[0].isIntersecting) return;
+            io.disconnect();
+            playScene();
+          }, { threshold: 1 });
+          io.observe(scene);
+        }
+      }
+
+      /* The pipeline */
+      var input = document.getElementById('slug-in');
+      var table = document.getElementById('stages');
+      var body = table.querySelector('tbody');
+      var naiveOut = document.getElementById('naive');
+      var chips = document.getElementById('slug-chips');
+
+      var CYR = { 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh', 'з': 'z', 'и': 'i', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya' };
+      var GRK = { 'α': 'a', 'β': 'v', 'γ': 'g', 'δ': 'd', 'ε': 'e', 'ζ': 'z', 'η': 'i', 'θ': 'th', 'ι': 'i', 'κ': 'k', 'λ': 'l', 'μ': 'm', 'ν': 'n', 'ξ': 'x', 'ο': 'o', 'π': 'p', 'ρ': 'r', 'σ': 's', 'ς': 's', 'τ': 't', 'υ': 'y', 'φ': 'f', 'χ': 'ch', 'ψ': 'ps', 'ω': 'o' };
+
+      function decode(text) {
+        var doc = new DOMParser().parseFromString('<!doctype html><body>' + text.replace(/</g, '&lt;'), 'text/html');
+        return doc.body.textContent;
+      }
+      function normalise(text) { return text.normalize('NFKD').replace(/[̀-ͯ]/g, ''); }
+      function transliterate(text) {
+        return Array.from(text).map(function (ch) {
+          var low = ch.toLowerCase();
+          var to = low in CYR ? CYR[low] : low in GRK ? GRK[low] : null;
+          if (to === null) return ch;
+          return ch === low ? to : to.charAt(0).toUpperCase() + to.slice(1);
+        }).join('');
+      }
+      function lower(text) { return text.toLowerCase(); }
+      function join(text) { return (text.match(/[\p{L}\p{N}]+/gu) || []).join('-'); }
+      function naive(text) { return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
+
+      var STAGES = [
+        ['decode HTML entities', decode],
+        ['normalise, drop accents', normalise],
+        ['transliterate', transliterate],
+        ['lowercase', lower],
+        ['extract words, join', join]
+      ];
+
+      function render(animate) {
+        var text = input.value;
+        naiveOut.textContent = naive(text) || '(an empty slug)';
+        body.textContent = '';
+        STAGES.forEach(function (stage, i) {
+          var next = stage[1](text);
+          var row = document.createElement('tr');
+          var last = i === STAGES.length - 1;
+          row.className = last ? 'final' : next !== text ? 'changed' : '';
+          row.style.animationDelay = (i * 140) + 'ms';
+          var head = document.createElement('th');
+          head.scope = 'row';
+          head.textContent = stage[0];
+          var cell = document.createElement('td');
+          var span = document.createElement('span');
+          span.textContent = next || (last ? '(an empty slug)' : ' ');
+          cell.appendChild(span);
+          row.appendChild(head);
+          row.appendChild(cell);
+          body.appendChild(row);
+          text = next;
+        });
+        table.classList.toggle('is-running', !!animate && !calm);
+      }
+
+      input.addEventListener('input', function () { render(false); });
+      [].forEach.call(chips.querySelectorAll('.chip'), function (chip) {
+        chip.addEventListener('click', function () { input.value = chip.textContent; render(true); input.focus(); });
+      });
+      chips.hidden = false;
+      render(false);
+    })();
+  </script>
+  <script src="/js/site.js" defer></script>
+</body>
+</html>

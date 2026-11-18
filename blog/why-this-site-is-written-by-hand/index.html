@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why this site is written by hand · Atilla Guzel</title>
+  <meta name="description" content="Your browser fetched a handful of files to show this page, and nothing built them. What this hand-written site replaced, why I chose it and what it costs.">
+  <meta name="author" content="Atilla Guzel">
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://atillaguzel.github.io/blog/why-this-site-is-written-by-hand/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Atilla Guzel">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Why this site is written by hand">
+  <meta property="og:description" content="Your browser fetched a handful of files to show this page, and nothing built them. What this hand-written site replaced, why I chose it and what it costs.">
+  <meta property="og:url" content="https://atillaguzel.github.io/blog/why-this-site-is-written-by-hand/">
+  <meta property="og:image" content="https://atillaguzel.github.io/images/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Atilla Guzel, data scientist and engineer in London">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Why this site is written by hand",
+    "description": "Your browser fetched a handful of files to show this page, and nothing built them. What this hand-written site replaced, why I chose it and what it costs.",
+    "datePublished": "2026-11-18",
+    "dateModified": "2026-11-18",
+    "inLanguage": "en-GB",
+    "url": "https://atillaguzel.github.io/blog/why-this-site-is-written-by-hand/",
+    "mainEntityOfPage": "https://atillaguzel.github.io/blog/why-this-site-is-written-by-hand/",
+    "image": "https://atillaguzel.github.io/images/og.png",
+    "author": {
+      "@type": "Person",
+      "@id": "https://atillaguzel.github.io/#person",
+      "name": "Atilla Guzel",
+      "url": "https://atillaguzel.github.io/"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&display=swap">
+  <link rel="preload" href="/fonts/iAWriterDuospace-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <style>
+
+    .demo { margin: 0.75rem 8px 1rem 0; }
+    .fetched { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+    .fetched th, .fetched td { padding: 0.3125rem 0; border-bottom: 1px solid var(--line); text-align: left; }
+    .fetched td:last-child, .fetched th:last-child { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .fetched td:first-child { color: var(--ink); font-family: var(--font-display); overflow-wrap: anywhere; padding-right: 1rem; }
+    .fetched thead th { color: var(--muted); font-weight: 400; }
+    .fetched tfoot td { border-bottom: 0; color: var(--ink); font-family: var(--font-display); font-weight: 700; }
+    .fetched tbody tr.arrives { animation: fade-in 320ms ease-out both; }
+  </style>
+</head>
+<body>
+
+  <header class="band band--page">
+    <div class="wrap">
+      <nav class="top" aria-label="Main">
+        <a class="brand" href="/">
+          <svg class="logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="nib-line" pathLength="1" d="M3 40H17"/>
+            <g class="nib-pen"><g transform="translate(6 6) rotate(45 24 20)">
+              <path class="nib-body" d="M19 4H29V11L33.5 20 24 36 14.5 20 19 11Z"/>
+              <path d="M24 35V25"/>
+              <circle class="nib-hole" cx="24" cy="20.5" r="2.25"/>
+            </g></g>
+          </svg>
+          atilla guzel
+        </a>
+        <ul>
+          <li><a href="/#work">work</a></li>
+          <li><a href="/blog/">blog</a></li>
+          <li><a href="https://www.linkedin.com/in/atilla-guzel/" rel="me">linkedin</a></li>
+        </ul>
+      </nav>
+      <h1>Why this site is written by hand</h1>
+      <p class="meta"><time datetime="2026-11-18">18 November 2026</time></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="post">
+
+      <p>Somebody follows a link to this page. Their browser asks a server for one file and gets it. A stylesheet follows, then a small script and the fonts. After that there is nothing left to fetch.</p>
+
+      <p>That somebody is you, a moment ago. Here is the list, as your own browser recorded it.</p>
+
+      <div class="stip demo">
+        <div class="face panel">
+          <h3 class="label">what your browser fetched</h3>
+          <div class="scroll">
+            <table class="fetched" id="fetched">
+              <thead><tr><th scope="col">File</th><th scope="col">Size</th></tr></thead>
+              <tbody><tr><td>This needs JavaScript to measure. The page itself does not.</td><td></td></tr></tbody>
+              <tfoot hidden><tr><td>Total</td><td id="fetched-total"></td></tr></tfoot>
+            </table>
+          </div>
+          <div class="aid"><button class="btn btn--alt btn--sm" type="button" id="fetched-replay" hidden>Replay</button></div>
+          <p class="fine">Sizes are as stored on the server, before compression. A dash means the size was not reported, usually because your browser already had the file. Google Analytics appears only if you accepted it.</p>
+        </div>
+      </div>
+
+      <p>This site has no build step. Every page you can visit is a file in a folder, and what is in the file is what you were sent. I chose that on purpose, and I'll show you why.</p>
+
+      <h2>What it replaced</h2>
+
+      <p>Go back a few years and follow the same link. The previous version of this site went up in July 2018, and I last touched it in June 2020. Its résumé page was a template. To show you one page of text, your browser would have been handed pieces of a site with 1,451 files in it, and 1,427 of those were Bootstrap, Font Awesome and jQuery. None of that code was mine, and after a few years none of it was current.</p>
+
+      <h2>Why not a generator</h2>
+
+      <p><strong>Each page is built for what it says.</strong> The post about <a href="/blog/paypal-is-not-paypal/">look-alike names</a> has a sign-up form in it that you can try to fool. The post about <a href="/blog/what-a-slug-has-to-survive/">slugs</a> shows a title changing stage by stage. Those pieces are written into the page they belong to, and there is no plugin system for them to satisfy.</p>
+
+      <p><strong>Nothing goes out of date.</strong> There are no packages to update. The one outside thing a page asks for is a typeface, as the list above shows, and it reads fine without it. A page written today should open the same way in ten years.</p>
+
+      <p><strong>It reads the same to everyone.</strong> The words are in the HTML as it is served, so a search engine, a screen reader and an AI agent get the page you get. There is a <a href="/sitemap.xml">sitemap</a> for crawlers and an <a href="/llms.txt">llms.txt</a> for agents.</p>
+
+      <h2>What it costs</h2>
+
+      <p>The header and the footer are copied into every page. Changing the navigation means editing every file. A generator exists to remove exactly that chore.</p>
+
+      <p>I can live with it because I do not do the chore alone. I maintain this site with an AI agent, the same way I work on the libraries: it drafts and I read. A file in the repository called <a href="https://github.com/atillaguzel/atillaguzel.github.io/blob/master/DESIGN.md">DESIGN.md</a> tells it how the site looks, how it sounds and how to add a post. The next change starts from those rules.</p>
+
+      <h2>The next visitor</h2>
+
+      <p>Somebody else will follow a link here tomorrow. Their browser will ask for one file, and that file will be the whole page. If you are curious what is in it, view the source. It is all there.</p>
+
+      <aside class="stip share" aria-labelledby="share-h">
+        <div class="face panel">
+          <h2 class="label" id="share-h">pass it on</h2>
+          <p>If this was worth your time, it may be worth someone else's.</p>
+          <p class="actions">
+            <button class="btn btn--sm" type="button" data-copy-link hidden>Copy link</button>
+            <button class="btn btn--alt btn--sm" type="button" data-native-share hidden>Share</button>
+            <a class="btn btn--alt btn--sm" href="https://x.com/intent/post?text=Why%20this%20site%20is%20written%20by%20hand&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhy-this-site-is-written-by-hand%2F" target="_blank" rel="noopener">Share on X</a>
+            <a class="btn btn--alt btn--sm" href="https://bsky.app/intent/compose?text=Why%20this%20site%20is%20written%20by%20hand%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwhy-this-site-is-written-by-hand%2F" target="_blank" rel="noopener">Share on Bluesky</a>
+          </p>
+          <p class="addr">https://atillaguzel.github.io/blog/why-this-site-is-written-by-hand/</p>
+        </div>
+      </aside>
+
+      <hr>
+      <p><a href="/blog/">&larr; all posts</a></p>
+
+    </article>
+
+    <footer>
+      <p>Written by <a class="mk" href="/">Atilla Guzel</a>.</p>
+      <p><button type="button" class="textbtn" data-consent-open hidden>analytics settings</button></p>
+    </footer>
+  </main>
+
+  <script>
+
+    (function () {
+      var table = document.getElementById('fetched');
+      if (!table || !window.performance || !performance.getEntriesByType) return;
+      var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var body = table.querySelector('tbody');
+      var foot = table.querySelector('tfoot');
+      var totalCell = document.getElementById('fetched-total');
+      var replay = document.getElementById('fetched-replay');
+
+      function kb(bytes) { return (bytes / 1024).toFixed(1) + ' kB'; }
+      function label(url) {
+        var u = new URL(url, location.href);
+        if (u.origin !== location.origin) return u.hostname;
+        return u.pathname === location.pathname ? 'this page' : u.pathname;
+      }
+
+      // The rows arrive in the order the files did, one after another.
+      function render() {
+        var entries = performance.getEntriesByType('navigation').concat(performance.getEntriesByType('resource'));
+        var total = 0;
+        body.textContent = '';
+        foot.hidden = true;
+        entries.forEach(function (entry, i) {
+          var size = entry.decodedBodySize || 0;
+          total += size;
+          var row = document.createElement('tr');
+          if (!calm) { row.className = 'arrives'; row.style.animationDelay = (i * 160) + 'ms'; }
+          var name = document.createElement('td');
+          name.textContent = label(entry.name);
+          var cell = document.createElement('td');
+          cell.textContent = size ? kb(size) : '–';
+          row.appendChild(name);
+          row.appendChild(cell);
+          body.appendChild(row);
+        });
+        totalCell.textContent = kb(total);
+        setTimeout(function () { foot.hidden = false; }, calm ? 0 : entries.length * 160 + 200);
+      }
+
+      function start() {
+        setTimeout(render, 300);
+        if (!calm) { replay.hidden = false; replay.addEventListener('click', render); }
+      }
+      if (document.readyState === 'complete') start();
+      else window.addEventListener('load', start);
+    })();
+  </script>
+  <script src="/js/site.js" defer></script>
+</body>
+</html>

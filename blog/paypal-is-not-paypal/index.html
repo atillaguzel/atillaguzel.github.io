@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>pаypal is not paypal · Atilla Guzel</title>
+  <meta name="description" content="Somebody signs up with a name that is already taken, and the form lets them in. How look-alike letters get past a unique index, and how skeletons stop them.">
+  <meta name="author" content="Atilla Guzel">
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://atillaguzel.github.io/blog/paypal-is-not-paypal/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Atilla Guzel">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="pаypal is not paypal">
+  <meta property="og:description" content="Somebody signs up with a name that is already taken, and the form lets them in. How look-alike letters get past a unique index, and how skeletons stop them.">
+  <meta property="og:url" content="https://atillaguzel.github.io/blog/paypal-is-not-paypal/">
+  <meta property="og:image" content="https://atillaguzel.github.io/images/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Atilla Guzel, data scientist and engineer in London">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "pаypal is not paypal",
+    "description": "Somebody signs up with a name that is already taken, and the form lets them in. How look-alike letters get past a unique index, and how skeletons stop them.",
+    "datePublished": "2026-11-18",
+    "dateModified": "2026-11-18",
+    "inLanguage": "en-GB",
+    "url": "https://atillaguzel.github.io/blog/paypal-is-not-paypal/",
+    "mainEntityOfPage": "https://atillaguzel.github.io/blog/paypal-is-not-paypal/",
+    "image": "https://atillaguzel.github.io/images/og.png",
+    "author": {
+      "@type": "Person",
+      "@id": "https://atillaguzel.github.io/#person",
+      "name": "Atilla Guzel",
+      "url": "https://atillaguzel.github.io/"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&display=swap">
+  <link rel="preload" href="/fonts/iAWriterDuospace-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <style>
+
+    .demo { margin: 0.75rem 8px 1rem 0; }
+    .glyphs { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+    .g { display: grid; justify-items: center; min-width: 2.25rem; padding: 0.25rem 0.375rem; border: 1px solid var(--line); }
+    .g b { color: var(--ink); font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; line-height: 1.4; }
+    .g small { color: var(--muted); font-size: 0.625rem; }
+    .g.odd { border-color: var(--ink); background: var(--btn); }
+    .g.odd b, .g.odd small { color: var(--on-btn); }
+    .verdicts { display: grid; gap: 0.25rem; padding-left: 1.25rem; list-style: square; color: var(--ink); }
+    .title-copy { color: var(--ink); font-size: 1.125rem; font-weight: 700; }
+    .rows { display: grid; gap: 0.375rem; }
+    .row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.75rem; }
+    .row small { width: 6.5rem; color: var(--muted); font-family: var(--font-text); font-size: 0.75rem; }
+    .cells { display: flex; gap: 0.25rem; }
+    .cell { display: grid; place-items: center; width: 1.875rem; height: 2rem; border: 1px solid var(--line); font-size: 1.125rem; font-weight: 500; }
+    .cell.hot { border-color: var(--ink); background: var(--btn); color: var(--on-btn); }
+    .cell.plain { border-color: var(--ink); }
+    .cell.flip { animation: flip-in 320ms ease-out; }
+  </style>
+</head>
+<body>
+
+  <header class="band band--page">
+    <div class="wrap">
+      <nav class="top" aria-label="Main">
+        <a class="brand" href="/">
+          <svg class="logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="nib-line" pathLength="1" d="M3 40H17"/>
+            <g class="nib-pen"><g transform="translate(6 6) rotate(45 24 20)">
+              <path class="nib-body" d="M19 4H29V11L33.5 20 24 36 14.5 20 19 11Z"/>
+              <path d="M24 35V25"/>
+              <circle class="nib-hole" cx="24" cy="20.5" r="2.25"/>
+            </g></g>
+          </svg>
+          atilla guzel
+        </a>
+        <ul>
+          <li><a href="/#work">work</a></li>
+          <li><a href="/blog/">blog</a></li>
+          <li><a href="https://www.linkedin.com/in/atilla-guzel/" rel="me">linkedin</a></li>
+        </ul>
+      </nav>
+      <h1>pаypal is not paypal</h1>
+      <p class="meta"><time datetime="2026-11-18">18 November 2026</time></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="post">
+
+      <p>It is late, and somebody is filling in a sign-up form. They type a name that is already taken. The form thinks for a moment and lets them in.</p>
+
+      <div class="aid" id="scene">
+        <span class="field" aria-hidden="true">
+          <span>username</span>
+          <span class="field-box"><span id="scene-typed">p<span class="imp">&#x430;</span>ypal</span><span class="caret"></span></span>
+          <span class="verdict" id="scene-ok">available</span>
+        </span>
+        <button class="btn btn--alt btn--sm" type="button" id="scene-replay" hidden>Replay</button>
+      </div>
+
+      <p>Now come back to this page and look at its title, because the same thing has just happened to you. The second letter of the first word is a stranger. I'll show you.</p>
+
+      <div class="aid">
+        <button class="btn btn--alt btn--sm" type="button" id="show" aria-pressed="false" hidden>Show me the stranger</button>
+        <span class="title-copy" id="show-title" aria-hidden="true" hidden>p<span class="imp">&#x430;</span>ypal is not paypal</span>
+        <span class="tag" id="show-tag">The second letter is U+0430, the Cyrillic small letter a.</span>
+      </div>
+
+      <p>Most typefaces draw that letter exactly like the Latin a. A database sees two different names. You and I see the same name twice. I maintain <a href="https://github.com/blip-box/confusable">confusable</a>, a Python library for this problem, and this is the short version of how the visitor got in and how to keep the next one out.</p>
+
+      <h2>How the visitor got in</h2>
+
+      <p>The form had one rule: no two accounts may share a name. It checked the new name against every name it held, found no match and opened the door. The rule did its job. The trouble is what counts as the same name, and there are three ways to make one that only reads like another.</p>
+
+      <ul>
+        <li><strong>A letter from another alphabet.</strong> Cyrillic and Greek each have letters that are drawn like Latin ones: а, е, о, р, с and more.</li>
+        <li><strong>A look-alike from the same alphabet.</strong> <code>rn</code> beside <code>m</code>, a capital <code>I</code> beside a small <code>l</code>, the digit <code>1</code> beside either.</li>
+        <li><strong>A character you cannot see.</strong> A zero-width space inside <code>pay&#x200B;pal</code> changes the name and leaves nothing on screen. A right-to-left override makes a file called <code>invoice[U+202E]gpj.exe</code> display as <code>invoiceexe.jpg</code>.</li>
+      </ul>
+
+      <p>Sit in the visitor's chair for a minute. The form below protects four names. See what you can get past it.</p>
+
+      <div class="stip demo">
+        <div class="face panel">
+          <h3 class="label">try a name</h3>
+          <label class="sr" for="name-in">A name to check</label>
+          <div class="prompt">
+            <span aria-hidden="true">&gt;</span>
+            <input id="name-in" type="text" value="p&#x430;ypal" autocomplete="off" autocapitalize="off" spellcheck="false">
+          </div>
+          <div class="glyphs" id="glyphs" aria-hidden="true"></div>
+          <ul class="verdicts" id="verdicts" aria-live="polite">
+            <li>Mixes Latin and Cyrillic letters.</li>
+            <li>Reads as the reserved name paypal.</li>
+          </ul>
+          <div class="chips" id="name-chips" hidden>
+            <span>or try</span>
+            <button class="chip" type="button" data-v="PAYPA1">PAYPA1</button>
+            <button class="chip" type="button" data-v="pay&#x200B;pal">pay|pal with a hidden space</button>
+            <button class="chip" type="button" data-v="rnicrosoft">rnicrosoft</button>
+            <button class="chip" type="button" data-v="&#x430;dmin">&#x430;dmin</button>
+            <button class="chip" type="button" data-v="john_smith42">john_smith42</button>
+          </div>
+          <p class="fine">Protected here: paypal, admin, support, microsoft. This is a small in-browser check that knows about twenty look-alikes. The library carries the full Unicode table.</p>
+        </div>
+      </div>
+
+      <h2>What the form should have compared</h2>
+
+      <p>Back to our visitor. This time the site does one extra thing before it answers. It rewrites the name in the plainest letters it can, so each look-alike turns into the letter it was imitating. That plain version is called a skeleton, and it comes from <a href="https://www.unicode.org/reports/tr39/">Unicode Technical Standard #39</a>. Two names are confusable when their skeletons are equal.</p>
+
+      <div class="aid" id="skel-aid">
+        <span class="rows" aria-hidden="true">
+          <span class="row"><small>the visitor</small><span class="cells"><span class="cell">p</span><span class="cell hot" id="skel-cell">&#x430;</span><span class="cell">y</span><span class="cell">p</span><span class="cell">a</span><span class="cell">l</span></span></span>
+          <span class="row"><small>the real one</small><span class="cells"><span class="cell">p</span><span class="cell">a</span><span class="cell">y</span><span class="cell">p</span><span class="cell">a</span><span class="cell">l</span></span></span>
+        </span>
+        <button class="btn btn--alt btn--sm" type="button" id="skel-btn" aria-pressed="false" hidden>Take the skeletons</button>
+        <span class="verdict verdict--no" id="skel-ok" hidden>same skeleton</span>
+        <span class="sr" id="skel-live" aria-live="polite"></span>
+      </div>
+
+      <p>You can do the same in a few lines of Python.</p>
+
+<pre><code>import confusable
+
+confusable.skeleton("pаypal")   # 'paypal'
+confusable.skeleton("microsoft")     # 'rnicrosoft'
+confusable.skeleton("rnicrosoft")    # 'rnicrosoft'</code></pre>
+
+      <p>The second result looks wrong at first. A skeleton is not a tidied-up name. It is a key for comparing, and the standard happens to pick <code>rn</code> as the plain form of <code>m</code>. So the site stores the skeleton beside the name and applies its one rule to that.</p>
+
+<pre><code>def username_keys(name: str) -> tuple[str, str]:
+    """Return the keys that must each be unique among usernames."""
+    return confusable.skeleton(name), confusable.skeleton(name.casefold())</code></pre>
+
+      <p>There are two keys because a skeleton keeps case: you can tell <code>Paypal</code> from <code>paypal</code>, so it does too. Most sites treat usernames as the same whatever their case, and the second key folds case first. That is the one <code>PAYPA1</code> and <code>paypal</code> share.</p>
+
+      <h2>Not every name is a username</h2>
+
+      <p>One caution before you add this to every text box you own. The checks that suit a username would turn away a great many real names.</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th scope="col">Text</th><th scope="col">Hold it to</th><th scope="col">Refuse</th></tr></thead>
+          <tbody>
+            <tr><td>Usernames, handles, slugs</td><td>A strict set of letters, digits and a little punctuation</td><td>Scripts that are not used together, mixed digit systems, a skeleton that is already taken</td></tr>
+            <tr><td>Display names</td><td>Nothing: spaces, emoji and mixed scripts are how people write their names</td><td>Invisible characters, piled-up accents, a skeleton that matches a name you protect</td></tr>
+            <tr><td>Filenames</td><td>The file system's own rules</td><td>Invisible characters, and an extension that reads differently from what it is</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The standard defines each check and leaves the policy to you. The library's guide on <a href="https://github.com/blip-box/confusable/blob/main/docs/accepting-names.md">accepting names safely</a> has a starting recipe for each row, and that code runs in the test suite.</p>
+
+      <aside class="note">
+        <h3 class="label">two cautions</h3>
+        <p>confusable is in alpha, so names and signatures may still change. And skeletons change when the Unicode data does. Store the Unicode version beside them and recompute when it moves.</p>
+      </aside>
+
+      <h2>The same night, again</h2>
+
+      <p>It is late, and somebody is filling in a sign-up form. They type a name that is already taken, with one letter borrowed from another alphabet. The form thinks for a moment.</p>
+
+      <div class="aid" id="ending">
+        <span class="field" aria-hidden="true">
+          <span>username</span>
+          <span class="field-box">p<span class="imp">&#x430;</span>ypal</span>
+          <span class="verdict verdict--no" id="ending-no">already taken</span>
+        </span>
+      </div>
+
+      <p>This time it says no.</p>
+
+      <aside class="stip share" aria-labelledby="share-h">
+        <div class="face panel">
+          <h2 class="label" id="share-h">pass it on</h2>
+          <p>If this was worth your time, it may be worth someone else's.</p>
+          <p class="actions">
+            <button class="btn btn--sm" type="button" data-copy-link hidden>Copy link</button>
+            <button class="btn btn--alt btn--sm" type="button" data-native-share hidden>Share</button>
+            <a class="btn btn--alt btn--sm" href="https://x.com/intent/post?text=p%D0%B0ypal%20is%20not%20paypal&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fpaypal-is-not-paypal%2F" target="_blank" rel="noopener">Share on X</a>
+            <a class="btn btn--alt btn--sm" href="https://bsky.app/intent/compose?text=p%D0%B0ypal%20is%20not%20paypal%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fpaypal-is-not-paypal%2F" target="_blank" rel="noopener">Share on Bluesky</a>
+          </p>
+          <p class="addr">https://atillaguzel.github.io/blog/paypal-is-not-paypal/</p>
+        </div>
+      </aside>
+
+      <hr>
+      <p><a href="/blog/">&larr; all posts</a></p>
+
+    </article>
+
+    <footer>
+      <p>Written by <a class="mk" href="/">Atilla Guzel</a>.</p>
+      <p><button type="button" class="textbtn" data-consent-open hidden>analytics settings</button></p>
+    </footer>
+  </main>
+
+  <script>
+
+    (function () {
+      var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function onceSeen(el, fn) {
+        if (calm || !('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          fn();
+        }, { threshold: 1 });
+        io.observe(el);
+      }
+
+      /* The opening scene: the form types the name and accepts it. */
+      var scene = document.getElementById('scene');
+      var typed = document.getElementById('scene-typed');
+      var sceneOk = document.getElementById('scene-ok');
+      var replay = document.getElementById('scene-replay');
+      var WORD = 'pаypal';
+      var timer = null;
+      function playScene() {
+        var i = 0;
+        clearInterval(timer);
+        typed.textContent = '';
+        sceneOk.hidden = true;
+        sceneOk.classList.remove('stamp-in');
+        scene.classList.add('is-typing');
+        timer = setInterval(function () {
+          typed.textContent = WORD.slice(0, ++i);
+          if (i < WORD.length) return;
+          clearInterval(timer);
+          typed.innerHTML = 'p<span class="imp">а</span>ypal';
+          setTimeout(function () {
+            scene.classList.remove('is-typing');
+            sceneOk.hidden = false;
+            sceneOk.classList.add('stamp-in');
+          }, 500);
+        }, 170);
+      }
+      if (!calm) {
+        replay.hidden = false;
+        replay.addEventListener('click', playScene);
+        onceSeen(scene, playScene);
+      }
+
+      /* The host: show the stranger in the title, when asked. */
+      var show = document.getElementById('show');
+      var showTag = document.getElementById('show-tag');
+      var showTitle = document.getElementById('show-title');
+      var title = document.querySelector('h1');
+      title.innerHTML = 'p<span class="imp">а</span>ypal is not paypal';
+      show.hidden = false;
+      showTag.hidden = true;
+      show.addEventListener('click', function () {
+        var on = show.getAttribute('aria-pressed') !== 'true';
+        show.setAttribute('aria-pressed', String(on));
+        show.textContent = on ? 'Hide it again' : 'Show me the stranger';
+        document.body.classList.toggle('is-shown', on);
+        showTag.hidden = !on;
+        showTitle.hidden = !on;
+      });
+
+      /* The fix: the two names become one skeleton. */
+      var skelBtn = document.getElementById('skel-btn');
+      var skelCell = document.getElementById('skel-cell');
+      var skelOk = document.getElementById('skel-ok');
+      var skelLive = document.getElementById('skel-live');
+      skelBtn.hidden = false;
+      skelBtn.addEventListener('click', function () {
+        var on = skelBtn.getAttribute('aria-pressed') !== 'true';
+        skelBtn.setAttribute('aria-pressed', String(on));
+        skelBtn.textContent = on ? 'Show them as typed' : 'Take the skeletons';
+        skelCell.textContent = on ? 'a' : 'а';
+        skelCell.classList.toggle('hot', !on);
+        skelCell.classList.toggle('plain', on);
+        skelCell.classList.remove('flip'); void skelCell.offsetWidth; skelCell.classList.add('flip');
+        skelOk.hidden = !on;
+        skelOk.classList.toggle('stamp-in', on);
+        skelLive.textContent = on ? 'Both names now have the skeleton paypal.' : 'As typed, the second letters differ.';
+      });
+
+      /* The ending: this time the form says no. */
+      var no = document.getElementById('ending-no');
+      onceSeen(document.getElementById('ending'), function () { no.classList.add('stamp-in'); });
+
+      /* The checker */
+      var input = document.getElementById('name-in');
+      var glyphs = document.getElementById('glyphs');
+      var verdicts = document.getElementById('verdicts');
+      var chips = document.getElementById('name-chips');
+
+      var RESERVED = ['paypal', 'admin', 'support', 'microsoft'];
+      var MAP = {
+        'а': 'a', 'е': 'e', 'о': 'o', 'р': 'p', 'с': 'c', 'у': 'y', 'х': 'x',
+        'і': 'i', 'ј': 'j', 'ѕ': 's', 'һ': 'h', 'ԁ': 'd',
+        'ο': 'o', 'α': 'a', 'ν': 'v', 'ι': 'i', 'ρ': 'p',
+        '0': 'O', '1': 'l', 'I': 'l', '|': 'l', 'm': 'rn'
+      };
+
+      function isInvisible(cp) {
+        return (cp >= 0x200B && cp <= 0x200F) || (cp >= 0x202A && cp <= 0x202E) || (cp >= 0x2060 && cp <= 0x2064) ||
+               (cp >= 0x2066 && cp <= 0x2069) || cp === 0xFEFF || cp === 0x00AD || (cp >= 0xE0000 && cp <= 0xE007F);
+      }
+      function scriptOf(cp) {
+        if ((cp >= 0x41 && cp <= 0x5A) || (cp >= 0x61 && cp <= 0x7A) || (cp >= 0xC0 && cp <= 0x24F)) return 'Latin';
+        if (cp >= 0x400 && cp <= 0x52F) return 'Cyrillic';
+        if (cp >= 0x370 && cp <= 0x3FF) return 'Greek';
+        return null;
+      }
+      function hex(cp) { return 'U+' + cp.toString(16).toUpperCase().padStart(4, '0'); }
+      function skeleton(text) {
+        return Array.from(text.normalize('NFD')).map(function (ch) {
+          if (isInvisible(ch.codePointAt(0))) return '';
+          return ch in MAP ? MAP[ch] : ch;
+        }).join('').normalize('NFD');
+      }
+      function item(text) { var li = document.createElement('li'); li.textContent = text; return li; }
+
+      function render() {
+        var name = input.value;
+        var scripts = [];
+        var hidden = [];
+
+        glyphs.textContent = '';
+        Array.from(name).forEach(function (ch, i) {
+          var cp = ch.codePointAt(0);
+          var invisible = isInvisible(cp);
+          var script = scriptOf(cp);
+          if (script && scripts.indexOf(script) === -1) scripts.push(script);
+          if (invisible) hidden.push(hex(cp) + ' at position ' + (i + 1));
+          var cell = document.createElement('span');
+          cell.className = 'g' + (cp > 0x7E || invisible ? ' odd' : '');
+          var glyph = document.createElement('b');
+          glyph.textContent = invisible ? '·' : ch;
+          var code = document.createElement('small');
+          code.textContent = cp > 0x7E || invisible ? hex(cp) : ' ';
+          cell.appendChild(glyph);
+          cell.appendChild(code);
+          glyphs.appendChild(cell);
+        });
+
+        verdicts.textContent = '';
+        if (!name) { verdicts.appendChild(item('Type a name to check it.')); return; }
+
+        hidden.forEach(function (h) { verdicts.appendChild(item('Contains a character you cannot see: ' + h + '.')); });
+        if (scripts.length > 1) verdicts.appendChild(item('Mixes ' + scripts.join(' and ') + ' letters.'));
+        RESERVED.forEach(function (r) {
+          if (name === r) verdicts.appendChild(item('Is exactly the protected name ' + r + '.'));
+          else if (skeleton(name) === skeleton(r)) verdicts.appendChild(item('Reads as the protected name ' + r + '.'));
+          else if (skeleton(name.toLowerCase()) === skeleton(r)) verdicts.appendChild(item('Reads as the protected name ' + r + ' once case is ignored.'));
+        });
+        if (!verdicts.children.length) verdicts.appendChild(item('You are through. This small check finds nothing wrong.'));
+      }
+
+      input.addEventListener('input', render);
+      [].forEach.call(chips.querySelectorAll('.chip'), function (chip) {
+        chip.addEventListener('click', function () { input.value = chip.dataset.v; render(); input.focus(); });
+      });
+      chips.hidden = false;
+      render();
+    })();
+  </script>
+  <script src="/js/site.js" defer></script>
+</body>
+</html>

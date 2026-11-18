@@ -1,133 +1,308 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-GB">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atilla Guzel · Data scientist and engineer in London</title>
+  <meta name="description" content="Atilla Guzel is a data scientist and engineer based in London. He builds small open-source Python libraries, including sluggi and confusable.">
+  <meta name="author" content="Atilla Guzel">
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://atillaguzel.github.io/">
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122031932-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Atilla Guzel">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Atilla Guzel">
+  <meta property="og:description" content="Atilla Guzel is a data scientist and engineer based in London. He builds small open-source Python libraries, including sluggi and confusable.">
+  <meta property="og:url" content="https://atillaguzel.github.io/">
+  <meta property="profile:first_name" content="Atilla">
+  <meta property="profile:last_name" content="Guzel">
+  <meta property="og:image" content="https://atillaguzel.github.io/images/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Atilla Guzel, data scientist and engineer in London">
+  <meta name="twitter:card" content="summary_large_image">
 
-    gtag('config', 'UA-122031932-1');
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://atillaguzel.github.io/#website",
+        "url": "https://atillaguzel.github.io/",
+        "name": "Atilla Guzel",
+        "inLanguage": "en-GB",
+        "publisher": {
+          "@id": "https://atillaguzel.github.io/#person"
+        }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://atillaguzel.github.io/#page",
+        "url": "https://atillaguzel.github.io/",
+        "name": "Atilla Guzel",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://atillaguzel.github.io/#website"
+        },
+        "mainEntity": {
+          "@id": "https://atillaguzel.github.io/#person"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://atillaguzel.github.io/#person",
+        "name": "Atilla Guzel",
+        "url": "https://atillaguzel.github.io/",
+        "jobTitle": "Data scientist and engineer",
+        "description": "Atilla Guzel is a data scientist and engineer based in London. He builds small open-source Python libraries, including sluggi and confusable.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        },
+        "knowsAbout": [
+          "Python",
+          "Open-source software",
+          "Data science",
+          "Unicode text processing"
+        ],
+        "sameAs": [
+          "https://github.com/atillaguzel",
+          "https://www.linkedin.com/in/atilla-guzel/"
+        ]
+      }
+    ]
+  }
   </script>
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Atilla Guzel — Data scientist and traveler</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&display=swap">
+  <link rel="preload" href="/fonts/iAWriterDuospace-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="me" href="https://github.com/atillaguzel">
+  <link rel="me" href="https://www.linkedin.com/in/atilla-guzel/">
 </head>
 <body>
 
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="grid">
-      <div class="logo">
-        <svg width="75" height="75" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        	 viewBox="0 0 488 488" style="enable-background:new 0 0 488 488;fill:#477b85;stroke:#16253d;stroke-width:0.25;" xml:space="preserve">
-        <g>
-        	<g>
-        		<path d="M484.26,157.654L484.26,157.654L381.968,75.239c-3.6-2.901-8.699-3.001-12.299-0.2L206.983,198.661
-        			c-3.6,2.701-4.9,7.501-3.2,11.702c33.897,83.115,37.697,129.123,14.199,184.633H9.999c-5.5,0-9.999,4.501-9.999,10.002
-        			S4.5,415,9.999,415h214.482c0.3,0,0.6,0,0.9,0c0.1,0,0.1,0,0.2,0s0.1,0,0.2,0c0.2,0,0.4-0.1,0.6-0.1c0.1,0,0.2,0,0.3-0.1
-        			c0.2,0,0.5-0.1,0.7-0.2c0.1,0,0.2-0.1,0.3-0.1h0.1c0.1,0,0.2-0.1,0.3-0.1c0.1,0,0.2-0.1,0.3-0.1s0.2-0.1,0.3-0.1
-        			c0.1,0,0.1-0.1,0.2-0.1c0,0,0.1,0,0.1-0.1c0.1,0,0.1-0.1,0.2-0.1c0.1-0.1,0.2-0.1,0.3-0.2c0.1-0.1,0.2-0.1,0.3-0.2
-        			c0.1,0,0.2-0.1,0.2-0.2c0.1,0,0.1-0.1,0.2-0.1c0,0,0.1,0,0.1-0.1c3.2-2.3,6.299-4.501,9.299-6.601
-        			c41.997-30.005,62.995-45.008,176.485-35.206c4.7,0.4,8.999-2.5,10.399-7.001l61.095-196.035
-        			C488.759,164.455,487.459,160.154,484.26,157.654z M409.766,350.789c-77.893-6.201-113.99,0-142.888,14.503l62.795-83.615
-        			c4.4,1.9,9.199,3.101,14.199,3.401c0.6,0,1.2,0,1.9,0c9.899,0,19.198-3.601,26.598-10.302
-        			c8.099-7.401,12.799-17.603,13.299-28.805c1-22.704-16.299-42.107-38.497-43.108c-10.799-0.5-21.098,3.301-29.198,10.602
-        			c-8.099,7.401-12.799,17.503-13.299,28.505c-0.5,10.302,3.1,20.004,9.199,27.605l-62.795,83.515c1.8-11.702,2.4-23.404,1.8-35.506
-        			c-1.5-29.805-9.999-63.211-27.598-107.619l150.287-114.32l90.892,73.313L409.766,350.789z M324.673,242.769
-        			c0.3-5.601,2.7-10.802,6.799-14.603c3.9-3.501,8.699-5.401,13.799-5.401c0.3,0,0.6,0,0.9,0
-        			c11.299,0.5,19.998,10.502,19.498,22.204c-0.3,5.901-2.7,11.202-6.799,14.903c-3.8,3.501-8.799,5.301-13.999,5.101
-        			c-4.3-0.1-8.199-1.6-11.399-4.001c-0.1-0.1-0.3-0.2-0.4-0.4c-0.1-0.1-0.2-0.1-0.3-0.2
-        			C327.573,256.272,324.273,249.771,324.673,242.769z"/>
-        	</g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        <g>
-        </g>
-        </svg>
+  <header class="band">
+    <div class="wrap">
+
+      <nav class="top" aria-label="Main">
+        <a class="brand" href="/">
+          <svg class="logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="nib-line" pathLength="1" d="M3 40H17"/>
+            <g class="nib-pen"><g transform="translate(6 6) rotate(45 24 20)">
+              <path class="nib-body" d="M19 4H29V11L33.5 20 24 36 14.5 20 19 11Z"/>
+              <path d="M24 35V25"/>
+              <circle class="nib-hole" cx="24" cy="20.5" r="2.25"/>
+            </g></g>
+          </svg>
+          atilla guzel
+        </a>
+        <ul>
+          <li><a href="#work">work</a></li>
+          <li><a href="/blog/">blog</a></li>
+          <li><a href="https://www.linkedin.com/in/atilla-guzel/" rel="me">linkedin</a></li>
+        </ul>
+      </nav>
+
+      <h1>
+        <span class="hello">Hello,</span>
+        <span class="intro">I'm Atilla Guzel, a data scientist and engineer based in London.</span>
+      </h1>
+      <p class="lede">I like small tools that do one thing well, and these days I build them in the open at <a class="mk" href="https://blipbox.io">blipbox</a>.</p>
+
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section id="work" aria-labelledby="work-h">
+      <h2 id="work-h">work</h2>
+      <div class="cards">
+
+        <article class="stip card">
+          <div class="face panel">
+            <h3 class="label">sluggi</h3>
+            <p>Turns any text into a clean, URL-safe slug. Unicode-aware, with no runtime dependencies.</p>
+            <dl class="facts">
+              <dt>status</dt><dd>on PyPI</dd>
+              <dt>licence</dt><dd>MIT</dd>
+              <dt>install</dt><dd>pip install sluggi</dd>
+            </dl>
+            <p class="links">
+              <a class="mk" href="https://github.com/blip-box/sluggi">source &rarr;</a>
+              <a class="mk" href="https://pypi.org/project/sluggi/">PyPI &rarr;</a>
+            </p>
+          </div>
+        </article>
+
+        <article class="stip card">
+          <div class="face panel">
+            <h3 class="label">confusable</h3>
+            <p>Tells you when text looks like something it is not. Follows Unicode Technical Standard #39, in pure Python.</p>
+            <dl class="facts">
+              <dt>status</dt><dd>alpha</dd>
+              <dt>licence</dt><dd>MIT</dd>
+              <dt>install</dt><dd>pip install --pre confusable</dd>
+            </dl>
+            <p class="links">
+              <a class="mk" href="https://github.com/blip-box/confusable">source &rarr;</a>
+              <a class="mk" href="https://pypi.org/project/confusable/">PyPI &rarr;</a>
+            </p>
+          </div>
+        </article>
+
+        <article class="stip card">
+          <div class="face panel">
+            <h3 class="label">guild</h3>
+            <p>Agent-run maintenance for open-source libraries, under human stewards who approve every change.</p>
+            <dl class="facts">
+              <dt>status</dt><dd>in development</dd>
+              <dt>licence</dt><dd>MIT</dd>
+              <dt>install</dt><dd>not released yet</dd>
+            </dl>
+            <p class="links">
+              <a class="mk" href="https://github.com/blip-box/guild">source &rarr;</a>
+            </p>
+          </div>
+        </article>
 
       </div>
-      <div class="scan" style="font-size: 1.1rem; font-weight:400; ">
-        <a href="https://www.englishpen.org/campaigns/the-tyranny-of-space-interviews/">The tyranny of space and time</a>
-        <p>Time can erase the writer, <br> but it cannot erase the written word.<br><cite>&mdash; Ahmet Altan</cite></p>
+      <div class="stip try">
+        <div class="face panel">
+          <h3 class="label">try sluggi</h3>
+          <label class="sr" for="slug-in">Text to turn into a slug</label>
+          <div class="prompt">
+            <span aria-hidden="true">&gt;</span>
+            <input id="slug-in" type="text" value="Привет, мир! Café №1" autocomplete="off" autocapitalize="off" spellcheck="false">
+          </div>
+          <div class="out">
+            <span class="out-k">slug</span>
+            <output id="slug-out" for="slug-in">privet-mir-cafe-no1</output>
+            <button class="btn btn--alt btn--sm" type="button" id="slug-copy" hidden>Copy</button>
+          </div>
+          <div class="chips" id="slug-chips" hidden>
+            <span>or try</span>
+            <button class="chip" type="button">Crème brûlée, à la carte</button>
+            <button class="chip" type="button">Καλημέρα κόσμε</button>
+            <button class="chip" type="button">Hello, World!!</button>
+          </div>
+          <p class="fine">An in-browser approximation of sluggi's default pipeline. The Python library does more.</p>
+        </div>
       </div>
-      <div class="intro" style="padding-top: 40px">
-        <h1>Hello &mdash; <br> I'm Atilla Guzel, <br>data scientist and traveler...</h1>
+    </section>
+
+    <section id="writing" aria-labelledby="writing-h">
+      <h2 id="writing-h">writing</h2>
+      <ol class="posts">
+        <li>
+          <time datetime="2026-11-19">2026-11-19</time>
+          <a class="mk" href="/blog/an-issue-is-not-an-instruction/">An issue is not an instruction</a>
+          <p>How agents can read issues from strangers without taking orders from them.</p>
+        </li>
+        <li>
+          <time datetime="2026-11-18">2026-11-18</time>
+          <a class="mk" href="/blog/why-this-site-is-written-by-hand/">Why this site is written by hand</a>
+          <p>No generator and no build step: what that replaced, and what it costs.</p>
+        </li>
+        <li>
+          <time datetime="2026-11-18">2026-11-18</time>
+          <a class="mk" href="/blog/paypal-is-not-paypal/">pаypal is not paypal</a>
+          <p>Why a unique index does not stop look-alike usernames, and how comparing skeletons does.</p>
+        </li>
+        <li>
+          <time datetime="2026-11-17">2026-11-17</time>
+          <a class="mk" href="/blog/what-a-slug-has-to-survive/">What a slug has to survive</a>
+          <p>Accents, other alphabets and empty results, shown one stage at a time.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="elsewhere" aria-labelledby="elsewhere-h">
+      <h2 id="elsewhere-h">elsewhere</h2>
+      <div class="prose">
+        <p>The best way to reach me is <a class="mk" href="https://www.linkedin.com/in/atilla-guzel/" rel="me">LinkedIn</a>. My code is on <a class="mk" href="https://github.com/atillaguzel" rel="me">GitHub</a>, mostly under the <a class="mk" href="https://github.com/blip-box">blip-box</a> organisation.</p>
       </div>
-  </div>
-  <div class="grid2">
-      <p class="copy" style="letter-spacing:0.1rem; ">I am currently a London based data scientist and director of <a href="https://www.nimbous.co/">Nimbous</a>. I'm also one of the cofounders of <a href="https://lifeium.co/">Lifeium</a>, and contributing the marketing and development team there. I have recently completed my studies towards a Master's degree at <a href="https://bolognabusinessschool.com/hp/">BBS</a>. I have a strong interest in Python, machine learning and statistical modelling.</p>
-      <p class="copy-b" style="letter-spacing:0.1rem; ">Life is too short and time is so precious. We are nomad travelers sailing this giant ship and the children of our own choices about life and time. So let's live wisely, be responsible and be grateful...</p>
+    </section>
 
-  </div>
+    <footer>
+      <p>Away from the keyboard I'm a father and a traveler, and a minimalist about most things.</p>
+      <blockquote>
+        <p>Time can erase the writer, but it cannot erase the written word.</p>
+        <cite>&mdash; <a class="mk" href="https://www.englishpen.org/posts/news/the-tyranny-of-space-interviews-with-ahmet-altan-and-ahmet-turan-alkan/">Ahmet Altan</a></cite>
+      </blockquote>
+      <p><button type="button" class="textbtn" data-consent-open hidden>analytics settings</button></p>
+    </footer>
 
-  <div class="grid2">
-  <!--    <p class="copy">
-        <svg width="24" height="24" style="fill:#b1d6d8" aria-labelledby="simpleicons-linkedin-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><title id="simpleicons-linkedin-icon">LinkedIn</title><a class="svg-a" xlink:href= "https://www.linkedin.com/in/atilla-guzel/"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></a></svg>
+  </main>
 
-        <svg width="24" height="24" style="fill:#b1d6d8" aria-labelledby="simpleicons-twitter-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><title id="simpleicons-twitter-icon">Twitter</title><a class="svg-a" xlink:href= "https://twitter.com/atillaguzel"><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></a></svg>
+  <script>
+    (function () {
+      var input = document.getElementById('slug-in');
+      var out = document.getElementById('slug-out');
+      var copy = document.getElementById('slug-copy');
+      var chips = document.getElementById('slug-chips');
+      if (!input || !out) return;
 
-        <svg width="24" height="24" style="fill:#b1d6d8" aria-labelledby="simpleicons-medium-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><title id="simpleicons-medium-icon">Medium</title><a class="svg-a" xlink:href= "https://medium.com/@atillaguzel"><path d="M2.846 6.36c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403H7.26l5.378 11.795 4.728-11.795H24v.403l-1.917 1.837c-.165.126-.247.333-.213.538v13.5c-.034.204.048.41.213.537l1.87 1.837v.403h-9.41v-.403l1.937-1.882c.19-.19.19-.246.19-.538V7.794l-5.39 13.688h-.727L4.278 7.794v9.174c-.052.386.076.774.347 1.053l2.52 3.06v.402H0v-.403l2.52-3.06c.27-.278.39-.67.326-1.052V6.36z"/></a></svg>
+      var CYR = { 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh', 'з': 'z', 'и': 'i', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya' };
+      var GRK = { 'α': 'a', 'β': 'v', 'γ': 'g', 'δ': 'd', 'ε': 'e', 'ζ': 'z', 'η': 'i', 'θ': 'th', 'ι': 'i', 'κ': 'k', 'λ': 'l', 'μ': 'm', 'ν': 'n', 'ξ': 'x', 'ο': 'o', 'π': 'p', 'ρ': 'r', 'σ': 's', 'ς': 's', 'τ': 't', 'υ': 'y', 'φ': 'f', 'χ': 'ch', 'ψ': 'ps', 'ω': 'o' };
 
-        <svg width="24" height="24" style="fill:#b1d6d8" aria-labelledby="simpleicons-instagram-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><title id="simpleicons-instagram-icon">Instagram</title><a class="svg-a" xlink:href= "https://www.instagram.com/atilla.guzel"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></a></svg>
+      function slug(s) {
+        s = s.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+        s = Array.from(s).map(function (c) { return c in CYR ? CYR[c] : c in GRK ? GRK[c] : c; }).join('');
+        return (s.match(/[\p{L}\p{N}]+/gu) || []).join('-');
+      }
 
-      <svg width="24" height="24" style="fill:#b1d6d8" aria-labelledby="simpleicons-github-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><title id="simpleicons-github-icon">GitHub</title> <a class="svg-a" xlink:href= "https://github.com/atillaguzel"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></a></svg>
+      function render() {
+        var value = slug(input.value);
+        out.textContent = value || '(nothing to slug yet)';
+        copy.disabled = !value;
+      }
 
-         YouTube
-        <svg width="24" height="24"style="fill:#b1d6d8" aria-labelledby="simpleicons-youtube-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title id="simpleicons-youtube-icon">YouTube</title><a xlink:href= "http://www.opera.com/"><path class="a" d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></a></svg>
+      input.addEventListener('input', render);
 
-                ––––––––––––––––––––––––––––––––––––––––––––––––––
+      [].forEach.call(chips.querySelectorAll('.chip'), function (chip) {
+        chip.addEventListener('click', function () {
+          input.value = chip.textContent;
+          render();
+          input.focus();
+        });
+      });
 
-      </p> -->
-          <p class="copy" style="letter-spacing:0.1rem; ">You may take a look at my <a href="https://atillaguzel.github.io/resume/">resume</a>.</p>
-  </div>
+      copy.addEventListener('click', function () {
+        function flash(text) {
+          copy.textContent = text;
+          clearTimeout(copy._t);
+          copy._t = setTimeout(function () { copy.textContent = 'Copy'; }, 1400);
+        }
+        function select() {
+          var range = document.createRange();
+          range.selectNodeContents(out);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          flash('Selected');
+        }
+        try {
+          navigator.clipboard.writeText(out.textContent).then(function () { flash('Copied'); }, select);
+        } catch (e) {
+          select();
+        }
+      });
 
+      copy.hidden = false;
+      chips.hidden = false;
+      render();
+    })();
+  </script>
+  <script src="/js/site.js" defer></script>
 </body>
 </html>
