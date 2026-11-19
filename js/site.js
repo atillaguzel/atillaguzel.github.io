@@ -235,11 +235,23 @@
     });
   }
 
-  // Code blocks. Each line becomes its own box so the stylesheet can wrap a long line under
-  // itself with a hanging indent. The text is unchanged, so copying a block gives the code
-  // exactly as written. Without script a block scrolls sideways as before.
-  [].forEach.call(document.querySelectorAll('.post pre > code'), function (code) {
-    var lines = code.textContent.replace(/\n$/, '').split('\n');
+  // Code blocks. A plain <pre><code> in a post becomes a labelled panel with a Copy button.
+  // Each line becomes its own box so the stylesheet can wrap a long line under itself with
+  // a hanging indent. The text is never changed, so copying a block, by the button or by
+  // hand, gives the code exactly as written. Without script a block is a plain bordered box.
+  //
+  //   <pre data-lang="python">        names the language in the label
+  //   <pre data-lang="python" data-results>
+  //       a trailing "# value" comment is treated as that line's result: it starts covered,
+  //       and a Show results button uncovers each one in turn
+  [].forEach.call(document.querySelectorAll('.post > pre'), function (pre) {
+    var code = pre.querySelector('code');
+    if (!code) return;
+    var source = code.textContent.replace(/\n$/, '');
+    var lines = source.split('\n');
+    var wantsResults = pre.hasAttribute('data-results');
+    var results = [];
+
     code.textContent = '';
     lines.forEach(function (text, n) {
       var line = document.createElement('span');
@@ -256,23 +268,109 @@
         line.appendChild(lead);
         rest = rest.slice(indent + 1);
       }
-      // A trailing comment stays with its marker: the row breaks before the "#", never
-      // between it and the first word of the comment.
-      var comment = rest.match(/(^|\s)((?:#|\/\/) +\S+)/);
+      // A comment is quieter than code and stays with its marker: the row breaks before
+      // the "#", never between it and the first word of the comment.
+      var comment = rest.match(/(^|\s)((?:#|\/\/) +)(\S+)([^\n]*)/);
       if (comment) {
         var at = comment.index + comment[1].length;
         addPieces(line, rest.slice(0, at));
+        var quiet = document.createElement('span');
+        quiet.className = 'c-com';
         var kept = document.createElement('span');
         kept.className = 'nb';
-        kept.textContent = comment[2];
-        line.appendChild(kept);
-        addPieces(line, rest.slice(at + comment[2].length));
+        if (wantsResults && comment[1]) {
+          kept.appendChild(document.createTextNode(comment[2]));
+          var result = document.createElement('span');
+          result.className = 'res';
+          result.textContent = comment[3] + comment[4];
+          result.style.setProperty('--n', (comment[3] + comment[4]).length);
+          kept.appendChild(result);
+          results.push(result);
+          quiet.appendChild(kept);
+        } else {
+          kept.textContent = comment[2] + comment[3];
+          quiet.appendChild(kept);
+          addPieces(quiet, comment[4]);
+        }
+        line.appendChild(quiet);
+        line.appendChild(document.createTextNode(rest.slice(at + comment[0].length - comment[1].length)));
       } else {
         addPieces(line, rest);
       }
       code.appendChild(line);
     });
-    code.parentNode.classList.add('wraps');
+    pre.classList.add('wraps');
+
+    var block = document.createElement('div');
+    block.className = 'stip codeblock';
+    var face = document.createElement('div');
+    face.className = 'face code-face';
+    var label = document.createElement('span');
+    label.className = 'label';
+    label.textContent = pre.dataset.lang || 'code';
+    var tools = document.createElement('span');
+    tools.className = 'code-tools';
+
+    if (results.length) {
+      block.classList.add('is-covered');
+      var reveal = document.createElement('button');
+      reveal.type = 'button';
+      reveal.className = 'btn btn--alt btn--sm';
+      reveal.textContent = 'Show results';
+      reveal.setAttribute('aria-pressed', 'false');
+      reveal.dataset.track = 'demo_interaction';
+      reveal.dataset.trackDemo = 'code_block';
+      reveal.dataset.trackAction = 'toggle';
+      reveal.addEventListener('click', function () {
+        var on = reveal.getAttribute('aria-pressed') !== 'true';
+        reveal.setAttribute('aria-pressed', String(on));
+        reveal.textContent = on ? 'Hide results' : 'Show results';
+        block.classList.toggle('is-covered', !on);
+        results.forEach(function (result, n) {
+          result.style.animationDelay = (n * 380) + 'ms';
+          result.classList.toggle('is-in', on);
+        });
+      });
+      tools.appendChild(reveal);
+    }
+
+    var copy = document.createElement('button');
+    copy.type = 'button';
+    copy.className = 'btn btn--alt btn--sm';
+    copy.textContent = 'Copy';
+    copy.dataset.track = 'demo_interaction';
+    copy.dataset.trackDemo = 'code_block';
+    copy.dataset.trackAction = 'copy';
+    copy.addEventListener('click', function () {
+      function flash(text) {
+        copy.textContent = text;
+        copy.classList.remove('is-done');
+        void copy.offsetWidth;
+        copy.classList.add('is-done');
+        clearTimeout(copy._timer);
+        copy._timer = setTimeout(function () { copy.textContent = 'Copy'; copy.classList.remove('is-done'); }, 1600);
+      }
+      function select() {
+        var range = document.createRange();
+        range.selectNodeContents(code);
+        var selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        flash('Selected');
+      }
+      try {
+        navigator.clipboard.writeText(source).then(function () { flash('Copied'); }, select);
+      } catch (e) {
+        select();
+      }
+    });
+    tools.appendChild(copy);
+
+    pre.parentNode.insertBefore(block, pre);
+    face.appendChild(label);
+    face.appendChild(tools);
+    face.appendChild(pre);
+    block.appendChild(face);
   });
 
   // The share panel at the end of a post. The X and Bluesky buttons are plain links and

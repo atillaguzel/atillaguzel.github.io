@@ -47,7 +47,7 @@ Measuring visits matters less than leaving the reader alone, so the default is n
 - Add `?ga_debug` to an address to see events arrive in GA4's DebugView.
 - In GA4, `demo_name`, `demo_action` and `theme` are registered as event-scoped custom dimensions, each with the event parameter of the same name. A new parameter needs the same.
 
-`demo_name` values in use: `sluggi_demo` (homepage); `signup_scene`, `stranger_reveal`, `name_checker`, `skeleton_compare` (look-alike names post); `hidden_issue`, `issue_steps`, `intake` (guild post); `address_scene`, `pipeline` (slug post); `fetched_files` (hand-written site post).
+`demo_name` values in use: `sluggi_demo` (homepage); `signup_scene`, `stranger_reveal`, `name_checker`, `skeleton_compare` (look-alike names post); `hidden_issue`, `issue_steps`, `intake` (guild post); `address_scene`, `pipeline` (slug post); `fetched_files` (hand-written site post); `code_block` (Copy and Show results on any code block).
 - The box is the one place the yellow and pale button pair appears together: yellow for yes, pale for no, the same size side by side.
 
 ## Search engines and agents
@@ -221,6 +221,12 @@ The `<head>` follows "Search engines and agents" above, with the title as `Post 
 1. Write code to fit. Keep every line in a block to about 66 characters, breaking a long call across lines the way a formatter would.
 2. On a wide screen a block grows past the reading column into the page's spare width.
 3. Where a line still does not fit, as on a phone, `js/site.js` wraps it under itself, indented past its own indent and marked with a small arrow. Copying gives the code exactly as written.
+
+**A code block is a labelled panel.** With script, each block gets the language set into its top border, a Copy button on the border opposite, the stippled shadow, and comments in the muted colour. Without script it is a plain bordered box.
+
+- Name the language on the block: `<pre data-lang="python">`.
+- Where a block shows calls and what they return, add `data-results` and write each return value as a trailing comment, `call()   # value`. Those values start covered, and a Show results button uncovers them one after another. Use it only when the comments are results; ordinary comments stay as they are.
+- The text of a block is never altered, so copying it, by the button or by selecting, gives the code exactly as written.
 
 Author a block as plain `<pre><code>` text. The script adds the per-line markup. A trailing comment stays with its `#`, so a wrapped row breaks before the comment and never inside its opening.
 

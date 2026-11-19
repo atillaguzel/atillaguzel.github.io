@@ -201,7 +201,7 @@
 
       <p>The first three still work in a web address, since browsers encode them, but they are not ASCII. If you need ASCII, pass your own mapping:</p>
 
-<pre><code>from sluggi import slugify
+<pre data-lang="python" data-results><code>from sluggi import slugify
 
 slugify("東京 station", custom_map={"東京": "tokyo"})   # 'tokyo-station'</code></pre>
 

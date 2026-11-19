@@ -188,7 +188,7 @@
 
       <p>You can do the same in a few lines of Python.</p>
 
-<pre><code>import confusable
+<pre data-lang="python" data-results><code>import confusable
 
 confusable.skeleton("pаypal")   # 'paypal'
 confusable.skeleton("microsoft")     # 'rnicrosoft'
@@ -196,7 +196,7 @@ confusable.skeleton("rnicrosoft")    # 'rnicrosoft'</code></pre>
 
       <p>The second result looks wrong at first. A skeleton is not a tidied-up name. It is a key for comparing, and the standard happens to pick <code>rn</code> as the plain form of <code>m</code>. So the site stores the skeleton beside the name and applies its one rule to that.</p>
 
-<pre><code>def username_keys(name: str) -> tuple[str, str]:
+<pre data-lang="python"><code>def username_keys(name: str) -> tuple[str, str]:
     """Return the keys that must each be unique among usernames."""
     return (
         confusable.skeleton(name),
