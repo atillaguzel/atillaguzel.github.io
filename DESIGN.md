@@ -35,7 +35,7 @@ The site counts visits with Google Analytics to learn about the typical reader, 
 - **Measurement only.** Google's script is told that analytics storage is granted and every advertising signal is denied, with Google signals and ad personalisation off. Its cookies last 30 days after the last visit.
 - **Local previews never send visits.** On a local address the events are collected in `window.__tracked` so they can be checked in the console, and `localStorage.setItem('test-zone', 'Europe/Paris')` stands in for the device's time zone to try the asked-first mode.
 - **`/privacy/` is part of this.** It lists what is counted, every cookie and stored value, and who to contact. When the counting, the events, the stored values or the outside requests change, change that page and its "Last changed" date in the same commit.
-- **Settings in GA4's admin that the page relies on:** event data retention at 2 months, Google signals off, every data-sharing option off, and granular location and device data off. They are set by hand in the GA4 property and cannot be seen from this repository.
+- **Settings in GA4's admin that the page relies on:** event data retention at 2 months, user data retention at 14 months, Google signals off, every data-sharing option off, and granular location and device data off. They are set by hand in the GA4 property and cannot be seen from this repository.
 
 **Events.** Page views, outbound link clicks and scroll depth come from GA4's own enhanced measurement, so the site adds only what that cannot see. There are three events. Markup declares the first two; pages do not call Google directly.
 
