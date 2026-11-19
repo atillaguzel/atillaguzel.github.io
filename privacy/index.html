@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy: what this site counts · Atilla Guzel</title>
+  <meta name="description" content="This site counts its visits with Google Analytics. What is counted, what is not, what is stored in your browser, and how to turn the counting off.">
+  <meta name="author" content="Atilla Guzel">
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    /* Before anything is painted: use the theme the visitor chose, if they chose one. */
+    try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="canonical" href="https://atillaguzel.github.io/privacy/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Atilla Guzel">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Privacy: what this site counts">
+  <meta property="og:description" content="This site counts its visits with Google Analytics. What is counted, what is not, what is stored in your browser, and how to turn the counting off.">
+  <meta property="og:url" content="https://atillaguzel.github.io/privacy/">
+  <meta property="og:image" content="https://atillaguzel.github.io/images/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Atilla Guzel, data scientist and engineer in London">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Privacy: what this site counts",
+    "url": "https://atillaguzel.github.io/privacy/",
+    "inLanguage": "en-GB",
+    "description": "This site counts its visits with Google Analytics. What is counted, what is not, what is stored in your browser, and how to turn the counting off.",
+    "dateModified": "2026-11-19",
+    "isPartOf": { "@id": "https://atillaguzel.github.io/#website" },
+    "author": {
+      "@type": "Person",
+      "@id": "https://atillaguzel.github.io/#person",
+      "name": "Atilla Guzel",
+      "url": "https://atillaguzel.github.io/"
+    }
+  }
+  </script>
+
+  <link rel="preload" href="/fonts/iAWriterDuospace-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/IBMPlexMono-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <style>
+    .counting { margin: 0.75rem 8px 1rem 0; }
+    .counting .panel { gap: 0.875rem; }
+  </style>
+</head>
+<body>
+
+  <header class="band band--page">
+    <div class="wrap">
+      <nav class="top" aria-label="Main">
+        <a class="brand" href="/">
+          <svg class="logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="nib-line" pathLength="1" d="M3 40H17"/>
+            <g class="nib-pen"><g transform="translate(6 6) rotate(45 24 20)">
+              <path class="nib-body" d="M19 4H29V11L33.5 20 24 36 14.5 20 19 11Z"/>
+              <path d="M24 35V25"/>
+              <circle class="nib-hole" cx="24" cy="20.5" r="2.25"/>
+            </g></g>
+          </svg>
+          atilla guzel
+        </a>
+        <ul>
+          <li><a href="/#work">work</a></li>
+          <li><a href="/blog/">blog</a></li>
+          <li>
+            <button class="theme" type="button" aria-pressed="false" aria-label="Switch to the dark theme" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <mask id="theme-bite"><rect x="-6" y="-6" width="36" height="36" fill="white"/><circle class="bite" cx="14.67" cy="10" r="4.33" fill="black"/></mask>
+                <circle class="sun" cx="12" cy="12" r="5" mask="url(#theme-bite)"/>
+                <path class="rays" d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <h1>Privacy</h1>
+      <p class="meta">Last changed <time datetime="2026-11-19">19 November 2026</time></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="post">
+
+      <p>This site counts its visits. I'd like to know which pages get read and which ones nobody finds, and that is all the counting is for. This page says what is counted, who does the counting and how to turn it off.</p>
+
+      <div class="stip counting" data-counting>
+        <div class="face panel">
+          <h2 class="label">counting</h2>
+          <p data-counting-state>The switch needs JavaScript. With JavaScript off, as it is now, nothing is counted.</p>
+          <p class="actions"><button class="btn btn--sm" type="button" data-counting-toggle hidden>Turn counting off</button></p>
+        </div>
+      </div>
+
+      <h2>What is counted</h2>
+
+      <ul>
+        <li>The page you opened, and the page or site that sent you to it.</li>
+        <li>Whether you reached the end of a page, and the links you follow away from the site.</li>
+        <li>A few button presses: sharing a post, using one of the small demos, copying a block of code, switching the theme.</li>
+        <li>The kind of device and browser you use, and the language it is set to.</li>
+        <li>The country or region you appear to be in. It is worked out from your internet address, and the address itself is not kept.</li>
+        <li>A random number, kept in a cookie, so that two pages read one after the other count as one visit.</li>
+      </ul>
+
+      <h2>What is not</h2>
+
+      <ul>
+        <li>Anything you type. The demos run in your browser, and what you enter into them stays there.</li>
+        <li>Your name, your email or an account. The site has no sign-in and nothing to fill in and send.</li>
+        <li>Anything for advertising. No ad network is involved, and Google's advertising features are switched off for this site.</li>
+      </ul>
+
+      <p>I look at totals, such as how many times a post was opened in a week. I don't follow what one visitor does.</p>
+
+      <h2>Who does the counting</h2>
+
+      <p>Google Analytics, a service run by Google. It works on my behalf here: Google handles these numbers on my instructions, and I have switched off the settings that would let it use them for its own products. Google describes its side in <a href="https://policies.google.com/technologies/partner-sites">how Google uses information from sites that use its services</a>. Its servers may be outside the UK.</p>
+
+      <p>The detail behind each visit is kept for two months, the shortest period Google offers. After that only the totals remain.</p>
+
+      <h2>What is stored in your browser</h2>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">Name</th><th scope="col">What it holds</th><th scope="col">How long</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>_ga</code> and <code>_ga_SNJ8BBR11L</code></td><td>Cookies from Google Analytics: the random number, and where your current visit has got to. Set only while counting is on.</td><td>30 days after your last visit</td></tr>
+            <tr><td><code>analytics-consent</code></td><td>Your answer about counting, or that you have seen the notice about it. Kept in your browser's local storage and sent nowhere.</td><td>Until you clear it</td></tr>
+            <tr><td><code>theme</code></td><td>Light or dark, if you pressed the theme switch. Kept in local storage and sent nowhere.</td><td>Until you clear it, or switch back</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>That is the whole list. The pages, styles, scripts and fonts all come from this site. The site is hosted on GitHub Pages, and GitHub, like any host, sees the internet address each request comes from. <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a> covers that.</p>
+
+      <h2>Turning it off</h2>
+
+      <ul>
+        <li>Press the switch at the top of this page. Counting stops at once and the Google cookies are deleted. The choice is kept in this browser, so another browser or device needs its own.</li>
+        <li>If your browser sends the Global Privacy Control signal, the site takes that as a no and never starts.</li>
+        <li>If your device is set to a European time zone outside the UK, the site asks first and counts nothing until you say yes, because the rules there are different.</li>
+      </ul>
+
+      <h2>Your rights, and how to reach me</h2>
+
+      <p>I'm Atilla Guzel. I live in London and I am responsible for this site. I count visits because I have what the law calls a legitimate interest in knowing whether the site is read. UK data protection law gives you the right to object to that, which the switch does, and to ask me what is held about you or to have it deleted.</p>
+
+      <p>The way to reach me is a message on <a href="https://www.linkedin.com/in/atilla-guzel/">LinkedIn</a>. If you think I have got this wrong, you can also complain to the <a href="https://ico.org.uk/make-a-complaint/">Information Commissioner's Office</a>.</p>
+
+      <hr>
+      <p><a href="/">&larr; home</a></p>
+    </article>
+
+    <footer>
+      <p>Written by <a class="mk" href="/">Atilla Guzel</a>.</p>
+      <p><a class="textbtn" href="/privacy/" aria-current="page">privacy</a></p>
+    </footer>
+  </main>
+
+  <script src="/js/site.js" defer></script>
+</body>
+</html>

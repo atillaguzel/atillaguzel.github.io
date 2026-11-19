@@ -8,6 +8,7 @@ Every page on this site is hand-written HTML and reads in full without JavaScrip
 
 - [Home](https://atillaguzel.github.io/): who Atilla is, the libraries he works on, and where to find him
 - [Blog](https://atillaguzel.github.io/blog/): the list of posts
+- [Privacy](https://atillaguzel.github.io/privacy/): what the site counts with Google Analytics, what it stores in the browser, and how to turn the counting off
 
 ## Posts
 

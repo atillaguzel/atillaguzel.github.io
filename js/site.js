@@ -1,15 +1,40 @@
-/* Shared behaviour for every page: analytics and events that start only after the visitor
-   accepts, and the share panel at the end of a post. See DESIGN.md. */
+/* Shared behaviour for every page: counting visits and the notice about it, events, the
+   theme switch, code blocks and the share panel at the end of a post. See DESIGN.md. */
 
 (function () {
   'use strict';
 
   var MEASUREMENT_ID = 'G-SNJ8BBR11L';
-  var KEY = 'analytics-consent';   // 'granted' or 'denied', kept in this browser only
-  var ASK_AFTER_MS = 10000;
+  // Kept in this browser only: 'granted' (said yes, or turned counting on), 'denied' (said no,
+  // or turned it off) or 'seen' (closed the notice without changing anything).
+  var KEY = 'analytics-consent';
+  var NOTICE_AFTER_MS = 10000;
+  var COOKIE_SECONDS = 30 * 24 * 60 * 60;   // Google's cookies go 30 days after the last visit
 
   // Local previews never send visits to Google.
   var isLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+
+  // UK law lets a site count visits for its own statistics without asking, as long as it
+  // says so and offers a way out. Most of Europe still expects to be asked first. The site
+  // has no server to tell it where a visitor is, so it reads the device's time zone, which
+  // needs no request to anyone. A device in a European zone other than the UK's is asked
+  // first; so is one that hides its zone. Everyone else is told, and counted unless they
+  // turn it off. On a local preview, localStorage 'test-zone' stands in for the device's zone.
+  var EU_ZONES_OUTSIDE_EUROPE = ['Atlantic/Canary', 'Atlantic/Madeira', 'Atlantic/Azores',
+    'Atlantic/Reykjavik', 'Africa/Ceuta', 'Arctic/Longyearbyen', 'Asia/Nicosia', 'Asia/Famagusta',
+    'Indian/Reunion', 'Indian/Mayotte', 'America/Guadeloupe', 'America/Martinique',
+    'America/Cayenne', 'America/Marigot'];
+
+  function asksFirst() {
+    var zone = '';
+    try {
+      zone = (isLocal && localStorage.getItem('test-zone')) ||
+        Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    } catch (e) {}
+    if (!zone || zone === 'UTC' || zone === 'Etc/UTC') return true;
+    if (zone === 'Europe/London' || zone === 'Europe/Belfast') return false;
+    return zone.indexOf('Europe/') === 0 || EU_ZONES_OUTSIDE_EUROPE.indexOf(zone) !== -1;
+  }
 
   function readChoice() {
     try { return localStorage.getItem(KEY); } catch (e) { return null; }
@@ -32,7 +57,7 @@
     loaded = true;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
-    // Say exactly what was agreed to: measurement, and nothing to do with advertising.
+    // Measurement only: every advertising signal is refused.
     window.gtag('consent', 'default', {
       analytics_storage: 'granted',
       ad_storage: 'denied',
@@ -43,6 +68,7 @@
     window.gtag('config', MEASUREMENT_ID, {
       allow_google_signals: false,
       allow_ad_personalization_signals: false,
+      cookie_expires: COOKIE_SECONDS,
       // Add ?ga_debug to an address to watch events arrive in GA4's DebugView.
       debug_mode: /[?&]ga_debug\b/.test(location.search) || undefined
     });
@@ -64,7 +90,7 @@
     });
   }
 
-  // Events. Nothing is sent unless the visitor has accepted. Markup declares what to send:
+  // Events. Nothing is sent unless counting is on. Markup declares what to send:
   //   data-track="share" data-track-method="x"                     on a button or link
   //   data-track="demo_interaction" data-track-demo="pipeline"     on a button, or on the
   //     data-track-action="example"                                box that holds several
@@ -157,6 +183,18 @@
   if (prefersDark && prefersDark.addEventListener) prefersDark.addEventListener('change', showTheme);
   showTheme();
 
+  // Counting is on when the visitor said yes, off when they said no. With no answer it is
+  // off for a browser sending the Global Privacy Control signal and for a device that is
+  // asked first, and on for everyone else.
+  var asks = asksFirst();
+  var choice = readChoice();
+
+  function isCounting() {
+    if (choice === 'granted') return true;
+    if (choice === 'denied') return false;
+    return !navigator.globalPrivacyControl && !asks;
+  }
+
   var box = null;
 
   function closeBox() {
@@ -169,41 +207,76 @@
   }
 
   function choose(value) {
-    saveChoice(value);
-    if (value === 'granted') startAnalytics(); else stopAnalytics();
+    // Closing the notice never undoes an answer already given.
+    if (value !== 'seen' || !choice) {
+      choice = value;
+      saveChoice(value);
+    }
+    if (isCounting()) startAnalytics(); else stopAnalytics();
     closeBox();
+    showCounting();
   }
 
-  // slow: the unasked first appearance drifts in; a box the visitor asked for appears at once.
-  function openBox(slow) {
+  // The switch on the privacy page: says whether counting is on in this browser and why,
+  // and turns it off or on. Its presses are not themselves counted.
+  var counters = [].slice.call(document.querySelectorAll('[data-counting]'));
+
+  function showCounting() {
+    var on = isCounting();
+    var why = 'Counting is on in this browser.';
+    if (!on) {
+      why = choice === 'denied' ? 'Counting is off in this browser. That choice is kept here and nowhere else.'
+        : navigator.globalPrivacyControl ? 'Counting is off, because your browser sends the Global Privacy Control signal.'
+        : 'Counting is off. Your device is set to a European time zone, so the site asks before it counts.';
+    }
+    counters.forEach(function (el) {
+      var state = el.querySelector('[data-counting-state]');
+      var button = el.querySelector('[data-counting-toggle]');
+      if (state) state.textContent = why;
+      if (button) {
+        button.hidden = false;
+        button.textContent = on ? 'Turn counting off' : 'Turn counting on';
+        button.setAttribute('aria-pressed', String(on));
+      }
+    });
+  }
+
+  counters.forEach(function (el) {
+    var button = el.querySelector('[data-counting-toggle]');
+    if (button) button.addEventListener('click', function () { choose(isCounting() ? 'denied' : 'granted'); });
+  });
+
+  // The box in the corner. Where the site asks first it is a question; elsewhere it is a
+  // notice that counting is on, with the way out beside it. Either way it drifts in slowly.
+  function openBox() {
     if (box) return;
     box = document.createElement('aside');
-    box.className = 'consent stip' + (slow ? ' is-slow' : '');
-    box.setAttribute('aria-label', 'Analytics');
+    box.className = 'consent stip is-slow';
+    box.setAttribute('aria-label', 'Counting visits');
     box.innerHTML =
       '<div class="face panel">' +
-        '<p class="consent-h">analytics</p>' +
-        '<p>Mind if I count your visit? I use Google Analytics to see which pages get read. Nothing loads unless you say yes.</p>' +
-        '<p class="actions">' +
-          '<button type="button" class="btn btn--sm" data-consent="granted">Yes, that’s fine</button>' +
-          '<button type="button" class="btn btn--alt btn--sm" data-consent="denied">No thanks</button>' +
-        '</p>' +
+        '<p class="consent-h">counting visits</p>' +
+        (asks
+          ? '<p>Mind if I count your visit? I use Google Analytics to see what gets read. Nothing loads unless you say yes. <a class="mk" href="/privacy/">What’s counted</a></p>' +
+            '<p class="actions">' +
+              '<button type="button" class="btn btn--sm" data-consent="granted">Yes, that’s fine</button>' +
+              '<button type="button" class="btn btn--alt btn--sm" data-consent="denied">No thanks</button>' +
+            '</p>'
+          : '<p>This site counts visits with Google Analytics, so I can see what gets read. No ads. <a class="mk" href="/privacy/" data-consent="seen">What’s counted</a></p>' +
+            '<p class="actions">' +
+              '<button type="button" class="btn btn--sm" data-consent="seen">OK</button>' +
+              '<button type="button" class="btn btn--alt btn--sm" data-consent="denied">Turn it off</button>' +
+            '</p>') +
       '</div>';
     box.addEventListener('click', function (event) {
-      var button = event.target.closest('[data-consent]');
-      if (button) choose(button.dataset.consent);
+      var control = event.target.closest('[data-consent]');
+      if (control) choose(control.dataset.consent);
     });
     document.body.appendChild(box);
     requestAnimationFrame(function () {
       requestAnimationFrame(function () { if (box) box.classList.add('is-in'); });
     });
   }
-
-  // The footer control lets a visitor change their mind at any time.
-  [].forEach.call(document.querySelectorAll('[data-consent-open]'), function (button) {
-    button.hidden = false;
-    button.addEventListener('click', function () { openBox(false); });
-  });
 
   // Tables in a post. On a phone each row stacks into a small block with its column names
   // beside the values, so nothing scrolls sideways. The stylesheet does the stacking; this
@@ -420,11 +493,14 @@
     });
   }
 
-  var choice = readChoice();
-  if (choice === 'granted') {
-    startAnalytics();
-  } else if (choice !== 'denied' && !navigator.globalPrivacyControl) {
-    // A browser that sends the Global Privacy Control signal has already answered no.
-    setTimeout(function () { openBox(true); }, ASK_AFTER_MS);
+  // Start-up. Count if counting is on. A visitor who has given no answer sees the box once,
+  // ten seconds in: the question where the site asks first, the notice elsewhere. A browser
+  // sending the Global Privacy Control signal has already answered and is left alone, and
+  // the privacy page shows its switch instead of the box.
+  if (isCounting()) startAnalytics();
+  showCounting();
+  var answered = choice === 'granted' || choice === 'denied' || (choice === 'seen' && !asks);
+  if (!answered && !navigator.globalPrivacyControl && !counters.length) {
+    setTimeout(openBox, NOTICE_AFTER_MS);
   }
 })();

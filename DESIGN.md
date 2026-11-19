@@ -18,21 +18,24 @@ Every page is a complete, hand-written HTML file. There is no generator, no Mark
 
 - **Shared chrome is copied.** The `<head>` block, the band with its nav, and the footer are repeated in each page. When one changes, change it in every `*.html` file.
 - **One stylesheet.** `css/site.css` styles everything shared. A page that needs something of its own (a figure, a demo) carries it in an inline `<style>` or `<script>`, built from the tokens. Move it into `site.css` when a second page needs it.
-- **One shared script.** `js/site.js` is loaded with `defer` at the end of every page and holds the analytics consent logic.
+- **One shared script.** `js/site.js` is loaded with `defer` at the end of every page. It holds the visit counting and its notice, the events, the theme switch, and the code-block, table and share-panel behaviour.
 - **JavaScript enhances.** A page reads complete without it. Controls that only work with script start with the `hidden` attribute and the script reveals them.
 - **Paths are root-absolute** (`/css/site.css`, `/images/favicon.svg`) in every page.
-- **Third-party requests:** the IBM Plex Mono stylesheet from Google Fonts on every visit, and Google Analytics only after the visitor accepts.
+- **Third-party requests:** Google Analytics while counting is on, and nothing else. Fonts, styles and scripts are all served from this site. Adding any other outside request means adding it to `/privacy/` too.
 
-## Analytics and consent
+## Counting visits
 
-Measuring visits matters less than leaving the reader alone, so the default is no measurement.
+The site counts visits with Google Analytics to learn about the typical reader, never one reader. UK law lets a site do that for its own statistics without asking first, provided it says so clearly and offers a simple way out. Everything below exists to keep those conditions true, so change it with care. The loader, the measurement ID and all of this logic live in `js/site.js`.
 
-- **Nothing from Google Analytics loads until the visitor accepts.** The loader, the measurement ID and the choice all live in `js/site.js`.
-- **The question arrives late and slowly.** Ten seconds after load a small box drifts into the bottom-right corner. It takes no focus, covers no controls and blocks nothing.
-- **One answer is remembered** in the browser's `localStorage`, so the box appears once. A browser sending the Global Privacy Control signal has answered no and is never asked.
-- **Every page footer carries** `<button type="button" class="textbtn" data-consent-open hidden>analytics settings</button>`, which reopens the box so a visitor can change their answer.
-- **Local previews never send visits**, whatever the stored choice. On a local address the events are collected in `window.__tracked` so they can be checked in the console.
-- **Only measurement is agreed to.** When Google's script loads it is told that analytics storage is granted and that every advertising signal is denied.
+- **Told, not asked, in most places.** Counting starts when a page loads. Ten seconds later a small notice drifts into the bottom-right corner, saying that visits are counted and by whom, with OK, Turn it off and a link to the privacy page. It takes no focus, covers no controls and blocks nothing. Once closed it does not come back.
+- **Asked first in Europe.** EU countries still expect a question before an analytics cookie. The site has no server to tell it where a visitor is, so it reads the device's time zone, which costs no request. A device in a `Europe/…` zone other than `Europe/London` and `Europe/Belfast`, in one of the EU zones listed in `js/site.js`, or with a hidden zone, gets the same box as a question, and nothing from Google loads until the answer is yes.
+- **The way out is always one press away.** Every page footer carries `<a class="textbtn" href="/privacy/">privacy</a>`. The privacy page has the switch: a `[data-counting]` panel that says whether counting is on in this browser and why, and turns it off or on. Turning it off stops counting at once and deletes Google's cookies.
+- **Global Privacy Control is a no.** A browser sending the signal is never counted and never shown the box, unless the visitor turns counting on with the switch.
+- **The answer is kept in the browser's `localStorage`** as `analytics-consent`: `granted` (said yes, or turned counting on), `denied` (said no, or turned it off) or `seen` (closed the notice).
+- **Measurement only.** Google's script is told that analytics storage is granted and every advertising signal is denied, with Google signals and ad personalisation off. Its cookies last 30 days after the last visit.
+- **Local previews never send visits.** On a local address the events are collected in `window.__tracked` so they can be checked in the console, and `localStorage.setItem('test-zone', 'Europe/Paris')` stands in for the device's time zone to try the asked-first mode.
+- **`/privacy/` is part of this.** It lists what is counted, every cookie and stored value, and who to contact. When the counting, the events, the stored values or the outside requests change, change that page and its "Last changed" date in the same commit.
+- **Settings in GA4's admin that the page relies on:** event data retention at 2 months, Google signals off, every data-sharing option off, and granular location and device data off. They are set by hand in the GA4 property and cannot be seen from this repository.
 
 **Events.** Page views, outbound link clicks and scroll depth come from GA4's own enhanced measurement, so the site adds only what that cannot see. There are three events. Markup declares the first two; pages do not call Google directly.
 
@@ -42,13 +45,14 @@ Measuring visits matters less than leaving the reader alone, so the default is n
 | `demo_interaction` | A reading device or demo is used | `demo_name`: which one; `demo_action`: `type`, `example`, `copy`, `toggle` or `replay` | `data-track="demo_interaction" data-track-demo="pipeline" data-track-action="example"` on a button, or on the box that holds several |
 | `theme_change` | The theme switch is pressed | `theme`: `light` or `dark`, the theme switched to | None; `js/site.js` sends it |
 
-- A text field takes `data-track-input="demo_interaction" data-track-demo="…"`. It reports once per page view that the field was used. **What a visitor types is never sent.**
+- A text field takes `data-track-input="demo_interaction" data-track-demo="…"`. It reports once per page view that the field was used. **What a visitor types is never sent.** The privacy page promises this.
 - Every new button, example chip and text field in a device gets these attributes. A new `demo_name` is lower case with underscores and names the device, not the post.
 - Add `?ga_debug` to an address to see events arrive in GA4's DebugView.
 - In GA4, `demo_name`, `demo_action` and `theme` are registered as event-scoped custom dimensions, each with the event parameter of the same name. A new parameter needs the same.
 
 `demo_name` values in use: `sluggi_demo` (homepage); `signup_scene`, `stranger_reveal`, `name_checker`, `skeleton_compare` (look-alike names post); `hidden_issue`, `issue_steps`, `intake` (guild post); `address_scene`, `pipeline` (slug post); `fetched_files` (hand-written site post); `code_block` (Copy and Show results on any code block).
-- The box is the one place the yellow and pale button pair appears together: yellow for yes, pale for no, the same size side by side.
+- The box is the one place the yellow and pale button pair appears together: yellow for yes or OK, pale for no or Turn it off, the same size side by side.
+- Presses on the box and on the privacy page's switch are not themselves counted.
 
 ## Search engines and agents
 
@@ -111,7 +115,7 @@ Pages that should stay out of search (`404.html`, the `/resume/` redirect) carry
 - The switch itself is the last `<li>` in the nav, a `<button class="theme">` that starts `hidden`. Copy it from `index.html`.
 - While the palette changes, the root carries `theme-fading` for a third of a second so every colour fades together.
 
-**Type.** Two faces, both monospace. iA Writer Duospace sets running text; only its regular weight is in the repo. IBM Plex Mono, the face Duospace is drawn from, sets everything bold: headings, labels, buttons, code. Anything heavier than 400 uses `--font-display`.
+**Type.** Two faces, both monospace, both served from `/fonts/`. iA Writer Duospace sets running text; only its regular weight is in the repo. IBM Plex Mono, the face Duospace is drawn from, sets everything bold: headings, labels, buttons, code. Anything heavier than 400 uses `--font-display`. Plex comes in weights 500 and 700, split by alphabet into the same files and ranges Google Fonts publishes, so a browser fetches only the alphabets a page uses. Its licence sits beside the files.
 
 **Case.** Interface labels are lowercase: the nav, panel labels, the homepage section headings. Titles and prose are sentence case: post titles, post headings, body text.
 
@@ -121,7 +125,7 @@ Pages that should stay out of search (`404.html`, the `/resume/` redirect) carry
 
 **The stipple means "you can act on this".** A named thing gets a labelled panel (`.panel` with a `.label` set into its top border). Wrap the panel in `.stip` only when it links somewhere or holds controls. A panel that is only read, such as a note in a post, stays flat.
 
-**Yellow is scarce.** A page has at most one `.btn`, for its main action; the homepage has none. Other buttons are `.btn--alt`. The consent box is the exception described above. Text links carry the marker (`.mk`, or automatically inside `.post`).
+**Yellow is scarce.** A page has at most one `.btn`, for its main action; the homepage has none. Other buttons are `.btn--alt`. The box about counting is the exception described above, and on the privacy page the switch is the yellow button. Text links carry the marker (`.mk`, or automatically inside `.post`).
 
 **Motion.** Hover and press respond in 120ms. Everything else changes instantly.
 
@@ -147,7 +151,7 @@ From there the two alternate. The host explains, warmly and exactly, and the sto
 
 **It never sells.** A claim carries its evidence or a link to it, numbers come from the project's own README, and the reader is left to judge the work. The site once opened with the headline "read every change", and Atilla's verdict was that it read as an ad.
 
-The homepage, the consent box and other interface text use the host half only: plain, warm, first person.
+The homepage, the privacy page, the box about counting and other interface text use the host half only: plain, warm, first person.
 
 ## Reading devices
 
@@ -161,7 +165,7 @@ A post is built with small interactions that let the reader see the thing happen
 
 ## Content decisions
 
-- Contact routes are LinkedIn and GitHub.
+- Contact routes are LinkedIn and GitHub. The privacy page names LinkedIn as the way to reach Atilla, and the site shows no email address.
 - Career history lives on LinkedIn. `/resume/` redirects to the homepage so old links keep working.
 - The work shown is the public libraries under the `blip-box` organisation.
 
@@ -197,7 +201,7 @@ Posts follow the look above. Each one is built as its own HTML page and may carr
     <hr>
     <p><a href="/blog/">&larr; all posts</a></p>
   </article>
-  <footer>… the analytics settings button …</footer>
+  <footer>… the privacy link …</footer>
 </main>
 <script src="/js/site.js" defer></script>
 ```

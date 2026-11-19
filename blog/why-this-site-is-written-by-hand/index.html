@@ -33,7 +33,7 @@
     "headline": "Why this site is written by hand",
     "description": "Your browser fetched a handful of files to show this page, and nothing built them. What this hand-written site replaced, why I chose it and what it costs.",
     "datePublished": "2026-11-18",
-    "dateModified": "2026-11-18",
+    "dateModified": "2026-11-19",
     "inLanguage": "en-GB",
     "url": "https://atillaguzel.github.io/blog/why-this-site-is-written-by-hand/",
     "mainEntityOfPage": "https://atillaguzel.github.io/blog/why-this-site-is-written-by-hand/",
@@ -47,10 +47,8 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&display=swap">
   <link rel="preload" href="/fonts/iAWriterDuospace-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/IBMPlexMono-700-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -105,7 +103,7 @@
   <main class="wrap">
     <article class="post">
 
-      <p>Somebody follows a link to this page. Their browser asks a server for one file and gets it. A stylesheet follows, then a small script and the fonts. After that there is nothing left to fetch.</p>
+      <p>Somebody follows a link to this page. Their browser asks a server for one file and gets it. A stylesheet follows, then a small script and the fonts. The only other thing it may fetch is the counter that notes the visit.</p>
 
       <p>That somebody is you, a moment ago. Here is the list, as your own browser recorded it.</p>
 
@@ -120,7 +118,7 @@
             </table>
           </div>
           <div class="aid"><button class="btn btn--alt btn--sm" type="button" id="fetched-replay" data-track="demo_interaction" data-track-demo="fetched_files" data-track-action="replay" hidden>Replay</button></div>
-          <p class="fine">Sizes are as stored on the server, before compression. A dash means the size was not reported, usually because your browser already had the file. Google Analytics appears only if you accepted it.</p>
+          <p class="fine">Sizes are as stored on the server, before compression. A dash means the size was not reported, usually because your browser already had the file. Google Analytics is in the list only while <a href="/privacy/">counting</a> is on.</p>
         </div>
       </div>
 
@@ -134,7 +132,7 @@
 
       <p><strong>Each page is built for what it says.</strong> The post about <a href="/blog/paypal-is-not-paypal/">look-alike names</a> has a sign-up form in it that you can try to fool. The post about <a href="/blog/what-a-slug-has-to-survive/">slugs</a> shows a title changing stage by stage. Those pieces are written into the page they belong to, and there is no plugin system for them to satisfy.</p>
 
-      <p><strong>Nothing goes out of date.</strong> There are no packages to update. The one outside thing a page asks for is a typeface, as the list above shows, and it reads fine without it. A page written today should open the same way in ten years.</p>
+      <p><strong>Nothing goes out of date.</strong> There are no packages to update. The one outside thing a page asks for is the visit counter, as the list above shows, and the page reads the same without it. A page written today should open the same way in ten years.</p>
 
       <p><strong>It reads the same to everyone.</strong> The words are in the HTML as it is served, so a search engine, a screen reader and an AI agent get the page you get. There is a <a href="/sitemap.xml">sitemap</a> for crawlers and an <a href="/llms.txt">llms.txt</a> for agents.</p>
 
@@ -169,7 +167,7 @@
 
     <footer>
       <p>Written by <a class="mk" href="/">Atilla Guzel</a>.</p>
-      <p><button type="button" class="textbtn" data-consent-open hidden>analytics settings</button></p>
+      <p><a class="textbtn" href="/privacy/">privacy</a></p>
     </footer>
   </main>
 
