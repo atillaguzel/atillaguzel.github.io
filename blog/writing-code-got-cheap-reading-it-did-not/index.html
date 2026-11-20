@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Writing code got cheap, reading it did not · Atilla Guzel</title>
+  <meta name="description" content="A study of 655 companies found coding agents raised pull requests by 36% and review time by 56%. What that means for whoever has to read the change.">
+  <meta name="author" content="Atilla Guzel">
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    /* Before anything is painted: use the theme the visitor chose, if they chose one. */
+    try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="canonical" href="https://atillaguzel.github.io/blog/writing-code-got-cheap-reading-it-did-not/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Atilla Guzel">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Writing code got cheap, reading it did not">
+  <meta property="og:description" content="A study of 655 companies found coding agents raised pull requests by 36% and review time by 56%. What that means for whoever has to read the change.">
+  <meta property="og:url" content="https://atillaguzel.github.io/blog/writing-code-got-cheap-reading-it-did-not/">
+  <meta property="og:image" content="https://atillaguzel.github.io/images/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Atilla Guzel, data scientist and engineer in London">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Writing code got cheap, reading it did not",
+    "description": "A study of 655 companies found coding agents raised pull requests by 36% and review time by 56%. What that means for whoever has to read the change.",
+    "datePublished": "2026-11-20",
+    "dateModified": "2026-11-20",
+    "inLanguage": "en-GB",
+    "url": "https://atillaguzel.github.io/blog/writing-code-got-cheap-reading-it-did-not/",
+    "mainEntityOfPage": "https://atillaguzel.github.io/blog/writing-code-got-cheap-reading-it-did-not/",
+    "image": "https://atillaguzel.github.io/images/og.png",
+    "author": {
+      "@type": "Person",
+      "@id": "https://atillaguzel.github.io/#person",
+      "name": "Atilla Guzel",
+      "url": "https://atillaguzel.github.io/"
+    }
+  }
+  </script>
+
+  <link rel="preload" href="/fonts/iAWriterDuospace-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/IBMPlexMono-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <style>
+
+    .demo { margin: 0.75rem 8px 1rem 0; }
+    .queue { display: grid; gap: 0.75rem; }
+    .dials { display: grid; gap: 0.5rem; }
+    .dial { display: grid; grid-template-columns: 11.5rem minmax(0, 1fr); align-items: center; gap: 0.25rem 1rem; color: var(--ink); font-family: var(--font-display); }
+    .dial output { font-weight: 700; }
+    .dial input { width: 100%; margin: 0; accent-color: var(--ink); }
+    .dial input:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+    @media (max-width: 30rem) { .dial { grid-template-columns: minmax(0, 1fr); } }
+    .pile-n { margin: 0; color: var(--ink); font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; }
+    .pile { display: flex; flex-wrap: wrap; gap: 3px; min-height: 10px; }
+    .pile i { width: 10px; height: 10px; background: var(--edge); }
+  </style>
+</head>
+<body>
+
+  <header class="band band--page">
+    <div class="wrap">
+      <nav class="top" aria-label="Main">
+        <a class="brand" href="/">
+          <svg class="logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="nib-line" pathLength="1" d="M3 40H17"/>
+            <g class="nib-pen"><g transform="translate(6 6) rotate(45 24 20)">
+              <path class="nib-body" d="M19 4H29V11L33.5 20 24 36 14.5 20 19 11Z"/>
+              <path d="M24 35V25"/>
+              <circle class="nib-hole" cx="24" cy="20.5" r="2.25"/>
+            </g></g>
+          </svg>
+          atilla guzel
+        </a>
+        <ul>
+          <li><a href="/#work">work</a></li>
+          <li><a href="/blog/">blog</a></li>
+          <li>
+            <button class="theme" type="button" aria-pressed="false" aria-label="Switch to the dark theme" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <mask id="theme-bite"><rect x="-6" y="-6" width="36" height="36" fill="white"/><circle class="bite" cx="14.67" cy="10" r="4.33" fill="black"/></mask>
+                <circle class="sun" cx="12" cy="12" r="5" mask="url(#theme-bite)"/>
+                <path class="rays" d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <h1>Writing code got cheap, reading it did not</h1>
+      <p class="meta"><time datetime="2026-11-20">20 November 2026</time></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="post">
+
+      <p>It is Friday afternoon and a reviewer has eleven changes waiting. Nine of them were opened before lunch, by something that does not stop for lunch. Each is tidy, each passes its tests, and each is about four hundred lines long.</p>
+
+      <p>The reviewer opens the first and starts to read. Reading is the part that has not changed. It goes at the speed it went last year.</p>
+
+      <p>You have been that reviewer, or you soon will be. Stay with them for a minute, because a study revised this month measured their afternoon across 655 companies, and I'd like to show you what it found.</p>
+
+      <h2>What was measured</h2>
+
+      <p>Two economists at Harvard, Fiona Chen and James Stratton, had the working records of 720,542 people at those companies: code, tickets and calendars, from January 2021 to August 2026. They compared companies that took up coding agents earlier with companies that took them up later. <a href="https://fion.ac/jellyfish.pdf">Their paper</a> reports what changed once the agents arrived.</p>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">What was measured</th><th scope="col">After coding agents</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lines of code added</td><td>up 44.0%</td></tr>
+            <tr><td>Pull requests opened</td><td>up 35.7%</td></tr>
+            <tr><td>Issues resolved</td><td>up 13.7%, which the authors call borderline</td></tr>
+            <tr><td>Time from asking for review to approval</td><td>up 56.1%</td></tr>
+            <tr><td>Time waiting for a reviewer</td><td>up 59.9%</td></tr>
+            <tr><td>Time in active review</td><td>up 58.5%</td></tr>
+            <tr><td>Comments on each change</td><td>up 38.6%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Read it from the top. Much more was written. Somewhat more was finished. And every change took over half as long again to be approved, both while it waited for someone to pick it up and once they had.</p>
+
+      <p>The authors put it in five words.</p>
+
+      <blockquote>
+        <p>Code review becomes the bottleneck.</p>
+        <cite>&mdash; Chen and Stratton, November 2026</cite>
+      </blockquote>
+
+      <aside class="note">
+        <h3 class="label">how far to trust it</h3>
+        <p>This is one working paper, first circulated in January 2026 and last revised on 14 November. It has not been through peer review. The companies all use one analytics product, Jellyfish, which supplied the records. The figures are the authors' estimates from the timing of adoption, not from an experiment.</p>
+      </aside>
+
+      <h2>Where the afternoon goes</h2>
+
+      <p>Back to our reviewer, and some arithmetic. Suppose their team used to write fifty changes a week and read fifty. Now it writes 36% more, which is the paper's figure, and reads as it did before.</p>
+
+      <div class="stip demo">
+        <div class="face panel queue">
+          <h3 class="label">a team's month</h3>
+          <div class="dials">
+            <div class="dial">
+              <label for="q-w"><output id="q-w-out" for="q-w">68</output> written a week</label>
+              <input type="range" id="q-w" min="30" max="100" step="1" value="68" data-track-input="demo_interaction" data-track-demo="review_queue" hidden>
+            </div>
+            <div class="dial">
+              <label for="q-r"><output id="q-r-out" for="q-r">50</output> read a week</label>
+              <input type="range" id="q-r" min="30" max="100" step="1" value="50" data-track-input="demo_interaction" data-track-demo="review_queue" hidden>
+            </div>
+          </div>
+          <div class="chips" id="q-chips" data-track="demo_interaction" data-track-demo="review_queue" data-track-action="example" hidden>
+            <span>examples</span>
+            <button class="chip" type="button" data-w="50" data-r="50">before agents</button>
+            <button class="chip" type="button" data-w="68" data-r="50">agents write 36% more</button>
+          </div>
+          <span class="out-k">waiting after four weeks</span>
+          <p class="pile-n" id="q-n" aria-live="polite">72 changes</p>
+          <div class="pile" id="q-pile" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p class="fine" id="q-say">18 more are written each week than are read, so they wait.</p>
+          <p class="fine">This is arithmetic, not a model of a real team. The 36% is the paper's estimate for pull requests. The fifty is made up.</p>
+        </div>
+      </div>
+
+      <p>Eighteen changes a week have nowhere to go, so they wait. After four weeks there are seventy-two of them, and each mark in the box is one that somebody is waiting on. To clear the pile, reading has to rise to sixty-eight a week, done by the same people.</p>
+
+      <p>No team lets a pile grow for a month. Something gives first, and in the study it was time. By the authors' estimate, the labour spent writing code fell by about 23% after agents arrived and the labour spent on review rose by about 43%. A tool bought to speed up writing turned writers into readers.</p>
+
+      <h2>Why reading stays slow</h2>
+
+      <p>Reading a change well means knowing the code around it, and that knowledge sits in few heads. In the study, 82.8% of reviews were of code the reviewer already knew. Had reviewers been assigned at random it would have been 17.2%. So you cannot clear the pile by handing it to whoever is free.</p>
+
+      <p>Machines read too. 79.1% of the companies had taken up an AI review tool, and the authors still found the overwhelming majority of reviews and comments written by people.</p>
+
+      <p>And what gets through is not always finished. <a href="https://arxiv.org/abs/2609.26847">A separate study</a> of merged pull requests in popular open-source projects found that the agent-written ones went on to need a fix more often: 1.62 times the odds of a person's, in the same repositories over the same period.</p>
+
+      <p>So the reading cannot be skipped, and for now it cannot simply be handed over.</p>
+
+      <h2>Write for the reader</h2>
+
+      <p>If reading is the scarce step, a change should be made cheap to read. I think that comes down to three things.</p>
+
+      <ul>
+        <li><strong>Keep it small.</strong> The box counts changes, but a reviewer pays by the line. Eleven changes of forty lines are an afternoon. Eleven of four hundred are not.</li>
+        <li><strong>Attach the evidence.</strong> A change that says what was run and what came out lets the reader check a claim. Without it they have to find out for themselves.</li>
+        <li><strong>Keep what it says beside what it does.</strong> When a change alters how something behaves, the words that describe the behaviour change with it, so one reading covers both.</li>
+      </ul>
+
+      <p>This site is made that way round. An agent drafts and I read, as I said in <a href="/blog/why-this-site-is-written-by-hand/">Why this site is written by hand</a>. Its design notes hold a rule that is there only for whoever reads the change.</p>
+
+      <blockquote>
+        <p>When the counting, the events, the stored values or the outside requests change, change that page and its "Last changed" date in the same commit.</p>
+        <cite>&mdash; this site's <a href="https://github.com/atillaguzel/atillaguzel.github.io/blob/master/DESIGN.md">DESIGN.md</a></cite>
+      </blockquote>
+
+      <p>"That page" is the <a href="/privacy/">privacy page</a>. Whoever reads a change to how visits are counted finds the page that describes the counting in the same diff. If it is not there, they know something is missing before they have read any code.</p>
+
+      <p>I have a queue of my own coming. <a href="https://github.com/blip-box/guild">Guild</a>, the project behind <a href="/blog/an-issue-is-not-an-instruction/">An issue is not an instruction</a>, has agents write the patches and a person merge every one. It has not run against a live repository yet. When it does, its stewards will be the reviewer in this story, and how fast they can read will set how much it can do.</p>
+
+      <h2>Friday, again</h2>
+
+      <p>Back to our reviewer. It is nearly five. They sort the eleven by size and open the smallest, which is thirty lines long and says which test it added and what the test printed. It takes four minutes.</p>
+
+      <p>The four-hundred-line ones will still be there on Monday. So will the thing that wrote them, which has opened two more since lunch.</p>
+
+      <aside class="stip share" aria-labelledby="share-h">
+        <div class="face panel">
+          <h2 class="label" id="share-h">pass it on</h2>
+          <p>If this was worth your time, it may be worth someone else's.</p>
+          <p class="actions">
+            <button class="btn btn--sm" type="button" data-copy-link data-track="share" data-track-method="copy_link" hidden>Copy link</button>
+            <button class="btn btn--alt btn--sm" type="button" data-native-share data-track="share" data-track-method="native" hidden>Share</button>
+            <a class="btn btn--alt btn--sm" data-track="share" data-track-method="x" href="https://x.com/intent/post?text=Writing%20code%20got%20cheap%2C%20reading%20it%20did%20not&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwriting-code-got-cheap-reading-it-did-not%2F" target="_blank" rel="noopener">Share on X</a>
+            <a class="btn btn--alt btn--sm" data-track="share" data-track-method="bluesky" href="https://bsky.app/intent/compose?text=Writing%20code%20got%20cheap%2C%20reading%20it%20did%20not%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fwriting-code-got-cheap-reading-it-did-not%2F" target="_blank" rel="noopener">Share on Bluesky</a>
+          </p>
+          <p class="addr">https://atillaguzel.github.io/blog/writing-code-got-cheap-reading-it-did-not/</p>
+        </div>
+      </aside>
+
+      <hr>
+      <p><a href="/blog/">&larr; all posts</a></p>
+
+    </article>
+
+    <footer>
+      <p>Written by <a class="mk" href="/">Atilla Guzel</a>.</p>
+      <p><a class="textbtn" href="/privacy/">privacy</a></p>
+    </footer>
+  </main>
+
+  <script>
+
+    /* A team's month: changes written and read each week, and the pile left after four weeks. */
+    (function () {
+      var WEEKS = 4;
+      var written = document.getElementById('q-w');
+      var read = document.getElementById('q-r');
+      var writtenOut = document.getElementById('q-w-out');
+      var readOut = document.getElementById('q-r-out');
+      var count = document.getElementById('q-n');
+      var pile = document.getElementById('q-pile');
+      var say = document.getElementById('q-say');
+      var chips = document.getElementById('q-chips');
+      var shown = -1;
+
+      function render() {
+        var w = Number(written.value), r = Number(read.value);
+        var gap = w - r;
+        var waiting = Math.max(0, gap * WEEKS);
+        writtenOut.textContent = w;
+        readOut.textContent = r;
+        count.textContent = waiting + (waiting === 1 ? ' change' : ' changes');
+        if (waiting !== shown) {
+          pile.innerHTML = new Array(waiting + 1).join('<i></i>');
+          shown = waiting;
+        }
+        say.textContent = gap > 0 ? gap + ' more are written each week than are read, so they wait.'
+          : gap === 0 ? 'Everything written is read. Nothing waits.'
+          : 'Nothing waits, and there is room to read ' + (-gap) + ' more a week.';
+      }
+
+      written.addEventListener('input', render);
+      read.addEventListener('input', render);
+      [].forEach.call(chips.querySelectorAll('.chip'), function (chip) {
+        chip.addEventListener('click', function () {
+          written.value = chip.dataset.w;
+          read.value = chip.dataset.r;
+          render();
+        });
+      });
+      written.hidden = false;
+      read.hidden = false;
+      chips.hidden = false;
+      render();
+    })();
+  </script>
+  <script src="/js/site.js" defer></script>
+</body>
+</html>

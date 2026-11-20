@@ -12,6 +12,7 @@ Every page on this site is hand-written HTML and reads in full without JavaScrip
 
 ## Posts
 
+- [Writing code got cheap, reading it did not](https://atillaguzel.github.io/blog/writing-code-got-cheap-reading-it-did-not/): Coding agents raised output and slowed review at 655 companies, and what that means for whoever reads the change.
 - [An issue is not an instruction](https://atillaguzel.github.io/blog/an-issue-is-not-an-instruction/): How agents can read issues from strangers without taking orders from them.
 - [Why this site is written by hand](https://atillaguzel.github.io/blog/why-this-site-is-written-by-hand/): No generator and no build step: what that replaced, and what it costs.
 - [pаypal is not paypal](https://atillaguzel.github.io/blog/paypal-is-not-paypal/): Why a unique index does not stop look-alike usernames, and how comparing skeletons does.

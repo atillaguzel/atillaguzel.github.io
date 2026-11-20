@@ -50,7 +50,7 @@ The site counts visits with Google Analytics to learn about the typical reader, 
 - Add `?ga_debug` to an address to see events arrive in GA4's DebugView.
 - In GA4, `demo_name`, `demo_action` and `theme` are registered as event-scoped custom dimensions, each with the event parameter of the same name. A new parameter needs the same.
 
-`demo_name` values in use: `sluggi_demo` (homepage); `signup_scene`, `stranger_reveal`, `name_checker`, `skeleton_compare` (look-alike names post); `hidden_issue`, `issue_steps`, `intake` (guild post); `address_scene`, `pipeline` (slug post); `fetched_files` (hand-written site post); `code_block` (Copy and Show results on any code block).
+`demo_name` values in use: `sluggi_demo` (homepage); `signup_scene`, `stranger_reveal`, `name_checker`, `skeleton_compare` (look-alike names post); `hidden_issue`, `issue_steps`, `intake` (guild post); `address_scene`, `pipeline` (slug post); `fetched_files` (hand-written site post); `review_queue` (review post); `code_block` (Copy and Show results on any code block).
 - The box is the one place the yellow and pale button pair appears together: yellow for yes or OK, pale for no or Turn it off, the same size side by side.
 - Presses on the box and on the privacy page's switch are not themselves counted.
 
