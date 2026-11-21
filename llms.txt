@@ -1,13 +1,13 @@
 # Atilla Guzel
 
-> The personal site of Atilla Guzel, a data scientist and engineer based in London who builds small open-source Python libraries.
+> The personal site of Atilla Guzel, a data scientist and engineer based in London who builds small open-source Python libraries. His subjects are data science, data visualisation, how findings are explained, investigative journalism and the software he builds; so far the posts are mostly about the last.
 
 Every page on this site is hand-written HTML and reads in full without JavaScript.
 
 ## Pages
 
 - [Home](https://atillaguzel.github.io/): who Atilla is, the libraries he works on, and where to find him
-- [Blog](https://atillaguzel.github.io/blog/): the list of posts
+- [Blog](https://atillaguzel.github.io/blog/): the list of posts, each with its subject
 - [Privacy](https://atillaguzel.github.io/privacy/): what the site counts with Google Analytics, what it stores in the browser, and how to turn the counting off
 
 ## Posts

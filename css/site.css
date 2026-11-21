@@ -1273,13 +1273,49 @@ h2 {
   font-size: 0.9375rem;
 }
 
+/* A post's subject sits under its date. It is read, not pressed, so it stays flat and quiet. */
+
+.posts .subject {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  justify-self: start;
+  padding: 0 0.375rem;
+  background: var(--mist);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* The sentence that opens a list of posts. */
+
+.leadin {
+  max-width: 65ch;
+  margin-bottom: 1.5rem;
+}
+
+h2:not(.sr) + .leadin {
+  margin-top: -0.75rem;
+}
+
+/* On a phone the date and the subject share a line, and the title and summary run full width. */
+
 @media (max-width: 30rem) {
   .posts li {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr;
+    column-gap: 0.75rem;
   }
 
+  .posts .subject {
+    grid-column: auto;
+    grid-row: auto;
+    align-self: center;
+  }
+
+  .posts a,
   .posts p {
-    grid-column: 1;
+    grid-column: 1 / -1;
   }
 }
 

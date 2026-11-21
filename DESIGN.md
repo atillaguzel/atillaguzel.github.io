@@ -168,6 +168,7 @@ A post is built with small interactions that let the reader see the thing happen
 - Contact routes are LinkedIn and GitHub. The privacy page names LinkedIn as the way to reach Atilla, and the site shows no email address.
 - Career history lives on LinkedIn. `/resume/` redirects to the homepage so old links keep working.
 - The work shown is the public libraries under the `blip-box` organisation.
+- The site's subjects are wider than the libraries: data science, data visualisation, data communication, investigative journalism and software. Atilla named them on 2026-11-21 and chose to say so through the writing. The homepage bio ends with a clause about what he writes on, and the list of posts opens with a sentence naming the subjects. The bio does not claim work in a subject he has only said interests him.
 
 ## Blog
 
@@ -242,12 +243,17 @@ Author a block as plain `<pre><code>` text. The script adds the per-line markup.
 - Copy link and the device's own Share button need script, so they start `hidden` and `js/site.js` reveals them. The address is always shown as text that selects in one press.
 - Copy link is the post's one yellow button.
 
-**The index** is an `<ol class="posts">`, newest first. Each entry is a `<time>` in ISO form, the title as an `.mk` link, and one sentence saying what the post is about.
+**The index** is an `<ol class="posts">`, newest first. Each entry is a `<time>` in ISO form, the post's subject as `<span class="subject">`, the title as an `.mk` link, and one sentence saying what the post is about.
+
+- **A post has one subject**, lowercase, one or two words. Use one already in the list before adding another, and add a new one to this line. In use: `agents`, `unicode`, `this site`.
+- The subject is a quiet flat label, never the yellow `.tag`, because it appears on every row and yellow is scarce.
+- **The list opens with a `<p class="leadin">`** naming what Atilla writes about, the same sentence on the homepage and the blog index. It ends "So far it is mostly the last of those", which is true while every post is about software. Rewrite that ending once posts on the other subjects exist.
+- The blog index also lists every post in its JSON-LD `blogPost` array, newest first.
 
 **Adding a post:**
 
 1. Create `/blog/<slug>/index.html`, starting from an existing post, and write it.
-2. Add its entry at the top of the list in `/blog/index.html` and in the `writing` section of the homepage.
+2. Add its entry, with its subject, at the top of the list in `/blog/index.html` and in the `writing` section of the homepage, and at the top of the `blogPost` array in the blog index's JSON-LD.
 3. Add it to `sitemap.xml` and `llms.txt`.
 4. Preview it at phone width (375px) and in both colour schemes.
 
