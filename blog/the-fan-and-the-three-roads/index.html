@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The fan and the three roads · Atilla Guzel</title>
+  <meta name="description" content="The Bank of England drew its forecasts as a fan for thirty years, then tried three scenarios. What each picture of uncertainty says, and what it leaves out.">
+  <meta name="author" content="Atilla Guzel">
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    /* Before anything is painted: use the theme the visitor chose, if they chose one. */
+    try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="canonical" href="https://atillaguzel.github.io/blog/the-fan-and-the-three-roads/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Atilla Guzel">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="The fan and the three roads">
+  <meta property="og:description" content="The Bank of England drew its forecasts as a fan for thirty years, then tried three scenarios. What each picture of uncertainty says, and what it leaves out.">
+  <meta property="og:url" content="https://atillaguzel.github.io/blog/the-fan-and-the-three-roads/">
+  <meta property="og:image" content="https://atillaguzel.github.io/images/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Atilla Guzel, data scientist and engineer in London">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The fan and the three roads",
+    "description": "The Bank of England drew its forecasts as a fan for thirty years, then tried three scenarios. What each picture of uncertainty says, and what it leaves out.",
+    "datePublished": "2026-11-25",
+    "dateModified": "2026-11-25",
+    "inLanguage": "en-GB",
+    "url": "https://atillaguzel.github.io/blog/the-fan-and-the-three-roads/",
+    "mainEntityOfPage": "https://atillaguzel.github.io/blog/the-fan-and-the-three-roads/",
+    "image": "https://atillaguzel.github.io/images/og.png",
+    "author": {
+      "@type": "Person",
+      "@id": "https://atillaguzel.github.io/#person",
+      "name": "Atilla Guzel",
+      "url": "https://atillaguzel.github.io/"
+    }
+  }
+  </script>
+
+  <link rel="preload" href="/fonts/iAWriterDuospace-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/IBMPlexMono-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <style>
+
+    .demo { margin: 0.75rem 8px 1rem 0; }
+    .draws { display: grid; gap: 0.875rem; }
+    .trio { display: grid; gap: 1.25rem; }
+    .draw { max-width: 22rem; }
+    /* On a wide screen the figure grows into the page's spare width, as a code block does,
+       and the three drawings sit side by side. */
+    @media (min-width: 58rem) {
+      .post > .demo { margin-right: calc(100% - min(55.5rem, 100vw - 2.5rem) + 8px); }
+      .trio { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+    }
+    .draw { display: grid; gap: 0.25rem; align-content: start; }
+    .draw .out-k { color: var(--ink); font-family: var(--font-display); font-weight: 700; }
+    .draw svg { display: block; width: 100%; height: auto; }
+    .draw .grid { stroke: var(--line); stroke-width: 1; }
+    .draw .ax { fill: var(--muted); font-family: var(--font-display); font-size: 10px; }
+    .draw .ax--k { fill: var(--ink); font-weight: 700; }
+    .draw .mid { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; }
+    .draw .mid--thin { stroke-width: 1.25; }
+    .draw .dot { fill: var(--ink); }
+    .draw .b90, .draw .b60, .draw .b30 { fill: var(--pen); }
+    .draw .b90 { opacity: 0.22; }
+    .draw .b60 { opacity: 0.3; }
+    .draw .b30 { opacity: 0.45; }
+    .draw .slot { fill: none; stroke: var(--line); stroke-width: 1; }
+    .draw .rug circle { fill: var(--ink); opacity: 0.55; animation: land 200ms ease-out backwards; }
+    @keyframes land { from { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .draw .rug circle { animation: none; } }
+  </style>
+</head>
+<body>
+
+  <header class="band band--page">
+    <div class="wrap">
+      <nav class="top" aria-label="Main">
+        <a class="brand" href="/">
+          <svg class="logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="nib-line" pathLength="1" d="M3 40H17"/>
+            <g class="nib-pen"><g transform="translate(6 6) rotate(45 24 20)">
+              <path class="nib-body" d="M19 4H29V11L33.5 20 24 36 14.5 20 19 11Z"/>
+              <path d="M24 35V25"/>
+              <circle class="nib-hole" cx="24" cy="20.5" r="2.25"/>
+            </g></g>
+          </svg>
+          atilla guzel
+        </a>
+        <ul>
+          <li><a href="/#work">work</a></li>
+          <li><a href="/blog/">blog</a></li>
+          <li>
+            <button class="theme" type="button" aria-pressed="false" aria-label="Switch to the dark theme" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <mask id="theme-bite"><rect x="-6" y="-6" width="36" height="36" fill="white"/><circle class="bite" cx="14.67" cy="10" r="4.33" fill="black"/></mask>
+                <circle class="sun" cx="12" cy="12" r="5" mask="url(#theme-bite)"/>
+                <path class="rays" d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <h1>The fan and the three roads</h1>
+      <p class="meta"><time datetime="2026-11-25">25 November 2026</time></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="post">
+
+      <p>It is the last day of April, and somebody is at the kitchen table deciding whether to fix their mortgage for two years or for five. The Bank of England published its report that morning. They open it to see where the Bank thinks prices are heading, and look for the one line that will tell them.</p>
+
+      <p>There is no line. There are three, lettered A, B and C, and the report takes care to say that none of them is the forecast.</p>
+
+      <p>Since 1996 that page had held a different picture, a fan that widened as it went. Stay with our reader at the table for a minute. I'd like to show you both pictures, and what each one is careful not to say.</p>
+
+      <h2>The fan</h2>
+
+      <p>The Bank <a href="https://www.bankofengland.co.uk/quarterly-bulletin/1998/q1/the-inflation-report-projections-understanding-the-fan-chart">first drew its inflation forecast as a fan</a> in February 1996. A dark band runs down the middle, lighter bands lie on either side of it, and the whole shape spreads as it moves away from today.</p>
+
+      <p>The note under the chart told you how to read it, and it changed little over the years. Here it is as it stood in <a href="https://www.bankofengland.co.uk/-/media/boe/files/monetary-policy-report/2025/august/monetary-policy-report-august-2025.pdf">the report for August 2025</a>. Imagine today's circumstances coming round a hundred times. In thirty of them inflation ends up in the dark band. In ninety it ends up somewhere inside the fan. In the other ten it lands outside, and the fan does not say where.</p>
+
+      <p>So the fan answers one question, <em>how likely?</em>, and it answers with a shape. What a shape cannot do is make you look at its edges. In April 2024 Ben Bernanke, asked by the Bank to review how it forecasts, <a href="https://www.bankofengland.co.uk/independent-evaluation-office/forecasting-for-monetary-policy-making-and-communication-at-the-bank-of-england-a-review/forecasting-for-monetary-policy-making-and-communication-at-the-bank-of-england-a-review">reported</a> that the fans rested on weak foundations, told a reader little that could not be said more directly, and got little attention from the public. His verdict was four words long.</p>
+
+      <blockquote>
+        <p>They should be eliminated.</p>
+        <cite>&mdash; Ben Bernanke, review for the Bank of England, April 2024</cite>
+      </blockquote>
+
+      <h2>The three roads</h2>
+
+      <p>The Bank did not go that far at once. In <a href="https://www.bankofengland.co.uk/monetary-policy-report/2025/november-2025">November 2025</a> its report kept a central forecast and set two scenarios beside it: one in which inflation proved stubborn, and one in which demand was weaker.</p>
+
+      <p>Then came the spring. <a href="https://www.bankofengland.co.uk/monetary-policy-report/2026/april-2026">The report our reader opened</a> on 30 April 2026 was written after a conflict in the Middle East had sent energy prices up sharply. It set out three scenarios, which differed in the path of energy prices and in how far the rise spread into wages and other prices. It named none of them as central, and the fan was not in it.</p>
+
+      <p>A scenario answers a different question, <em>what if?</em> It tells a story with a cause in it: if energy stays dear, then this follows. It can describe something that has not happened before, which a fan drawn from past errors cannot. What it leaves out is the odds. Three roads on a page do not say which is likeliest, or whether the truth will run between them or beyond them all.</p>
+
+      <h2>One forecast, three drawings</h2>
+
+      <p>Here is one made-up forecast, drawn all three ways. Press the button and the box plays out a hundred futures, as the fan's note asks you to imagine, and marks where each one ends.</p>
+
+      <div class="stip demo">
+        <div class="face panel draws">
+          <h3 class="label">one forecast, three drawings</h3>
+          <div class="trio" aria-live="polite">
+            <div class="draw">
+              <span class="out-k">a line</span>
+              <svg viewBox="0 0 220 170" role="img" aria-label="A single line that starts at 3 and falls to 2 after three years."><line class="grid" x1="30" x2="186" y1="119" y2="119"/><text class="ax" x="25" y="122.5" text-anchor="end">0</text><line class="grid" x1="30" x2="186" y1="88" y2="88"/><text class="ax" x="25" y="91.5" text-anchor="end">2</text><line class="grid" x1="30" x2="186" y1="57" y2="57"/><text class="ax" x="25" y="60.5" text-anchor="end">4</text><line class="grid" x1="30" x2="186" y1="26" y2="26"/><text class="ax" x="25" y="29.5" text-anchor="end">6</text><text class="ax" x="30" y="165">now</text><text class="ax" x="186" y="165" text-anchor="end">3 years</text><rect class="slot" x="192" y="10.5" width="22" height="139.5"/><g class="rug"></g><path class="mid" d="M30 72.5 L43 69.4 L56 67.9 L69 67.9 L82 69.4 L95 72.5 L108 75.6 L121 78.7 L134 81.8 L147 83.4 L160 84.9 L173 86.5 L186 88"/><circle class="dot" cx="186" cy="88" r="3"/><text class="ax ax--k" x="184" y="81" text-anchor="end">2.0</text></svg>
+              <p class="fine" id="f-line">It names one number, 2.0.</p>
+            </div>
+            <div class="draw">
+              <span class="out-k">a fan</span>
+              <svg viewBox="0 0 220 170" role="img" aria-label="The same line inside a fan of three shaded bands that widen over three years, from about minus 0.6 to 4.6 at the end."><line class="grid" x1="30" x2="186" y1="119" y2="119"/><text class="ax" x="25" y="122.5" text-anchor="end">0</text><line class="grid" x1="30" x2="186" y1="88" y2="88"/><text class="ax" x="25" y="91.5" text-anchor="end">2</text><line class="grid" x1="30" x2="186" y1="57" y2="57"/><text class="ax" x="25" y="60.5" text-anchor="end">4</text><line class="grid" x1="30" x2="186" y1="26" y2="26"/><text class="ax" x="25" y="29.5" text-anchor="end">6</text><text class="ax" x="30" y="165">now</text><text class="ax" x="186" y="165" text-anchor="end">3 years</text><rect class="slot" x="192" y="10.5" width="22" height="139.5"/><g class="rug"></g><path class="b90" d="M30 72.5 L43 57.6 L56 51.2 L69 47.5 L82 45.8 L95 46.2 L108 46.8 L121 47.5 L134 48.5 L147 48 L160 47.7 L173 47.4 L186 47.2 L186 128.8 L173 125.5 L160 122.1 L147 118.7 L134 115.1 L121 109.9 L108 104.4 L95 98.8 L82 93 L69 88.2 L56 84.5 L43 81.2 L30 72.5Z"/><path class="b60" d="M30 72.5 L43 63.4 L56 59.3 L69 57.4 L82 57.3 L95 59 L108 60.8 L121 62.8 L134 64.8 L147 65.3 L160 65.8 L173 66.5 L186 67.1 L186 108.9 L173 106.4 L160 104 L147 101.4 L134 98.8 L121 94.6 L108 90.4 L95 86 L82 81.5 L69 78.3 L56 76.4 L43 75.4 L30 72.5Z"/><path class="b30" d="M30 72.5 L43 66.6 L56 64 L69 63.1 L82 63.9 L95 66.3 L108 68.8 L121 71.4 L134 74 L147 75.1 L160 76.2 L173 77.3 L186 78.5 L186 97.5 L173 95.6 L160 93.6 L147 91.6 L134 89.6 L121 86 L108 82.4 L95 78.7 L82 74.9 L69 72.6 L56 71.7 L43 72.2 L30 72.5Z"/><path class="mid mid--thin" d="M30 72.5 L43 69.4 L56 67.9 L69 67.9 L82 69.4 L95 72.5 L108 75.6 L121 78.7 L134 81.8 L147 83.4 L160 84.9 L173 86.5 L186 88"/></svg>
+              <p class="fine" id="f-fan">It says 30 in 100 end in the middle band and 90 in 100 inside the fan.</p>
+            </div>
+            <div class="draw">
+              <span class="out-k">three roads</span>
+              <svg viewBox="0 0 220 170" role="img" aria-label="Three lines from the same start: A falls to 0.8, B falls to 2, and C rises to 3.6."><line class="grid" x1="30" x2="186" y1="119" y2="119"/><text class="ax" x="25" y="122.5" text-anchor="end">0</text><line class="grid" x1="30" x2="186" y1="88" y2="88"/><text class="ax" x="25" y="91.5" text-anchor="end">2</text><line class="grid" x1="30" x2="186" y1="57" y2="57"/><text class="ax" x="25" y="60.5" text-anchor="end">4</text><line class="grid" x1="30" x2="186" y1="26" y2="26"/><text class="ax" x="25" y="29.5" text-anchor="end">6</text><text class="ax" x="30" y="165">now</text><text class="ax" x="186" y="165" text-anchor="end">3 years</text><rect class="slot" x="192" y="10.5" width="22" height="139.5"/><g class="rug"></g><path class="mid" d="M30 72.5 L43 71 L56 71 L69 72.5 L82 75.6 L95 80.2 L108 84.9 L121 89.6 L134 94.2 L147 97.3 L160 100.4 L173 103.5 L186 106.6"/><path class="mid" d="M30 72.5 L43 69.4 L56 67.9 L69 67.9 L82 69.4 L95 72.5 L108 75.6 L121 78.7 L134 81.8 L147 83.4 L160 84.9 L173 86.5 L186 88"/><path class="mid" d="M30 72.5 L43 65 L56 60.8 L69 58.5 L82 57.9 L95 59.1 L108 60.3 L121 61.7 L134 63.1 L147 63.1 L160 63.1 L173 63.1 L186 63.2"/><text class="ax ax--k" x="173" y="58.1" text-anchor="middle">C</text><text class="ax ax--k" x="121" y="73.7" text-anchor="middle">B</text><text class="ax ax--k" x="173" y="115.5" text-anchor="middle">A</text></svg>
+              <p class="fine" id="f-roads">It names three ways things could go, and gives no odds.</p>
+            </div>
+          </div>
+          <p><button class="btn btn--alt btn--sm" type="button" id="f-play" data-track="demo_interaction" data-track-demo="forecast_drawings" data-track-action="replay" hidden>Play a hundred futures</button></p>
+          <p class="fine">The forecast is invented and is not the Bank's. Each mark in the strip on the right is where one future ends, three years out.</p>
+        </div>
+      </div>
+
+      <p>Run it a few times. About five marks in a hundred land on the line, so the line is nearly always wrong, by a little or by a lot. About thirty land in the fan's middle band and about ninety inside the fan, as its note promised. And about four in ten land beyond the outer two roads, because the roads were never drawn as edges.</p>
+
+      <aside class="note">
+        <h3 class="label">about this figure</h3>
+        <p>The hundred futures are drawn from the fan's own arithmetic, so the fan is right here by construction. That is the assumption a fan makes: the future will miss in the way the past did. Without script the figure shows the three drawings and no marks.</p>
+      </aside>
+
+      <h2>What gets misread</h2>
+
+      <p>Each drawing invites its own mistake. The line invites you to plan for one number. The fan invites you to take its edge for a wall. The roads, I suspect, invite you to pick one, most often the middle one, and call it the forecast.</p>
+
+      <p>The second mistake has been measured, on a different fan. American hurricane forecasts come with a cone, drawn so that the centre of the storm stays inside it about two times in three. Researchers at the University of Miami <a href="https://news.miami.edu/stories/2022/11/that-uncanny-coneresearchers-want-to-erase-the-uncertainty.html">asked 2,847 people in Florida</a> what the cone meant. Almost half took places outside it to be out of harm's way, and 40% thought it showed where the damage would be.</p>
+
+      <p>This year the forecasters are <a href="https://islandfreepress.org/outer-banks-news/national-hurricane-center-unveils-new-cone-graphics-for-the-2026-hurricane-season/">trying out a wider cone</a>, meant to hold about 90% of outcomes, the same share as the Bank's fan. It will be wrong less often. I'd expect its edge to be read as a wall all the same.</p>
+
+      <h2>November</h2>
+
+      <p>Back to our reader. They chose a term in April, as you have to, with three roads in front of them and no odds.</p>
+
+      <p>If they open <a href="https://www.bankofengland.co.uk/monetary-policy-report/2026/november-2026">this month's report</a> they will find the page changed again. The central line is back, and so is the fan around it, though the fan means something narrower now. In August 2025 it still leaned whichever way the Bank's committee judged the risks to lie. Now it is drawn only from the size of the Bank's own forecast errors since 2004, leaving out the pandemic, and the risks are told as two scenarios printed beside it.</p>
+
+      <p>So the page answers both questions at last. The fan says how far off forecasts like this have been before. The roads say what the Bank is worried about this time. It takes longer to read than one line did, and I think it is closer to what anybody knows.</p>
+
+      <aside class="stip share" aria-labelledby="share-h">
+        <div class="face panel">
+          <h2 class="label" id="share-h">pass it on</h2>
+          <p>If this was worth your time, it may be worth someone else's.</p>
+          <p class="actions">
+            <button class="btn btn--sm" type="button" data-copy-link data-track="share" data-track-method="copy_link" hidden>Copy link</button>
+            <button class="btn btn--alt btn--sm" type="button" data-native-share data-track="share" data-track-method="native" hidden>Share</button>
+            <a class="btn btn--alt btn--sm" data-track="share" data-track-method="x" href="https://x.com/intent/post?text=The%20fan%20and%20the%20three%20roads&amp;url=https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fthe-fan-and-the-three-roads%2F" target="_blank" rel="noopener">Share on X</a>
+            <a class="btn btn--alt btn--sm" data-track="share" data-track-method="bluesky" href="https://bsky.app/intent/compose?text=The%20fan%20and%20the%20three%20roads%20https%3A%2F%2Fatillaguzel.github.io%2Fblog%2Fthe-fan-and-the-three-roads%2F" target="_blank" rel="noopener">Share on Bluesky</a>
+          </p>
+          <p class="addr">https://atillaguzel.github.io/blog/the-fan-and-the-three-roads/</p>
+        </div>
+      </aside>
+
+      <hr>
+      <p><a href="/blog/">&larr; all posts</a></p>
+
+    </article>
+
+    <footer>
+      <p>Written by <a class="mk" href="/">Atilla Guzel</a>.</p>
+      <p><a class="textbtn" href="/privacy/">privacy</a></p>
+    </footer>
+  </main>
+
+  <script>
+
+    /* One forecast, three drawings: a hundred futures drawn from the fan's own spread, marked
+       where each ends. The numbers below repeat the geometry of the three static drawings. */
+    (function () {
+      var N = 100;
+      var END = 2.0, SD = 1.6;        /* where the forecast ends, and its spread there */
+      var DARK = 0.385, FAN = 1.645;  /* half-widths of the 30% and 90% bands, in spreads */
+      var LOW = 0.8, HIGH = 3.6;      /* where roads A and C end */
+      var NS = 'http://www.w3.org/2000/svg';
+      var play = document.getElementById('f-play');
+      var rugs = document.querySelectorAll('.draw .rug');
+      var say = { line: document.getElementById('f-line'), fan: document.getElementById('f-fan'), roads: document.getElementById('f-roads') };
+      if (!play || rugs.length !== 3) return;
+
+      function y(v) { return 150 - (Math.max(-2, Math.min(7, v)) + 2) * 15.5; }
+      function normal() {
+        var u = 1 - Math.random(), w = Math.random();
+        return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * w);
+      }
+
+      play.addEventListener('click', function () {
+        var onLine = 0, dark = 0, inFan = 0, beyond = 0, marks = [], i, z, v;
+        for (i = 0; i < N; i++) {
+          z = normal();
+          v = END + SD * z;
+          if (Math.abs(v - END) <= 0.1) onLine++;
+          if (Math.abs(z) <= DARK) dark++;
+          if (Math.abs(z) <= FAN) inFan++;
+          if (v < LOW || v > HIGH) beyond++;
+          marks.push({ x: 195 + Math.random() * 16, y: y(v) });
+        }
+        [].forEach.call(rugs, function (rug) {
+          while (rug.firstChild) rug.removeChild(rug.firstChild);
+          marks.forEach(function (m, n) {
+            var c = document.createElementNS(NS, 'circle');
+            c.setAttribute('cx', m.x.toFixed(1));
+            c.setAttribute('cy', m.y.toFixed(1));
+            c.setAttribute('r', '1.7');
+            c.style.animationDelay = (n * 6) + 'ms';
+            rug.appendChild(c);
+          });
+        });
+        say.line.textContent = onLine + ' of 100 ended within a tenth of the line.';
+        say.fan.textContent = dark + ' ended in the middle band, ' + inFan + ' inside the fan and ' + (N - inFan) + ' outside it.';
+        say.roads.textContent = beyond + ' ended beyond the outer two roads.';
+        play.textContent = 'Play another hundred';
+      });
+      play.hidden = false;
+    })();
+  </script>
+  <script src="/js/site.js" defer></script>
+</body>
+</html>
